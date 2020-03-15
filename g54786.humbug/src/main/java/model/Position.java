@@ -75,7 +75,11 @@ public class Position {
         }
         return true;
     }
-    
+    /**
+     * Gives the position next to the current position.
+     * @param d The direction in which to go.
+     * @return New position.
+     */
     public Position next(Direction d) {
         Position position = new Position (getRow()+ d.getDeltaRow(),getColumn()
                 +d.getDeltaColumn());

@@ -25,7 +25,7 @@ public class Position {
 
     /**
      * Row getter.
-     * @return 
+     * @return Row
      */
     public int getRow() {
         return row;
@@ -33,7 +33,7 @@ public class Position {
 
     /**
      * Column getter.
-     * @return 
+     * @return Column
      */
     public int getColumn() {
         return column;
@@ -41,7 +41,7 @@ public class Position {
 
     /**
      * Hash code to test if positions are equal to each other.
-     * @return 
+     * @return hash code
      */
     @Override
     public int hashCode() {
@@ -74,6 +74,12 @@ public class Position {
             return false;
         }
         return true;
+    }
+    
+    public Position next(Direction d) {
+        Position position = new Position (getRow()+ d.getDeltaRow(),getColumn()
+                +d.getDeltaColumn());
+        return position; 
     }
     
     

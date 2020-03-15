@@ -6,9 +6,28 @@
 package model;
 
 /**
- *
+ * Square on the board.
+ * A square is or grass or star.
  * @author router
  */
 public class Square {
+    private SquareType type;
+    
+    /**
+     * Constructor of square on board.
+     * @param type Square is grass or star.
+     */
+    public Square (SquareType type) {
+        this.type = type;
+    }
+    
+    /**
+     * Getter of Square type.
+     * @return type of square.
+     */
+    public SquareType getType() {
+        return type;
+    }
+    
     
 }

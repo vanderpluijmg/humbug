@@ -11,7 +11,7 @@ package model;
  * @author router
  */
 public class Square {
-    private SquareType type;
+    private final SquareType type;
     
     /**
      * Constructor of square on board.

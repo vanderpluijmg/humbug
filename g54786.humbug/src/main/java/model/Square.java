@@ -5,6 +5,8 @@
  */
 package model;
 
+
+
 /**
  * Square on the board.
  * A square is or grass or star.
@@ -28,6 +30,5 @@ public class Square {
     public SquareType getType() {
         return type;
     }
-    
-    
+  
 }

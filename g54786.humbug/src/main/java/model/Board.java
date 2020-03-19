@@ -42,18 +42,17 @@ public class Board {
      * @param p Position to check.
      * @return True if exists, false if not.
      */
-    public boolean isInside(Position p) { //Out of bounds problem
+    public boolean isInside(Position p) {
         boolean isInside = true;
         if (p == null) {
             throw new IllegalArgumentException();
         }
         if (p.getRow() >= this.getNbRow() // checks if row is bigger than size 
                 || p.getColumn() >= this.getNbColumn() // check if column is bigger than size
-                || p.getRow() < 0 || p.getColumn() < 0){
+                || p.getRow() < 0 || p.getColumn() < 0) {
             isInside = false;
-        }
-        else if (squares[p.getRow()][p.getColumn()] == null){
-            isInside = false;      
+        } else if (squares[p.getRow()][p.getColumn()] == null) {
+            isInside = false;
         }
         return isInside;
     }
@@ -96,6 +95,5 @@ public class Board {
         }
         return col;
     }
-
 
 }

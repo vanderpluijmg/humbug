@@ -47,8 +47,8 @@ public abstract class Spider extends Animal {
                         return nextPosition;
                     } else {
                         setPositionOnBoard(nextPosition);
+                        return nextPosition;
                     }
-                    return nextPosition;
                 }
             }
             setPositionOnBoard(nextPosition);

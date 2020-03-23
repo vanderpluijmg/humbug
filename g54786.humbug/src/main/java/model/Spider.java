@@ -7,7 +7,8 @@ package model;
 
 /**
  * Makes the spider move. Spider has a specific move pattern.
- * @author router
+ *
+ * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public abstract class Spider extends Animal {
 
@@ -16,60 +17,48 @@ public abstract class Spider extends Animal {
     }
 
     /**
-     * Moves spider in given direction.
+     * Moves snail in given direction.
      *
-     * @param board The board in which the spider will move.
-     * @param direction The direction chosen by the user that the spider will
-     * follow.
-     * @param animal All animals that are on board.
-     * @return New position of spider. It can be or off the board since it
-     * reached a STAR, or, stuck somewhere on the board.
+     * @param board board on which the snail must move.
+     * @param direction direction in which the snail must move.
+     * @param animal all animals on the board.
+     * @return new position after it moved.
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animal) {
-        Position nextPosition = getPositionOnBoard().next(direction);
+        Position initPosition = getPositionOnBoard();
+        Position nextPosition = initPosition.next(direction);
         while (board.isInside(nextPosition)) {
-            Position initPosition = getPositionOnBoard();
+            initPosition = getPositionOnBoard();
             nextPosition = initPosition.next(direction);
-            if (!board.isInside(nextPosition)) {
-                this.setPositionOnBoard(null);
-                return null;
-            }
             for (Animal animals : animal) {
                 if (animals.getPositionOnBoard().equals(nextPosition)) {
+                    setPositionOnBoard(initPosition);
                     return initPosition;
-                }
-            }
-            if (board.getSquareType(nextPosition) == SquareType.STAR 
-                    && !ableToMove(nextPosition, board, direction, animal)){
-                setOnStar(true);
-                board.setSquareType(nextPosition, SquareType.STAR);
-                return nextPosition;
-        }
-        
-    }
-        return null;
-}
-    /**
-     * Checks if after the given position the spider is still able to move.
-     * 
-     * @param pos 
-     * @param board
-     * @param direction direction in which this method will check.
-     * @param animal
-     * @return 
-     */
-    public boolean ableToMove (Position pos ,Board board, Direction direction, Animal... animal){
-        Position nextPosition = pos.next(direction);
-        boolean ableToMove = true;
-        for (Animal animals : animal) {
-            while (board.isInside(pos.next(direction))){
-                if (animals.getPositionOnBoard().equals(nextPosition)){
-                    ableToMove = false;
-                }
-            }
-        }
-        return ableToMove;
-    }   
-}
 
+                } else if (animals.getPositionOnBoard().equals(nextPosition.next(direction))) {
+                    //Checks if square after nextPosition is free or not. 
+                    //If not we can conclude that if nextPosition is a SquareType 
+                    //Star that it has arrived to its destination. 
+                    if (SquareType.STAR == board.getSquareType(nextPosition)) {
+                        setOnStar(true);
+                        setPositionOnBoard(nextPosition);
+                        board.setSquareType(nextPosition, SquareType.GRASS);
+                        return nextPosition;
+                    } else {
+                        setPositionOnBoard(nextPosition);
+                    }
+                    return nextPosition;
+                }
+            }
+            setPositionOnBoard(nextPosition);
+
+        }
+        if (!board.isInside(nextPosition)) {
+            this.setPositionOnBoard(null);
+            return null;
+        }
+        return null;
+    }
+
+}

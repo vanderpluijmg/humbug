@@ -8,7 +8,7 @@ package model;
 /**
  * Makes the snail move. Snail has a specific move pattern.
  *
- * @author router
+ * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public abstract class Snail extends Animal {
 
@@ -35,6 +35,7 @@ public abstract class Snail extends Animal {
             }
             for (Animal animals : animal) {
                 if (animals.getPositionOnBoard().equals(nextPosition)) {
+                    this.setPositionOnBoard(initPosition);
                     return initPosition;
                 }
             }
@@ -43,6 +44,7 @@ public abstract class Snail extends Animal {
                     == SquareType.STAR) {
                 setOnStar(true);
                 board.setSquareType(nextPosition, SquareType.GRASS);
+                this.setPositionOnBoard(nextPosition);
                 return nextPosition;
             } else return nextPosition;
         }

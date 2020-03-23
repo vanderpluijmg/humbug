@@ -9,7 +9,7 @@ package model;
  * SquareType represents the type of square on the board.
  * Square can be or grass or a animal arriving case.
  * 
- * @author router
+ * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public enum SquareType {
    GRASS, STAR;

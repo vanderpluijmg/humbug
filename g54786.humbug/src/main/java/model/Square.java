@@ -8,7 +8,7 @@ package model;
 /**
  * Square on the board. A square is or grass or star.
  *
- * @author router
+ * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Square {
 

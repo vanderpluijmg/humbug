@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
- * @author router
+ * @author Pierre Bettens (pbt) <pbettens@he2b.be>
  */
 public class SnailTest {
     

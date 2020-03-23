@@ -11,6 +11,8 @@ import model.Board;
 import model.Direction;
 import model.Position;
 import model.SquareType;
+import model.Snail;
+import model.Spider;
 
 /**
  *
@@ -23,43 +25,49 @@ public abstract class View implements InterfaceView {
     /**
      * Displays the given board in a new String Array, does not show null.
      *
-     * @param board Board given to display
+     * @param board Board given to display.
+     * @param animal All animals on board.
      */
     public static void displayBoard(Board board, Animal... animal) {
         String[][] tab = new String[board.getNbRow()][board.getNbColumn()];
         // Populating the new array "tab".
-        for(Animal animals : animal){
-            for (int row = 0; row < tab.length; row++) {
-                for (int col = 0; col < tab[row].length; col++) {
-                    Position position = new Position(row, col);
-                    if (board.isInside(position) && board.getSquareType(position)
-                            == SquareType.GRASS) {
-                        tab[row][col] = "|/n|/n|   |/n|/n| ";
-                    } else if (board.isInside(position)
-                            && board.getSquareType(position) == SquareType.STAR) {
-                        tab[row][col] = "STAR ";
-                    } else if (animals.getPositionOnBoard() == position){
-                        tab[row][col] = "Animal ";
-                    } else 
-                        tab[row][col] = " f";
- 
+        for (int row = 0; row < tab.length; row++) {
+            for (int col = 0; col < tab[row].length; col++) {
+                Position position = new Position(row, col);
+                if (board.isInside(position) && board.getSquareType(position)
+                        == SquareType.GRASS) {
+                    tab[row][col] = "\033[31;42m|   |";
+                } else if (board.isInside(position)
+                        && board.getSquareType(position) == SquareType.STAR) {
+                    tab[row][col] = "| * |";
+                } else {
+                    tab[row][col] = "     "; // To not show null on board.
+                }
+                for (Animal animals : animal){
+                    if (animals instanceof Snail){
+                        tab [row][col] = "|Sna|";
+                    }else if (animals instanceof Spider){
+                        tab [row][col] = "|Spi|";
+                    }
                 }
             }
         }
         //Displays the new array "tab".
         for (String[] tab1 : tab) {
             for (String tab11 : tab1) {
-                System.out.print(tab11 + " ");
+                System.out.print(tab11);
             }
             System.out.println();
         }
     }
+
 
     /**
      * Displays error message.
      *
      * @param message Message to display.
      */
+    @Override
     public void displayError(String message) {
         System.err.println("Error :" + message);
     }
@@ -69,6 +77,7 @@ public abstract class View implements InterfaceView {
      *
      * @return a new position object.
      */
+    @Override
     public Position askPosition() {
         int idxRow;
         int idxCol;
@@ -99,6 +108,7 @@ public abstract class View implements InterfaceView {
      *
      * @return a new direction object.
      */
+    @Override
     public Direction askDirection() {
         String dir = null;
         do {
@@ -128,7 +138,7 @@ public abstract class View implements InterfaceView {
 
     public static void main(String[] args) {
         displayBoard(Board.getInitialBoard());
-
+        
     
     
 }

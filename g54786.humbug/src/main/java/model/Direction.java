@@ -7,7 +7,7 @@ package model;
 
 /**
  * Direction in which an animal will be able to move.
- * @author router
+ * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public enum Direction {
     NORTH(-1,0), SOUTH(1,0), EAST(0,1), WEST(0,-1);

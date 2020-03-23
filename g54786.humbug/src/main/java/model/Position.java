@@ -7,7 +7,7 @@ package model;
 
 /**
  * Square position.
- * @author router
+ * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Position {
     private final int row;

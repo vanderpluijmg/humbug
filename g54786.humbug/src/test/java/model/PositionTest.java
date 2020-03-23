@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test positions
- * @author router
+ * @author Pierre Bettens (pbt) <pbettens@he2b.be>
  */
 public class PositionTest {
     

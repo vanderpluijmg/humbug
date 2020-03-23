@@ -14,9 +14,7 @@ import org.junit.jupiter.api.Test;
  */
 public class PositionTest {
     
-    public PositionTest() {
-    }
-    /**
+       /**
      * Test of next method, of class Position.
      */
     @Test
@@ -96,12 +94,10 @@ public class PositionTest {
         assertTrue(position1.hashCode() == position1.hashCode());
         assertTrue(position1.hashCode() == position2.hashCode());
     }
-    
- 
+
    
     
     
     
     
 }
-    

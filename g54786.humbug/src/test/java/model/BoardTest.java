@@ -8,6 +8,7 @@ package model;
 import org.junit.jupiter.api.Assertions;
 import static model.SquareType.*;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
 /**
@@ -15,21 +16,26 @@ import org.junit.jupiter.api.Test;
  * @author router
  */
 public class BoardTest {
-    private Board board;
+   private Board board;
 
     public BoardTest() {
         
     }
-    /**
-     * Test of isInside method, of class Board.
-     */
-    @Test
-    public void testIsInside_general_true() {
+    
+    @BeforeEach
+    public void setUp() {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), null},
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
+    }
+
+    /**
+     * Test of isInside method, of class Board.
+     */
+    @Test
+    public void testIsInside_general_true() {
         System.out.println("isInside general");
         Position position = new Position(0,0);
         boolean expResult = true;
@@ -42,11 +48,6 @@ public class BoardTest {
      */
     @Test
     public void testIsInside_false_null() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
         System.out.println("isInside false null");
         Position position = new Position(1,0);
         boolean expResult = false;
@@ -59,11 +60,6 @@ public class BoardTest {
      */
     @Test
     public void testIsInside_false_outbound_negative() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
         System.out.println("isInside false out of bound");
         Position position = new Position(-1,0);
         boolean expResult = false;
@@ -76,11 +72,6 @@ public class BoardTest {
      */
     @Test
     public void testIsInside_false_outbound_positive_row() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
         System.out.println("isInside false out of bound");
         Position position = new Position(10,1);
         boolean expResult = false;
@@ -93,11 +84,6 @@ public class BoardTest {
      */
     @Test
     public void testIsInside_false_outbound_positive_column() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
         System.out.println("isInside false out of bound");
         Position position = new Position(2,23);
         boolean expResult = false;
@@ -107,11 +93,6 @@ public class BoardTest {
 
     @Test
     public void testGetSquareType_exist() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
         System.out.println("get square type exist");
         SquareType expResult = SquareType.GRASS;
         SquareType result = board.getSquareType(new Position(0,0));
@@ -120,11 +101,6 @@ public class BoardTest {
 
     @Test
     public void testGetSquareType_exist_star() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
         System.out.println("get square type exist");
         SquareType expResult = SquareType.STAR;
         SquareType result = board.getSquareType(new Position(2,2));
@@ -133,17 +109,10 @@ public class BoardTest {
 
     @Test
     public void testGetSquareType_null() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
         System.out.println("get case type illegal argument");
         Assertions.assertThrows(IllegalArgumentException.class, 
                 () -> { board.getSquareType(new Position(1, 0));
     });
 
-    
+    }
 }
-}
-    

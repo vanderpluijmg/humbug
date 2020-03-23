@@ -6,6 +6,7 @@
 package view.text;
 
 import java.util.Scanner;
+import model.Animal;
 import model.Board;
 import model.Direction;
 import model.Position;
@@ -15,7 +16,7 @@ import model.SquareType;
  *
  * @author router
  */
-public class View {
+public abstract class View implements InterfaceView {
 
     static Scanner keyboard = new Scanner(System.in);
 
@@ -24,20 +25,24 @@ public class View {
      *
      * @param board Board given to display
      */
-    public static void displayBoard(Board board) {
+    public static void displayBoard(Board board, Animal... animal) {
         String[][] tab = new String[board.getNbRow()][board.getNbColumn()];
         // Populating the new array "tab".
-        for (int row = 0; row < tab.length; row++) {
-            for (int col = 0; col < tab[row].length; col++) {
-                Position position = new Position(row, col);
-                if (board.isInside(position) && board.getSquareType(position)
-                        == SquareType.GRASS) {
-                    tab[row][col] = "GRASS";
-                } else if (board.isInside(position)
-                        && board.getSquareType(position) == SquareType.STAR) {
-                    tab[row][col] = "STAR ";
-                } else {
-                    tab[row][col] = "     "; // To not show null on board.
+        for(Animal animals : animal){
+            for (int row = 0; row < tab.length; row++) {
+                for (int col = 0; col < tab[row].length; col++) {
+                    Position position = new Position(row, col);
+                    if (board.isInside(position) && board.getSquareType(position)
+                            == SquareType.GRASS) {
+                        tab[row][col] = "|/n|/n|   |/n|/n| ";
+                    } else if (board.isInside(position)
+                            && board.getSquareType(position) == SquareType.STAR) {
+                        tab[row][col] = "STAR ";
+                    } else if (animals.getPositionOnBoard() == position){
+                        tab[row][col] = "Animal ";
+                    } else 
+                        tab[row][col] = " f";
+ 
                 }
             }
         }
@@ -64,7 +69,7 @@ public class View {
      *
      * @return a new position object.
      */
-    public static Position askPosition() {
+    public Position askPosition() {
         int idxRow;
         int idxCol;
         System.out.println("Please enter a row");
@@ -74,19 +79,19 @@ public class View {
         Position position = new Position(idxRow, idxCol);
         return position;
     }
-    
+
     /**
      * This method checks for valid integer.
-     * 
+     *
      * @return a valid int.
      */
-    public static int intValidation (){
-        while (!keyboard.hasNextInt()){
+    public static int intValidation() {
+        while (!keyboard.hasNextInt()) {
             keyboard.next();
             System.out.println("Please enter a valid integer");
         }
         return keyboard.nextInt();
-        
+
     }
 
     /**
@@ -94,7 +99,7 @@ public class View {
      *
      * @return a new direction object.
      */
-    public static Direction askDirection() {
+    public Direction askDirection() {
         String dir = null;
         do {
             System.out.println("Enter a direction. Valid directions are NORTH, "
@@ -123,9 +128,8 @@ public class View {
 
     public static void main(String[] args) {
         displayBoard(Board.getInitialBoard());
-        askPosition();
-        askDirection();
 
-    }
-
+    
+    
+}
 }

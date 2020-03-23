@@ -69,6 +69,9 @@ public class Board {
         }
         return squares[p.getRow()][p.getColumn()].getType();
     }
+    public SquareType setSquareType (Position p, SquareType type) {
+        return squares[p.getRow()][p.getColumn()].setType(type);
+    }
 
     /**
      * Checks number of rows in board.

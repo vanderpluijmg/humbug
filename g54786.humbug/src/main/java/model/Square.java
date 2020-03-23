@@ -5,30 +5,40 @@
  */
 package model;
 
-
-
 /**
- * Square on the board.
- * A square is or grass or star.
+ * Square on the board. A square is or grass or star.
+ *
  * @author router
  */
 public class Square {
-    private final SquareType type;
-    
+
+    private SquareType type;
+
     /**
      * Constructor of square on board.
+     *
      * @param type Square is grass or star.
      */
-    public Square (SquareType type) {
+    public Square(SquareType type) {
         this.type = type;
     }
-    
+    /**
+     * Setter of SquareType.
+     * @param type Type of square you want.
+     * @return 
+     */
+    public SquareType setType(SquareType type) {
+        this.type = type;
+        return this.type;
+    }
+
     /**
      * Getter of Square type.
+     *
      * @return type of square.
      */
     public SquareType getType() {
         return type;
     }
-  
+
 }

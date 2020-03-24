@@ -5,11 +5,6 @@
  */
 package model;
 
-import model.Animal;
-import model.Board;
-import model.Direction;
-import model.Position;
-
 /**
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>

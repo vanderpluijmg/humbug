@@ -6,26 +6,33 @@
 package model;
 
 /**
- *
+ * All the elements needed for the game.
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public abstract class Game implements Model {
-    //Board board = new Board(square);
-    //Animal[] animal = new Animal;
     
-    public void startLevel (Board board, Animal[] animal){
-        Board.getInitialBoard();
-        
+    private Board board;
+    private Animal[] animals;
+    /**
+     * Starts the first level.
+     * @param level
+     */
+    @Override
+    public void startLevel (int level){
+        board = Board.getInitialBoard();
+        animals = new Animal[] {new Snail(new Position(0,0)) {}};
     }
     /**
      * Checks if the level is over, meaning all animals are on square type STAR.
-     * @param board level board.
-     * @param animal All animals on board.
      * @return True or false.
      */
-    public boolean levelIsOVer (Board board, Animal[] animal){
+    @Override
+    public boolean levelIsOver(){
+        if (board == null || animals == null){
+            throw new IllegalArgumentException();
+        }
         boolean levelIsOver = true;
-        for (Animal animals : animal){
+        for (Animal animals : animals){
             if (animals.isOnStar() == false){
                 levelIsOver = false;
             }
@@ -35,19 +42,26 @@ public abstract class Game implements Model {
     }
     /**
      * Move the animal if its allowed.
-     * @param board level board
+     * @param position
      * @param direction direction in which the animal needs to move.
-     * @param animal all animals on board.
      */
-    public void move (Board board, Direction direction, Animal[] animal){
+    @Override
+        public void move(Position position, Direction direction){
         if (board == null || direction == null){
             throw new IllegalArgumentException();
         }
-        
-        
-            
+        int i = 0;
+        while (i <animals.length) {
+            position = getAnimals()[i].move(board, direction, animals);
+            if (getAnimals()[i].getPositionOnBoard()==null){
+                i++;
+            } else {
+                System.err.println("L'animal est betom");
+        }
+            i++;    
         }
     }
+}
     
     
     

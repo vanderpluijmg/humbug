@@ -6,42 +6,49 @@
 package model;
 
 /**
- * Square position.
+ * Position of a square. Position is composed of a row and column value.
+ *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Position {
-    private final int row;
-    private final int column;
-    
+
+    private final int row; //Final because a row does not change.
+    private final int column; //Final because a column does not change.
+
     /**
-     * Position constructor.
-     * @param row in which a square is.
-     * @param column in which is square is.
+     * Constructor of a position
+     *
+     * @param row Row coordinates of position.
+     * @param column Column coordinates of position.
      */
-    public Position (int row, int column){
+    public Position(int row, int column) {
         this.row = row;
         this.column = column;
     }
 
     /**
-     * Row getter.
-     * @return Row
+     * Getter of row.
+     *
+     * @return Row coordinates.
      */
     public int getRow() {
         return row;
     }
 
     /**
-     * Column getter.
-     * @return Column
+     * Getter of column.
+     *
+     * @return Column coordinates.
      */
     public int getColumn() {
         return column;
     }
 
     /**
-     * Hash code to test if positions are equal to each other.
-     * @return hash code
+     * Generates hash code to have the possibility to test if two positions are
+     * the same.
+     *
+     * @return The generated hash code.
      */
     @Override
     public int hashCode() {
@@ -50,23 +57,25 @@ public class Position {
         hash = 23 * hash + this.column;
         return hash;
     }
+
     /**
-     * Tests if two square are at the same position.
-     * @param obj Square position
-     * @return True or False.
+     * Tests if the current object is equal to the object given in parameters.
+     *
+     * @param object Objet wished to compare to current object.
+     * @return True if they are equal, false if not.
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
         }
-        if (obj == null) {
+        if (object == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != object.getClass()) {
             return false;
         }
-        final Position other = (Position) obj;
+        final Position other = (Position) object;
         if (this.row != other.row) {
             return false;
         }
@@ -75,17 +84,26 @@ public class Position {
         }
         return true;
     }
+
     /**
-     * Gives the position next to the current position.
-     * @param d The direction in which to go.
-     * @return New position.
+     * Gives the position next to the current position in the given direction.
+     *
+     * @param direction Direction in which to go.
+     * @return New position in the given direction.
      */
-    public Position next(Direction d) {
-        Position position = new Position (getRow()+ d.getDeltaRow(),getColumn()
-                +d.getDeltaColumn());
-        return position; 
+    public Position next(Direction direction) {
+        Position position = new Position(getRow()
+                + direction.getDeltaRow(), getColumn()
+                + direction.getDeltaColumn());
+        return position;
     }
-    
-    
-    
+    /**
+     * For display purposes.
+     * @return Position in text. 
+     */
+    @Override
+    public String toString() {
+        return "position :" + "(" + row + "," + column + ")";
+    }
+
 }

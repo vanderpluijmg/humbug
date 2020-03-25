@@ -7,7 +7,7 @@ package model;
 
 /**
  * SquareType represents the type of square on the board.
- * Square can be or grass or a animal arriving case.
+ * Square can be or GRASS or STAR.
  * 
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */

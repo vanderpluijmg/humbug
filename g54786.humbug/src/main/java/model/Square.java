@@ -6,7 +6,8 @@
 package model;
 
 /**
- * Square on the board. A square is or grass or star.
+ * Square on the board. A square is or grass or star. A square does not know its
+ * location on the board.
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
@@ -24,8 +25,9 @@ public class Square {
     }
     /**
      * Setter of SquareType.
-     * @param type Type of square you want.
-     * @return 
+     * 
+     * @param type Type of square to set.
+     * @return Set square type.
      */
     public SquareType setType(SquareType type) {
         this.type = type;
@@ -35,7 +37,7 @@ public class Square {
     /**
      * Getter of Square type.
      *
-     * @return type of square.
+     * @return Type of square.
      */
     public SquareType getType() {
         return type;

@@ -6,7 +6,8 @@
 package model;
 
 /**
- * Board initialization.
+ * Board game is constituted of squares. The board does not know if or which
+ * animals are on it.
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
@@ -24,14 +25,14 @@ public class Board {
     }
 
     /**
-     * Initializes level 1 board.
+     * Initializes initial board, level 1.
      *
-     * @return level 1 board.
+     * @return Level 1 board.
      */
     public static Board getInitialBoard() {
-        Square grass = new Square(SquareType.GRASS);//Creates GRASS type Square
+        Square grass = new Square(SquareType.GRASS);//Creates GRASS type Square.
         Square[][] lvl1 = {{grass, grass, null}, {null, grass, grass},
-        {null, null, grass}};
+        {null, null, grass}}; //Fills in the array lvl1.
         Board board = new Board(lvl1);
         return board;
     }
@@ -39,19 +40,19 @@ public class Board {
     /**
      * Checks if given position is on the board game or not.
      *
-     * @param p Position to check.
+     * @param position Position to check.
      * @return True if exists, false if not.
      */
-    public boolean isInside(Position p) {
+    public boolean isInside(Position position) {
         boolean isInside = true;
-        if (p == null) {
+        if (position == null) {
             throw new IllegalArgumentException();
         }
-        if (p.getRow() >= this.getNbRow() // checks if row is bigger than size 
-                || p.getColumn() >= this.getNbColumn() // check if column is bigger than size
-                || p.getRow() < 0 || p.getColumn() < 0) {
+        if (position.getRow() >= this.getNbRow() //Checks if row is bigger than size. 
+                || position.getColumn() >= this.getNbColumn() //Checks if column is bigger than size.
+                || position.getRow() < 0 || position.getColumn() < 0) {
             isInside = false;
-        } else if (squares[p.getRow()][p.getColumn()] == null) {
+        } else if (squares[position.getRow()][position.getColumn()] == null) {
             isInside = false;
         }
         return isInside;
@@ -60,33 +61,45 @@ public class Board {
     /**
      * Gets square type of given position.
      *
-     * @param p Position to check.
+     * @param position Position to check.
      * @return Square type of given position
      */
-    public SquareType getSquareType(Position p) {
-        if (squares[p.getRow()][p.getColumn()] == null) {
+    public SquareType getSquareType(Position position) {
+        if (squares[position.getRow()][position.getColumn()] == null) {
             throw new IllegalArgumentException();
         }
-        return squares[p.getRow()][p.getColumn()].getType();
-    }
-    public SquareType setSquareType (Position p, SquareType type) {
-        return squares[p.getRow()][p.getColumn()].setType(type);
+        return squares[position.getRow()][position.getColumn()].getType();
     }
 
     /**
-     * Checks number of rows in board.
+     * Sets the square to the desired square type.
+     *
+     * @param position Position of the square.
+     * @param type Square type to which it needs to be set.
+     * @return The set square type.
+     */
+    public SquareType setSquareType(Position position, SquareType type) {
+        if (squares[position.getRow()][position.getColumn()] == null) {
+            throw new IllegalArgumentException();
+        }
+        return squares[position.getRow()][position.getColumn()].setType(type);
+    }
+
+    /**
+     * Gets number of rows.
      *
      * @return number of rows.
      */
     public int getNbRow() {
         int row;
         for (row = 0; row < squares.length; row++) {
+            //Row index gets incremented, counts number of rows.
         }
         return row;
     }
 
     /**
-     * Checks number of columns.
+     * Gets number of columns.
      *
      * @return number of columns.
      */
@@ -94,6 +107,7 @@ public class Board {
         int col = -1;
         for (int row = 0; row < squares.length; row++) {
             for (col = 0; col < squares[row].length; col++) {
+                //Columni index gets incremented, counts number of columns.
             }
         }
         return col;

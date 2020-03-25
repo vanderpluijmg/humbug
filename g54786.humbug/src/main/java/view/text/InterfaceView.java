@@ -11,12 +11,13 @@ import model.Direction;
 import model.Position;
 
 /**
- * These at the minimum requirements for a display method.
- * @author router
+ * This is an interface for view class.
+ * 
+ * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public interface InterfaceView {
-    
-    void diplayBoard (Board board, Animal... animals);
+
+    void displayBoard(Board board, Animal... animal);
     Position askPosition();
     Direction askDirection();
     void displayError(String message);

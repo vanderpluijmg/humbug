@@ -7,63 +7,81 @@ package model;
 
 /**
  * All the elements needed for the game.
+ *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public abstract class Game implements Model {
-    
+
     private Board board;
     private Animal[] animals;
     /**
-     * Starts the first level.
-     * @param level
+     * Getter of board.
+     * 
+     * @return The board.
      */
     @Override
-    public void startLevel (int level){
-        board = Board.getInitialBoard();
-        animals = new Animal[] {new Snail(new Position(0,0)) {}};
+    public Board getBoard() {
+        return board;
     }
     /**
-     * Checks if the level is over, meaning all animals are on square type STAR.
-     * @return True or false.
+     * Getter of animals.
+     * @return Array of animals.
      */
     @Override
-    public boolean levelIsOver(){
-        if (board == null || animals == null){
+    public Animal[] getAnimals() {
+        return animals;
+    }
+
+    /**
+     * Initializes the given level.
+     *
+     * @param level Level that will load, in this case level 1.
+     */
+    @Override
+    public void startLevel(int level) {
+        board = Board.getInitialBoard();
+        animals = new Animal[]{new Spider(new Position(0, 1)) {}};
+    }
+
+    /**
+     * Checks if the level is over, meaning all animals are on square type STAR.
+     *
+     * @return True if level is over, false if not.
+     */
+    @Override
+    public boolean levelIsOver() {
+        if (board == null || animals == null) {
             throw new IllegalArgumentException();
         }
         boolean levelIsOver = true;
-        for (Animal animals : animals){
-            if (animals.isOnStar() == false){
+        for (Animal allAnimals : animals) {
+            if (allAnimals.isOnStar() == false) {
                 levelIsOver = false;
             }
         }
         return levelIsOver;
-        
+
     }
+
     /**
-     * Move the animal if its allowed.
-     * @param position
+     * Moves the animal if its allowed, else throws exception.
+     *
+     * @param position Current position of animal.
      * @param direction direction in which the animal needs to move.
      */
     @Override
-        public void move(Position position, Direction direction){
-        if (board == null || direction == null){
+    public void move(Position position, Direction direction) {
+        if (board == null || direction == null) {
             throw new IllegalArgumentException();
         }
-        int i = 0;
-        while (i <animals.length) {
-            position = getAnimals()[i].move(board, direction, animals);
-            if (getAnimals()[i].getPositionOnBoard()==null){
-                i++;
-            } else {
-                System.err.println("L'animal est betom");
-        }
-            i++;    
+        int index = 0;
+        while (index < animals.length) {
+            if (position.equals(getAnimals()[index].getPositionOnBoard())
+                    || getAnimals()[index].getPositionOnBoard() == null){
+                throw new IllegalArgumentException();
+            }
+            else getAnimals()[index].move(board, direction, animals);
+            index++;
         }
     }
 }
-    
-    
-    
-    
-

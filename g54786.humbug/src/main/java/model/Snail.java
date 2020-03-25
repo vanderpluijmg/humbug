@@ -19,10 +19,10 @@ public abstract class Snail extends Animal {
     /**
      * Moves snail in given direction.
      *
-     * @param board board on which the snail must move.
-     * @param direction direction in which the snail must move.
-     * @param animal all animals on the board.
-     * @return new position after it moved.
+     * @param board Board on which the snail must move.
+     * @param direction Direction in which the snail must move.
+     * @param animal All animals on the board.
+     * @return New position after the snail moved.
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animal) {

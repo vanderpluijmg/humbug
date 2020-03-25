@@ -4,10 +4,19 @@
  * and open the template in the editor.
  */
 
+import controller.Controller;
+import model.Game;
+import view.text.View;
+
 /**
- *
- * @author router
+ * Main class for Humbug game.
+ * 
+ * @author Gregoy van der Pluijm <54786@etu.he2b.be>
  */
 public class Main {
+    public static void main(String[] args) {
+        Controller controller = new Controller(new Game() {}, new View() {});
+        controller.startGame();
+    }
     
 }

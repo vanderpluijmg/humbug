@@ -5,6 +5,7 @@
  */
 package view.text;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import model.Animal;
 import model.Board;
@@ -27,10 +28,10 @@ public abstract class View implements InterfaceView {
      * Displays the given board in a new String Array, does not show null.
      *
      * @param board Board given to display.
-     * @param animal All animals on board.
+     * @param animals All animals on board.
      */
     @Override
-    public void displayBoard(Board board, Animal... animal) {
+    public void displayBoard(Board board, Animal... animals) {
         String[][] tab = new String[board.getNbRow()][board.getNbColumn()];
         //Populating the new array "tab".
         for (int row = 0; row < tab.length; row++) {
@@ -38,31 +39,29 @@ public abstract class View implements InterfaceView {
                 Position position = new Position(row, col);
                 if (board.isInside(position) && board.getSquareType(position)
                         == SquareType.GRASS) {
-                    tab[row][col] = "\n-------\n"
-                            + "|     |\n"
-                            + "|GRASS|\n"
-                            + "|     |\n"
-                            + "-------";
+                    tab[row][col] = TerminalColor.BG_GREEN +"    ";
+                            ;
                 } else if (board.isInside(position)
                         && board.getSquareType(position) == SquareType.STAR) {
-                    tab[row][col] = "| * |";
+                    tab[row][col] = TerminalColor.BG_LIGHT_YELLOW + "    ";
                 } else {
-                    tab[row][col] = "\n-------\n-"
-                            +"       \n"
-                            +"       \n"
-                            +"       \n"
-                            +"--------"; //To not show null on board.
+                    tab[row][col] = TerminalColor.BG_BLUE +"    "
+                          ; //To not show null on board.
                 }
-                //for (Animal animals : animal){
-                //    if (animals instanceof Snail){
-                //        tab [row][col] = "|Sna|";
-                //    }else if (animals instanceof Spider){
-                //        tab [row][col] = "|Spi|";
-                //    }
-                //}
+                for (Animal animal : animals){
+                    if (animal.getPositionOnBoard().equals(position)){
+                        if (animal instanceof Snail){
+                            tab [row][col] = TerminalColor.BG_GREEN +" SN ";
+                        }else if (animal instanceof Spider){
+                            tab [row][col] = TerminalColor.BG_GREEN +" SP ";
+                        }
+                    }
+                }
             }
         }
+        
         //Displays the new array "tab".
+        System.out.println("");
         for (String[] tab1 : tab) {
             for (String tab11 : tab1) {
                 System.out.print(tab11);
@@ -85,15 +84,15 @@ public abstract class View implements InterfaceView {
     /**
      * Asks user for a position
      *
-     * @return The position given by the user threw row and column coordinates.
+     * @return The position given by row and column coordinates.
      */
     @Override
     public Position askPosition() {
         int idxRow;
         int idxCol;
-        System.out.println("Please enter a row");
+        System.out.println("Please enter the animals row");
         idxRow = intValidation();
-        System.out.println("Please enter a column");
+        System.out.println("Please enter the animals column");
         idxCol = intValidation();
         Position position = new Position(idxRow, idxCol);
         return position;
@@ -124,25 +123,24 @@ public abstract class View implements InterfaceView {
         do {
             System.out.println("Enter a direction. Valid directions are NORTH, "
                     + "SOUTH, EAST or WEST");
-            dir = keyboard.nextLine().toUpperCase();
+            dir = keyboard.next().toUpperCase();
         } while (!"WEST".equals(dir) && !"NORTH".equals(dir)
                 && !"EAST".equals(dir) && !"SOUTH".equals(dir));
 
         switch (dir) {
-            case "NORTH":
-                Direction directionN = Direction.NORTH;
-                return directionN;
-            case "SOUTH":
-                Direction directionS = Direction.SOUTH;
-                return directionS;
-            case "EAST":
-                Direction directionE = Direction.EAST;
-                return directionE;
             case "WEST":
                 Direction directionW = Direction.WEST;
                 return directionW;
+            case "NORTH":
+                Direction directionN = Direction.NORTH;
+                return directionN;
+            case "EAST":
+                Direction directionE = Direction.EAST;
+                return directionE;
             default:
-                return null; // Will never return
+                Direction directionS = Direction.SOUTH;
+                return directionS;    
         }
     }
+    
 }

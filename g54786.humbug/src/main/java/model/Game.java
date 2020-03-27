@@ -14,22 +14,25 @@ public abstract class Game implements Model {
 
     private Board board;
     private Animal[] animals;
+
     /**
      * Getter of board.
-     * 
+     *
      * @return The board.
      */
     @Override
     public Board getBoard() {
-        return board;
+        return this.board;
     }
+
     /**
      * Getter of animals.
+     *
      * @return Array of animals.
      */
     @Override
     public Animal[] getAnimals() {
-        return animals;
+        return this.animals;
     }
 
     /**
@@ -40,7 +43,9 @@ public abstract class Game implements Model {
     @Override
     public void startLevel(int level) {
         board = Board.getInitialBoard();
-        animals = new Animal[]{new Spider(new Position(0, 1)) {}};
+        animals = new Animal[]{new Spider(new Position(0, 0)) {
+        }};
+        //Position starPosition = new Position(2,2);
     }
 
     /**
@@ -50,7 +55,7 @@ public abstract class Game implements Model {
      */
     @Override
     public boolean levelIsOver() {
-        if (board == null || animals == null) {
+        if (this.board == null || animals == null) {
             throw new IllegalArgumentException();
         }
         boolean levelIsOver = true;
@@ -71,17 +76,17 @@ public abstract class Game implements Model {
      */
     @Override
     public void move(Position position, Direction direction) {
-        if (board == null || direction == null) {
+        if (this.board == null || this.animals == null) {
             throw new IllegalArgumentException();
         }
-        int index = 0;
-        while (index < animals.length) {
-            if (position.equals(getAnimals()[index].getPositionOnBoard())
-                    || getAnimals()[index].getPositionOnBoard() == null){
-                throw new IllegalArgumentException();
+        for (Animal animal : animals) {
+            if (animal.getPositionOnBoard().equals(position)) {
+                Position nextPosition = animal.move(this.board, direction, this.animals);
+                if (nextPosition == null) {
+                    System.out.println("Null position");
+                }
             }
-            else getAnimals()[index].move(board, direction, animals);
-            index++;
         }
     }
+
 }

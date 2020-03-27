@@ -18,8 +18,8 @@ import model.Board;
  */
 public class Controller {
 
-    private final Model game;
-    private final InterfaceView view;
+    private Model game;
+    private InterfaceView view;
     /**
      * Constructor for controller.
      * @param game Model interface.

@@ -1,5 +1,5 @@
 
-package view.text;
+package g54786.humbug.view.text;
 /**
  * <p>
  * TerminalColor met à disposition un ensemble de constantes permettant de

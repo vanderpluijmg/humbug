@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package g54786.humbug.model;
 
 /**
  * Makes the snail move. Snail has a specific move pattern.
@@ -26,9 +26,11 @@ public abstract class Snail extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animal) {
-        for (int move = 0; move < 1; move++) {
-            Position initPosition = getPositionOnBoard();
-            Position nextPosition = initPosition.next(direction);
+        Position initPosition = getPositionOnBoard();
+        Position nextPosition = initPosition.next(direction);
+        while (board.isInside(nextPosition)) {
+            initPosition = getPositionOnBoard();
+            nextPosition = initPosition.next(direction);
             if (!board.isInside(nextPosition)) {
                 this.setPositionOnBoard(null);
                 return null;
@@ -46,7 +48,10 @@ public abstract class Snail extends Animal {
                 board.setSquareType(nextPosition, SquareType.GRASS);
                 this.setPositionOnBoard(nextPosition);
                 return nextPosition;
-            } else return nextPosition;
+            } else {
+                this.setPositionOnBoard(nextPosition);
+                return nextPosition;
+            }
         }
         return null;
     }

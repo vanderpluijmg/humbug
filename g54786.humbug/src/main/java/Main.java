@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-import controller.Controller;
-import model.Game;
-import view.text.View;
+import g54786.humbug.controller.Controller;
+import g54786.humbug.model.Game;
+import g54786.humbug.view.text.View;
 
 /**
  * Main class for Humbug game.

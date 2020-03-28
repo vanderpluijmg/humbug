@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package g54786.humbug.controller;
 
-import view.text.InterfaceView;
-import model.Model;
-import model.Direction;
-import model.Position;
-import model.Board;
+import g54786.humbug.view.text.InterfaceView;
+import g54786.humbug.model.Model;
+import g54786.humbug.model.Direction;
+import g54786.humbug.model.Position;
+import g54786.humbug.model.Board;
 
 /**
  * Controller is responsible for game dynamics and updates view after each move.
@@ -20,8 +20,10 @@ public class Controller {
 
     private Model game;
     private InterfaceView view;
+
     /**
      * Constructor for controller.
+     *
      * @param game Model interface.
      * @param view InterfaceView interface.
      */
@@ -29,16 +31,16 @@ public class Controller {
         this.game = game;
         this.view = view;
     }
-    
+
     /**
      * Interacts with user.
      */
     public void startGame() {
         game.startLevel(1);
         while (!game.levelIsOver()) {
-            view.displayBoard(Board.getInitialBoard(), game.getAnimals());
-            Direction direction = view.askDirection();
+            view.displayBoard(Board.getInitialBoard(), game.getAnimals());            
             Position position = view.askPosition();
+            Direction direction = view.askDirection();
             try { //Tries to move the animal
                 game.move(position, direction);
             } catch (IllegalArgumentException nonValidMove) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package g54786.humbug.model;
 
 /**
  * Makes the spider move. Spider has a specific move pattern.

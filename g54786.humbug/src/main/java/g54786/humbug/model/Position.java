@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package g54786.humbug.model;
 
 /**
  * Position of a square. Position is composed of a row and column value.

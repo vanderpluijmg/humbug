@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package g54786.humbug.model;
 
 /**
  * Animals know where they are on the board but they don't know if they are on

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package g54786.humbug.model;
 
 /**
  * All the elements needed for the game.
@@ -43,9 +43,8 @@ public abstract class Game implements Model {
     @Override
     public void startLevel(int level) {
         board = Board.getInitialBoard();
-        animals = new Animal[]{new Spider(new Position(0, 0)) {
+        animals = new Animal[]{new Snail(new Position(0, 0)) {
         }};
-        //Position starPosition = new Position(2,2);
     }
 
     /**
@@ -72,7 +71,7 @@ public abstract class Game implements Model {
      * Moves the animal if its allowed, else throws exception.
      *
      * @param position Current position of animal.
-     * @param direction direction in which the animal needs to move.
+     * @param direction Direction in which the animal needs to move.
      */
     @Override
     public void move(Position position, Direction direction) {

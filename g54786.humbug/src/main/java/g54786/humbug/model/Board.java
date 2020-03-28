@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package g54786.humbug.model;
 
 /**
  * Board game is constituted of squares. The board does not know if or which
@@ -31,8 +31,9 @@ public class Board {
      */
     public static Board getInitialBoard() {
         Square grass = new Square(SquareType.GRASS);//Creates GRASS type Square.
+        Square Star = new Square(SquareType.STAR);
         Square[][] lvl1 = {{grass, grass, null}, {null, grass, grass},
-        {null, null, grass}}; //Fills in the array lvl1.
+        {null, null, Star}}; //Fills in the array lvl1.
         Board board = new Board(lvl1);
         return board;
     }
@@ -105,8 +106,8 @@ public class Board {
      */
     public int getNbColumn() {
         int col = -1;
-        for (int row = 0; row < squares.length; row++) {
-            for (col = 0; col < squares[row].length; col++) {
+        for (Square[] square : squares) {
+            for (col = 0; col < square.length; col++) {
                 //Columni index gets incremented, counts number of columns.
             }
         }

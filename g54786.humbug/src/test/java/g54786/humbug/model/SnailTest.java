@@ -3,10 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package g54786.humbug.model;
 
-import static model.SquareType.GRASS;
-import static model.SquareType.STAR;
+import g54786.humbug.model.Animal;
+import g54786.humbug.model.Board;
+import g54786.humbug.model.Direction;
+import g54786.humbug.model.Position;
+import g54786.humbug.model.Snail;
+import g54786.humbug.model.Square;
+import static g54786.humbug.model.SquareType.GRASS;
+import static g54786.humbug.model.SquareType.STAR;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;

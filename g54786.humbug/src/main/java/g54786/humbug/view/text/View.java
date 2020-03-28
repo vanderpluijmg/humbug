@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.text;
+package g54786.humbug.view.text;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import model.Animal;
-import model.Board;
-import model.Direction;
-import model.Position;
-import model.SquareType;
-import model.Snail;
-import model.Spider;
+import g54786.humbug.model.Animal;
+import g54786.humbug.model.Board;
+import g54786.humbug.model.Direction;
+import g54786.humbug.model.Position;
+import g54786.humbug.model.SquareType;
+import g54786.humbug.model.Snail;
+import g54786.humbug.model.Spider;
 
 /**
  * Defines how the game is seen by the user.
@@ -37,23 +36,21 @@ public abstract class View implements InterfaceView {
         for (int row = 0; row < tab.length; row++) {
             for (int col = 0; col < tab[row].length; col++) {
                 Position position = new Position(row, col);
-                if (board.isInside(position) && board.getSquareType(position)
-                        == SquareType.GRASS) {
-                    tab[row][col] = TerminalColor.BG_GREEN +"    ";
-                            ;
-                } else if (board.isInside(position)
-                        && board.getSquareType(position) == SquareType.STAR) {
-                    tab[row][col] = TerminalColor.BG_LIGHT_YELLOW + "    ";
+                if (board.isInside(position) && board.getSquareType(position).equals(SquareType.GRASS)) {
+                    tab[row][col] = TerminalColor.BG_GREEN +"     ";
+                } else if (board.isInside(position) 
+                        && board.getSquareType(position).equals(SquareType.STAR)) {
+                    tab[row][col] = TerminalColor.BG_RED + "  *  ";
                 } else {
-                    tab[row][col] = TerminalColor.BG_BLUE +"    "
+                    tab[row][col] = TerminalColor.BG_BLUE +"     "
                           ; //To not show null on board.
                 }
                 for (Animal animal : animals){
                     if (animal.getPositionOnBoard().equals(position)){
                         if (animal instanceof Snail){
-                            tab [row][col] = TerminalColor.BG_GREEN +" SN ";
+                            tab [row][col] = TerminalColor.BG_GREEN +"  SN ";
                         }else if (animal instanceof Spider){
-                            tab [row][col] = TerminalColor.BG_GREEN +" SP ";
+                            tab [row][col] = TerminalColor.BG_GREEN +"  SP ";
                         }
                     }
                 }
@@ -61,15 +58,14 @@ public abstract class View implements InterfaceView {
         }
         
         //Displays the new array "tab".
-        System.out.println("");
-        for (String[] tab1 : tab) {
-            for (String tab11 : tab1) {
-                System.out.print(tab11);
+        System.out.println("  0  " + "  1  " + "  2  ");
+        for (String[] rows : tab) {
+            for (String cols : rows) {
+                System.out.print(TerminalColor.BLACK_UNDERLINE +cols);
             }
             System.out.println();
         }
     }
-
 
     /**
      * Displays error message.
@@ -82,7 +78,7 @@ public abstract class View implements InterfaceView {
     }
 
     /**
-     * Asks user for a position
+     * Asks user for a position.
      *
      * @return The position given by row and column coordinates.
      */
@@ -90,9 +86,9 @@ public abstract class View implements InterfaceView {
     public Position askPosition() {
         int idxRow;
         int idxCol;
-        System.out.println("Please enter the animals row");
+        System.out.println("Please enter the animals row you wish to select");
         idxRow = intValidation();
-        System.out.println("Please enter the animals column");
+        System.out.println("Please enter the animals column you wish to select");
         idxCol = intValidation();
         Position position = new Position(idxRow, idxCol);
         return position;
@@ -103,7 +99,7 @@ public abstract class View implements InterfaceView {
      *
      * @return A integer.
      */
-    public static int intValidation() {
+    private static int intValidation() {
         while (!keyboard.hasNextInt()) {
             keyboard.next();
             System.out.println("Please enter a valid integer");
@@ -113,7 +109,7 @@ public abstract class View implements InterfaceView {
     }
 
     /**
-     * Asks user for a direction
+     * Asks user for a direction.
      *
      * @return The direction given by the user.
      */

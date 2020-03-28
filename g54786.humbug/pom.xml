@@ -67,4 +67,5 @@
         </snapshots> 
     </repository>
 </repositories>
+    <name>Humbug</name>
 </project>

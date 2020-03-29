@@ -5,13 +5,6 @@
  */
 package g54786.humbug.model;
 
-import g54786.humbug.model.Animal;
-import g54786.humbug.model.Board;
-import g54786.humbug.model.Direction;
-import g54786.humbug.model.Position;
-import g54786.humbug.model.Snail;
-import g54786.humbug.model.Spider;
-import g54786.humbug.model.Square;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

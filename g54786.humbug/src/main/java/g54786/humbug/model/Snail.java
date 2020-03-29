@@ -31,10 +31,7 @@ public abstract class Snail extends Animal {
         while (board.isInside(nextPosition)) {
             initPosition = getPositionOnBoard();
             nextPosition = initPosition.next(direction);
-            if (!board.isInside(nextPosition)) {
-                this.setPositionOnBoard(null);
-                return null;
-            }
+            
             for (Animal animals : animal) {
                 if (animals.getPositionOnBoard().equals(nextPosition)) {
                     this.setPositionOnBoard(initPosition);
@@ -53,6 +50,10 @@ public abstract class Snail extends Animal {
                 return nextPosition;
             }
         }
+        if (!board.isInside(nextPosition)) {
+                this.setPositionOnBoard(null);
+                return null;
+            }
         return null;
     }
 }

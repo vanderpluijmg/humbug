@@ -36,9 +36,11 @@ public class Controller {
      * Interacts with user.
      */
     public void startGame() {
+        boolean levelIsNotOver = true;
         game.startLevel(1);
-        while (!game.levelIsOver()) {
-            view.displayBoard(Board.getInitialBoard(), game.getAnimals());            
+
+        while (!game.levelIsOver() && levelIsNotOver) {
+            view.displayBoard(Board.getInitialBoard(), game.getAnimals());
             Position position = view.askPosition();
             Direction direction = view.askDirection();
             try { //Tries to move the animal

@@ -30,10 +30,10 @@ public class Board {
      * @return Level 1 board.
      */
     public static Board getInitialBoard() {
-        Square grass = new Square(SquareType.GRASS);//Creates GRASS type Square.
-        Square Star = new Square(SquareType.STAR);
+        Square grass = new Square(SquareType.GRASS);
+        Square Star = new Square(SquareType.STAR); 
         Square[][] lvl1 = {{grass, grass, null}, {null, grass, grass},
-        {null, null, Star}}; //Fills in the array lvl1.
+        {null, null, Star}}; 
         Board board = new Board(lvl1);
         return board;
     }

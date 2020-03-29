@@ -16,7 +16,7 @@ import g54786.humbug.model.Spider;
 
 /**
  * Defines how the game is seen by the user.
- * 
+ *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public abstract class View implements InterfaceView {
@@ -32,49 +32,57 @@ public abstract class View implements InterfaceView {
     @Override
     public void displayBoard(Board board, Animal... animals) {
         String[][] tab = new String[board.getNbRow()][board.getNbColumn()];
-        //Populating the new array "tab".
+        //Populating the new array "tab" by defining every square case.
         for (int row = 0; row < tab.length; row++) {
             for (int col = 0; col < tab[row].length; col++) {
                 Position position = new Position(row, col);
-                if (board.isInside(position) && board.getSquareType(position).equals(SquareType.GRASS)) {
-                    tab[row][col] = TerminalColor.BG_GREEN +"     ";
-                } else if (board.isInside(position) 
-                        && board.getSquareType(position).equals(SquareType.STAR)) {
+                if (board.isInside(position) && board.getSquareType(position)
+                        .equals(SquareType.GRASS)) {
+                    tab[row][col] = TerminalColor.BG_GREEN + "     ";
+                } else if (board.isInside(position)
+                        && board.getSquareType(position)
+                                .equals(SquareType.STAR)) {
                     tab[row][col] = TerminalColor.BG_RED + "  *  ";
                 } else {
-                    tab[row][col] = TerminalColor.BG_BLUE +"     "
-                          ; //To not show null on board.
+                    tab[row][col] = TerminalColor.BG_BLUE + "     "; //To not show null on board.
                 }
-                for (Animal animal : animals){
-                    if (animal.getPositionOnBoard().equals(position)){
-                        if (animal instanceof Snail){
-                            tab [row][col] = TerminalColor.BG_GREEN +"  SN ";
-                        }else if (animal instanceof Spider){
-                            tab [row][col] = TerminalColor.BG_GREEN +"  SP ";
+                for (Animal animal : animals) {
+                    if (animal.getPositionOnBoard().equals(position)) {
+                        if (animal instanceof Snail) {
+                            tab[row][col] = TerminalColor.BG_GREEN + "  SN ";
+                        } else if (animal instanceof Spider) {
+                            tab[row][col] = TerminalColor.BG_GREEN + "  SP ";
                         }
                     }
                 }
             }
         }
-        
-        //Displays the new array "tab".
+
+        displayArray(tab);
+    }
+    /**
+     * Displays an array.
+     * 
+     * @param tab Array to display
+     */
+    private void displayArray(String[][] tab) {
         System.out.println("  0  " + "  1  " + "  2  ");
         for (String[] rows : tab) {
             for (String cols : rows) {
-                System.out.print(TerminalColor.BLACK_UNDERLINE +cols);
+                System.out.print(TerminalColor.BLACK_UNDERLINE + cols);
             }
             System.out.println();
         }
     }
 
-    /**
-     * Displays error message.
-     *
-     * @param message Message to display.
-     */
-    @Override
-    public void displayError(String message) {
-        System.err.println("Error :" + message);
+/**
+ * Displays error message.
+ *
+ * @param message Message to display.
+ */
+@Override
+public void displayError(String message) {
+        System.err.println(message);
     }
 
     /**
@@ -83,15 +91,15 @@ public abstract class View implements InterfaceView {
      * @return The position given by row and column coordinates.
      */
     @Override
-    public Position askPosition() {
+public Position askPosition() {
         int idxRow;
         int idxCol;
         System.out.println("Please enter the animals row you wish to select");
         idxRow = intValidation();
         System.out.println("Please enter the animals column you wish to select");
         idxCol = intValidation();
-        Position position = new Position(idxRow, idxCol);
-        return position;
+        Position wantedPosition = new Position(idxRow, idxCol);
+        return wantedPosition;
     }
 
     /**
@@ -114,7 +122,7 @@ public abstract class View implements InterfaceView {
      * @return The direction given by the user.
      */
     @Override
-    public Direction askDirection() {
+public Direction askDirection() {
         String dir;
         do {
             System.out.println("Enter a direction. Valid directions are NORTH, "

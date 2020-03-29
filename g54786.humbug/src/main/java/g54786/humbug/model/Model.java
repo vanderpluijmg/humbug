@@ -7,6 +7,7 @@ package g54786.humbug.model;
 
 /**
  * This is an interface for Game class.
+ * 
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public interface Model {

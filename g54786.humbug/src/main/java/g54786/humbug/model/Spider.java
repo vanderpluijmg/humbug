@@ -38,8 +38,8 @@ public abstract class Spider extends Animal {
 
                 } else if (animals.getPositionOnBoard().equals(nextPosition.next(direction))) {
                     //Checks if square after nextPosition is free or not. 
-                    //If not we can conclude that if nextPosition is a SquareType 
-                    //Star that it has arrived to its destination. 
+                    //If not and nextPosition is a SquareType STAR
+                    //The animals has arriven on a STAR.
                     if (SquareType.STAR == board.getSquareType(nextPosition)) {
                         setOnStar(true);
                         setPositionOnBoard(nextPosition);

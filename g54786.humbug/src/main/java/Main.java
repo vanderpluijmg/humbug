@@ -16,7 +16,12 @@ import g54786.humbug.view.text.View;
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller(new Game() {}, new View() {});
-        controller.startGame();
+        try {
+            controller.startGame();
+        } catch (NullPointerException e) {
+            System.out.println("Game Over!");
+        }
+
     }
     
 }

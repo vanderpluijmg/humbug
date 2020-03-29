@@ -54,7 +54,7 @@ public abstract class Game implements Model {
      */
     @Override
     public boolean levelIsOver() {
-        if (this.board == null || animals == null) {
+        if (this.board == null || this.animals == null) {
             throw new IllegalArgumentException();
         }
         boolean levelIsOver = true;
@@ -80,9 +80,10 @@ public abstract class Game implements Model {
         }
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(position)) {
-                Position nextPosition = animal.move(this.board, direction, this.animals);
+                Position nextPosition = animal.move(this.board, direction,
+                        this.animals);
                 if (nextPosition == null) {
-                    System.out.println("Null position");
+                    throw new IllegalArgumentException();
                 }
             }
         }

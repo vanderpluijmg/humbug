@@ -1,5 +1,5 @@
-
 package g54786.humbug.view.text;
+
 /**
  * <p>
  * TerminalColor met à disposition un ensemble de constantes permettant de
@@ -7,7 +7,7 @@ package g54786.humbug.view.text;
  * <p>
  * Ca s'utilise par exemple comme suit  <code>System.out.println(TerminalColor.RED + "j'écris en rouge" +
  * TerminalColor.DEFAULT);</code>.
- * 
+ *
  * @author Pierre Bettens (pbt) <pbettens@he2b.be>
  */
 public enum TerminalColor {
@@ -37,7 +37,7 @@ public enum TerminalColor {
     PINK_UNDERLINE("\033[35;4m"),
     CYAN_UNDERLINE("\033[36;4m"),
     WHITE_UNDERLINE("\033[38;4m"),
-    GREY_UNDERLINE("\033[37;4m"),    
+    GREY_UNDERLINE("\033[37;4m"),
     LIGHT_GREY_UNDERLINE("\033[37;4m"),
     DARK_GREY_UNDERLINE("\033[90;4m"),
     LIGHT_RED_UNDERLINE("\033[91m;4m"),
@@ -74,8 +74,7 @@ public enum TerminalColor {
     BG_YELLOW_FG_WHITE("\033[43;38;1m"),
     BG_BLUE_FG_WHITE("\033[44;38;1m"),
     BG_MAGENTA_FG_WHITE("\033[45;38;1m"),
-    BG_CYAN_FG_WHITE("\033[46;38;1m"),
-;
+    BG_CYAN_FG_WHITE("\033[46;38;1m"),;
     private String couleur;
 
     private TerminalColor(String c) {
@@ -87,4 +86,3 @@ public enum TerminalColor {
         return "" + couleur;
     }
 }
-    

@@ -28,9 +28,7 @@ public class SnailTest {
             {null, null, new Square(STAR)}
         });
         animals = new Animal[] {
-            new Snail(new Position(0, 0)) {},
-            new Snail(new Position(1, 2)) {}
-        };
+            new Snail(new Position(0, 0)) {}};
     }
 
     /**

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g54786.humbug.model;
 
 /**
@@ -13,6 +8,20 @@ package g54786.humbug.model;
  */
 public class Board {
 
+    /**
+     * Initializes initial board, level 1.
+     *
+     * @return Level 1 board.
+     */
+    public static Board getInitialBoard() {
+        Square grass = new Square(SquareType.GRASS);
+        Square Star = new Square(SquareType.STAR);
+        Square[][] lvl1 = {{grass, grass, null}, {null, grass, grass},
+        {null, null, Star}};
+        Board board = new Board(lvl1);
+        return board;
+    }
+
     private final Square squares[][];
 
     /**
@@ -22,20 +31,6 @@ public class Board {
      */
     Board(Square[][] square) {
         this.squares = square;
-    }
-
-    /**
-     * Initializes initial board, level 1.
-     *
-     * @return Level 1 board.
-     */
-    public static Board getInitialBoard() {
-        Square grass = new Square(SquareType.GRASS);
-        Square Star = new Square(SquareType.STAR); 
-        Square[][] lvl1 = {{grass, grass, null}, {null, grass, grass},
-        {null, null, Star}}; 
-        Board board = new Board(lvl1);
-        return board;
     }
 
     /**

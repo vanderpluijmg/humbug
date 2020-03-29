@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g54786.humbug.model;
 
 /**
@@ -31,7 +26,7 @@ public abstract class Snail extends Animal {
         while (board.isInside(nextPosition)) {
             initPosition = getPositionOnBoard();
             nextPosition = initPosition.next(direction);
-            
+
             for (Animal animals : animal) {
                 if (animals.getPositionOnBoard().equals(nextPosition)) {
                     this.setPositionOnBoard(initPosition);
@@ -51,9 +46,9 @@ public abstract class Snail extends Animal {
             }
         }
         if (!board.isInside(nextPosition)) {
-                this.setPositionOnBoard(null);
-                return null;
-            }
+            this.setPositionOnBoard(null);
+            return null;
+        }
         return null;
     }
 }

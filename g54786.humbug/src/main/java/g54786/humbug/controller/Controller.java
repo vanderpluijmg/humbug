@@ -46,7 +46,7 @@ public class Controller {
             try { //Tries to move the animal
                 game.move(position, direction);
             } catch (IllegalArgumentException nonValidMove) {
-                view.displayError("Non valid move");
+                view.displayError("You fell in the water!");
             }
 
         }

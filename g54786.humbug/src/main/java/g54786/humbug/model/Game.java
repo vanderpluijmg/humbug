@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g54786.humbug.model;
 
 /**
@@ -43,8 +38,7 @@ public abstract class Game implements Model {
     @Override
     public void startLevel(int level) {
         board = Board.getInitialBoard();
-        animals = new Animal[]{new Snail(new Position(0, 0)) {
-        }};
+        animals = new Animal[]{new Snail(new Position(0, 0)) {},      new Snail(new Position(1, 2)) {}};
     }
 
     /**

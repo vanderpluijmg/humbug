@@ -6,7 +6,7 @@ To run Humbug :
 	3. "java Main"
 	
 Rule of the game :
-You must bring the animals that are on the grass(GREEN) to the star(RED). To do this you must avoid to fall intot the water (BLUE).
+You must bring the animals that are on the grass(GREEN) to the star(RED). To do this you must avoid to fall into the water (BLUE).
 
 
 

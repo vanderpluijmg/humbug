@@ -31,23 +31,18 @@ public abstract class Spider extends Animal {
                     setPositionOnBoard(initPosition);
                     return initPosition;
 
-                } else if (animals.getPositionOnBoard().equals(nextPosition.next(direction))) {
-                    //Checks if square after nextPosition is free or not. 
-                    //If not and nextPosition is a SquareType STAR
-                    //The animals has arriven on a STAR.
-                    if (SquareType.STAR == board.getSquareType(nextPosition)) {
+                } else if (SquareType.STAR == board.getSquareType(nextPosition)) {
                         setOnStar(true);
                         setPositionOnBoard(nextPosition);
                         board.setSquareType(nextPosition, SquareType.GRASS);
                         return nextPosition;
-                    } else {
+                } else {
                         setPositionOnBoard(nextPosition);
                         return nextPosition;
                     }
                 }
-            }
+            
             setPositionOnBoard(nextPosition);
-
         }
         if (!board.isInside(nextPosition)) {
             this.setPositionOnBoard(null);

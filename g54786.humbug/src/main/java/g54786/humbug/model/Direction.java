@@ -6,7 +6,10 @@ package g54786.humbug.model;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public enum Direction {
-    NORTH(-1, 0), SOUTH(1, 0), EAST(0, 1), WEST(0, -1);
+    NORTH(-1, 0),
+    SOUTH(1, 0),
+    EAST(0, 1),
+    WEST(0, -1);
 
     private final int deltaRow;
     private final int deltaColumn;

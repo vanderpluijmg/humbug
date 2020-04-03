@@ -22,7 +22,7 @@ public class Board {
         return board;
     }
 
-    private final Square squares[][];
+    private Square squares[][];
 
     /**
      * Constructor for board class.
@@ -44,8 +44,10 @@ public class Board {
         if (position == null) {
             throw new IllegalArgumentException();
         }
-        if (position.getRow() >= this.getNbRow() //Checks if row is bigger than size. 
-                || position.getColumn() >= this.getNbColumn() //Checks if column is bigger than size.
+        if (position.getRow() >= this.getNbRow() //Checks if row is bigger than 
+            //size. 
+                || position.getColumn() >= this.getNbColumn() //Checks if column
+                   //is bigger than size.
                 || position.getRow() < 0 || position.getColumn() < 0) {
             isInside = false;
         } else if (squares[position.getRow()][position.getColumn()] == null) {
@@ -61,8 +63,9 @@ public class Board {
      * @return Square type of given position
      */
     public SquareType getSquareType(Position position) {
-        if (squares[position.getRow()][position.getColumn()] == null) {
+        if (position == null) {
             throw new IllegalArgumentException();
+        } else {
         }
         return squares[position.getRow()][position.getColumn()].getType();
     }
@@ -87,11 +90,7 @@ public class Board {
      * @return number of rows.
      */
     public int getNbRow() {
-        int row;
-        for (row = 0; row < squares.length; row++) {
-            //Row index gets incremented, counts number of rows.
-        }
-        return row;
+        return squares.length;
     }
 
     /**
@@ -100,13 +99,6 @@ public class Board {
      * @return number of columns.
      */
     public int getNbColumn() {
-        int col = -1;
-        for (Square[] square : squares) {
-            for (col = 0; col < square.length; col++) {
-                //Columni index gets incremented, counts number of columns.
-            }
-        }
-        return col;
+        return squares[0].length;
     }
-
 }

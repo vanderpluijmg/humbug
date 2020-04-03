@@ -7,6 +7,7 @@ package g54786.humbug.model;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public enum SquareType {
-    GRASS, STAR;
+    GRASS,
+    STAR;
 
 }

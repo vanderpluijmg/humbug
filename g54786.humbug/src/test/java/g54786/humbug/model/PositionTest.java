@@ -5,10 +5,6 @@
  */
 package g54786.humbug.model;
 
-import g54786.humbug.model.Direction;
-import g54786.humbug.model.Direction;
-import g54786.humbug.model.Position;
-import g54786.humbug.model.Position;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 

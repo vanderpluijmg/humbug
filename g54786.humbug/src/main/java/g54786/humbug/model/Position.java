@@ -1,5 +1,7 @@
 package g54786.humbug.model;
 
+import java.util.Objects;
+
 /**
  * Position of a square. Position is composed of a row and column value.
  *
@@ -47,10 +49,7 @@ public class Position {
      */
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + this.row;
-        hash = 23 * hash + this.column;
-        return hash;
+        return Objects.hash(row, column);
     }
 
     /**

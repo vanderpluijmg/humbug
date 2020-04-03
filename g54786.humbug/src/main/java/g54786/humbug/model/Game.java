@@ -38,7 +38,7 @@ public abstract class Game implements Model {
     @Override
     public void startLevel(int level) {
         board = Board.getInitialBoard();
-        animals = new Animal[]{new Snail(new Position(0, 0)) {},      new Snail(new Position(1, 2)) {}};
+        animals = new Animal[]{new Snail(new Position(0, 0)) {},};
     }
 
     /**

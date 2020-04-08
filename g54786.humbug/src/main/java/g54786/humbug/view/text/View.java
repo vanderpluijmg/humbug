@@ -1,13 +1,13 @@
 package g54786.humbug.view.text;
 
 import java.util.Scanner;
-import g54786.humbug.model.Animal;
+import g54786.humbug.model.Animal.Animal;
 import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
 import g54786.humbug.model.SquareType;
-import g54786.humbug.model.Snail;
-import g54786.humbug.model.Spider;
+import g54786.humbug.model.Animal.Snail;
+import g54786.humbug.model.Animal.Spider;
 
 /**
  * Defines how the game is seen by the user.

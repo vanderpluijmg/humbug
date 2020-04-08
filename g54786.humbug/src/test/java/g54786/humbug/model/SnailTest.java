@@ -5,6 +5,8 @@
  */
 package g54786.humbug.model;
 
+import g54786.humbug.model.Animal.Snail;
+import g54786.humbug.model.Animal.Animal;
 import static g54786.humbug.model.SquareType.GRASS;
 import static g54786.humbug.model.SquareType.STAR;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,8 @@
 package g54786.humbug.model;
 
+import g54786.humbug.model.Animal.Snail;
+import g54786.humbug.model.Animal.Animal;
+
 /**
  * All the elements needed for the game.
  *

@@ -5,10 +5,6 @@
  */
 package g54786.humbug.model;
 
-import g54786.humbug.model.Board;
-import g54786.humbug.model.Position;
-import g54786.humbug.model.Square;
-import g54786.humbug.model.SquareType;
 import org.junit.jupiter.api.Assertions;
 import static g54786.humbug.model.SquareType.*;
 import static org.junit.jupiter.api.Assertions.*;

@@ -29,8 +29,8 @@ public class Board {
      *
      * @param square 2D array, board game.
      */
-    Board(Square[][] square) {
-        this.squares = square;
+    Board(Square[][] squares) {
+        this.squares = squares;
     }
 
     /**
@@ -63,9 +63,14 @@ public class Board {
      * @return Square type of given position
      */
     public SquareType getSquareType(Position position) {
-        if (position == null) {
+        if (null == position 
+                        || this.squares[position.getRow()][position.getColumn()]
+                        == null
+                        || position.getColumn() < 0
+                        || position.getRow() < 0
+                        || position.getRow() > this.squares.length - 1
+                        || position.getColumn() > this.squares[position.getRow()].length - 1) {
             throw new IllegalArgumentException();
-        } else {
         }
         return squares[position.getRow()][position.getColumn()].getType();
     }

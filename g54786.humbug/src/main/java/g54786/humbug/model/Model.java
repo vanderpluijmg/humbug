@@ -1,5 +1,7 @@
 package g54786.humbug.model;
 
+import g54786.humbug.model.Animal.Animal;
+
 /**
  * This is an interface for Game class.
  *

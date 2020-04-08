@@ -9,6 +9,10 @@ package g54786.humbug.model;
 public class Square {
 
     private SquareType type;
+    private boolean northWall;
+    private boolean westWall;
+    private boolean eastWall;
+    private boolean southWall;
 
     /**
      * Constructor of square on board.
@@ -17,6 +21,46 @@ public class Square {
      */
     public Square(SquareType type) {
         this.type = type;
+        this.eastWall = false;
+        this.northWall = false;
+        this.southWall = false;
+        this.westWall = false;
+    }
+
+    /**
+     * Getter of north wall
+     *
+     * @return status of north wall
+     */
+    public boolean isNorthWall() {
+        return northWall;
+    }
+
+    /**
+     * Getter of west wall
+     *
+     * @return
+     */
+    public boolean isWestWall() {
+        return westWall;
+    }
+
+    /**
+     * Getter of east wall
+     *
+     * @return
+     */
+    public boolean isEastWall() {
+        return eastWall;
+    }
+
+    /**
+     * Getter of south wall
+     *
+     * @return
+     */
+    public boolean isSouthWall() {
+        return southWall;
     }
 
     /**
@@ -38,5 +82,22 @@ public class Square {
     public SquareType getType() {
         return type;
     }
-
+    /**
+     * Checks if the direction has a wall.
+     * 
+     * @param direction Direction to check for wall.
+     * @return True if it does have a wall, false if not. 
+     */
+    public boolean hasWall(Direction direction) {
+        switch (direction) {
+            case SOUTH:
+                return isSouthWall();
+            case EAST:
+                return isEastWall();
+            case NORTH:
+                return isNorthWall();
+            default:
+                return isWestWall();
+        }
+    }
 }

@@ -41,4 +41,16 @@ public enum Direction {
         return deltaColumn;
     }
 
+    public Direction opposite() {
+        if (this == EAST) {
+            return WEST;
+        } else if (this == WEST) {
+            return EAST;
+        } else if (this == NORTH) {
+            return SOUTH;
+        } else {
+            return NORTH;
+        }
+
+    }
 }

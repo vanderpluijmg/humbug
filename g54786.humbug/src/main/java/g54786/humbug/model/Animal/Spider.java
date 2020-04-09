@@ -27,34 +27,28 @@ public abstract class Spider extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        Position initPosition = getPositionOnBoard();
-        Position nextPosition = initPosition.next(direction);
+
+        Position nextPosition = getPositionOnBoard().next(direction);
+
         while (board.isInside(nextPosition)) {
-            initPosition = getPositionOnBoard();
-            nextPosition = initPosition.next(direction);
+
             for (Animal animal : animals) {
                 if (animal.getPositionOnBoard().equals(nextPosition)) {
-                    setPositionOnBoard(initPosition);
-                    return initPosition;
-
-                } else if (SquareType.STAR == board.getSquareType(nextPosition)) {
+                    if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR) {
                         setOnStar(true);
-                        setPositionOnBoard(nextPosition);
-                        board.setSquareType(nextPosition, SquareType.GRASS);
-                        return nextPosition;
-                } else {
-                        setPositionOnBoard(nextPosition);
-                        return nextPosition;
+                        board.setSquareType(getPositionOnBoard(), SquareType.STAR);
                     }
+                    setPositionOnBoard(getPositionOnBoard());
+                    return getPositionOnBoard();
+
+                } else {
+                    setPositionOnBoard(nextPosition);
+                    nextPosition = getPositionOnBoard().next(direction);
                 }
-            
-            setPositionOnBoard(nextPosition);
+            }
         }
-        if (!board.isInside(nextPosition)) {
-            this.setPositionOnBoard(null);
-            return null;
-        }
+
+        setPositionOnBoard(null);
         return null;
     }
-
 }

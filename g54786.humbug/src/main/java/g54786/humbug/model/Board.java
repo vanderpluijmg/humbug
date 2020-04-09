@@ -48,7 +48,8 @@ public class Board {
             //size. 
                 || position.getColumn() >= this.getNbColumn() //Checks if column
                    //is bigger than size.
-                || position.getRow() < 0 || position.getColumn() < 0) {
+                || position.getRow() < 0 || position.getColumn() < 0)
+                {
             isInside = false;
         } else if (squares[position.getRow()][position.getColumn()] == null) {
             isInside = false;
@@ -63,13 +64,7 @@ public class Board {
      * @return Square type of given position
      */
     public SquareType getSquareType(Position position) {
-        if (null == position 
-                        || this.squares[position.getRow()][position.getColumn()]
-                        == null
-                        || position.getColumn() < 0
-                        || position.getRow() < 0
-                        || position.getRow() > this.squares.length - 1
-                        || position.getColumn() > this.squares[position.getRow()].length - 1) {
+        if (!isInside(position)) {
             throw new IllegalArgumentException();
         }
         return squares[position.getRow()][position.getColumn()].getType();
@@ -83,7 +78,7 @@ public class Board {
      * @return The set square type.
      */
     public SquareType setSquareType(Position position, SquareType type) {
-        if (squares[position.getRow()][position.getColumn()] == null) {
+        if (!isInside(position)) {
             throw new IllegalArgumentException();
         }
         return squares[position.getRow()][position.getColumn()].setType(type);

@@ -29,8 +29,9 @@ public class Controller {
 
     /**
      * Interacts with user.
+     * @param nLevel Level to start at.
      */
-    public void startGame() {
+    public void startGame(int nLevel) {
         boolean levelIsNotOver = true;
         game.startLevel(1);
 

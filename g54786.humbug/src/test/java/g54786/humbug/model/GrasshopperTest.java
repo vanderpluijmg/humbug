@@ -80,7 +80,7 @@ public class GrasshopperTest {
      * Test of move method, of class Grasshopper.
      */
     @Test
-    public void testMove_next_notinside_2() {
+    public void testMove_next_notinside() {
         System.out.println("move next case null");
         Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = null; // move and fall

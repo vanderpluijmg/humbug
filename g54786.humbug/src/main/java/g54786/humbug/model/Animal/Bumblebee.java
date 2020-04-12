@@ -22,28 +22,10 @@ public abstract class Bumblebee extends Animal {
 
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-
-        Position initPosition = getPositionOnBoard();
-        Position nextPosition = initPosition.next(direction);
-
-        while (board.isInside(nextPosition)) {
-            for (Animal animal : animals) {
-                if (animal.getPositionOnBoard().equals(nextPosition)) {
-                    if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR){
-                        setOnStar(true);
-                        board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
-                        setPositionOnBoard(getPositionOnBoard());
-                        return getPositionOnBoard();
-                    }
-                        setPositionOnBoard(getPositionOnBoard());
-                        return getPositionOnBoard();
-                    } else {
-                    setPositionOnBoard(nextPosition);
-                    return nextPosition;
-                }
-            }
-        }
-        setPositionOnBoard(null);
-        return null;
-    }
+    
+        Position nextPosition = getPositionOnBoard().next(direction);
+        
+        return nextPosition;
+        
+    }   
 }

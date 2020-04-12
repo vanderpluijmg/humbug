@@ -100,7 +100,7 @@ public class Board {
         return squares[0].length;
     }
 
-    public Square getSquares(Position position) {
+    public Square getSquare(Position position) {
         int row = position.getRow();
         int column = position.getColumn();
         return squares[row][column];

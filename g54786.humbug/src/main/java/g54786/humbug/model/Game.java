@@ -34,11 +34,24 @@ public abstract class Game implements Model {
     public Animal[] getAnimals() {
         return this.animals;
     }
-
+    /**
+     * Getter of remaining moves.
+     * 
+     * @return Remaining number of moves.
+     */
     @Override
     public int getRemainingMoves() {
-        return remainingMoves;
+        return this.remainingMoves;
     }
+    /**
+     * Getter for current level.
+     * 
+     * @return Level.
+     */
+    public int getCurrentLevel() {
+        return this.currentLevel;
+    }
+    
 
     /**
      * Initializes the given level.
@@ -50,6 +63,30 @@ public abstract class Game implements Model {
         board = Board.getInitialBoard();
         animals = new Animal[]{new Snail(new Position(0, 0)) {},};
     }
+    @Override
+    public LevelStatus getLevelStatus(){
+        for (Animal animal : animals){
+            if (allOnStar(animals)){
+                return LevelStatus.WIN;
+            } else if (animal.getPositionOnBoard() == null){
+                return LevelStatus.FAIL;
+            } else if (animal.isOnStar()){ //ADJUST DIFFERENCE BETWEEN
+                return LevelStatus.NOT_STARTED;
+            } else {
+                return LevelStatus.IN_PROGRESS;
+            }
+        }
+        return null;
+    }   
+    private boolean allOnStar (Animal ... animals){
+        boolean allOnStar = true;
+        for (Animal animal : animals){
+            if (!animal.isOnStar()){
+                allOnStar = false;
+            }
+        }
+        return allOnStar;
+    }
 
     /**
      * Moves the animal if its allowed, else throws exception.
@@ -59,8 +96,8 @@ public abstract class Game implements Model {
      */
     @Override
     public void move(Position position, Direction direction) {
-        if (this.board == null || this.animals == null) {
-            throw new IllegalArgumentException();
+        if (getLevelStatus() != LevelStatus.IN_PROGRESS) {
+            throw new IllegalStateException();
         }
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(position)) {

@@ -6,12 +6,12 @@
 package g54786.humbug.model;
 
 /**
- *
+ * Game status.
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public enum LevelStatus {
-        NOT_STARTED,
-        IN_PROGRESS,
+        NOT_STARTED, 
+        IN_PROGRESS, 
         FAIL,
         WIN;
 }

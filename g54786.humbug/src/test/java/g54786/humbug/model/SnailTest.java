@@ -18,10 +18,10 @@ import org.junit.jupiter.api.BeforeEach;
  * @author Pierre Bettens (pbt) <pbettens@he2b.be>
  */
 public class SnailTest {
-    
+
     private Board board;
     private Animal[] animals;
-    
+
     @BeforeEach
     public void setUp() {
         board = new Board(new Square[][]{
@@ -88,21 +88,4 @@ public class SnailTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of move method, of class Snail.
-     */
-    @Test
-    public void testMove_next_wall() {
-        board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
-            {null, new Square(GRASS), new Square(GRASS)},
-            {null, null, new Square(STAR)}
-        });
-        System.out.println("move next case wall");
-        Snail instance = (Snail) animals[0];
-        Position expResult = new Position(0, 0); // don't move
-        Position result = instance.move(board, Direction.EAST, animals);
-        assertEquals(expResult, result);
-    }
-    
 }

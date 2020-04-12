@@ -22,7 +22,11 @@ public interface Model {
      * @return Array of animals.
      */
     Animal[] getAnimals();
-    
+    /**
+     * Getter of remaining moves.
+     * 
+     * @return Remaining number of moves.
+     */
     int getRemainingMoves();
 
     /**
@@ -35,7 +39,7 @@ public interface Model {
     /**
      * Checks if the level is over, meaning all animals are on square type STAR.
      *
-     * @return True if level is over, false if not.
+     * @return Level status..
      */
     LevelStatus getLevelStatus();
 

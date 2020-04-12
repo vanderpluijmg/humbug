@@ -11,7 +11,10 @@ import g54786.humbug.model.SquareType;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public abstract class Snail extends Animal {
-
+    /**
+     * Constructor for Snail class.
+     * @param positionOnBoard Position on board.
+     */
     public Snail(Position positionOnBoard) {
         super(positionOnBoard);
     }
@@ -41,8 +44,8 @@ public abstract class Snail extends Animal {
                 board.setSquareType(nextPosition, SquareType.GRASS);
                 setPositionOnBoard(nextPosition);
                 return nextPosition;
-            } else if (board.getSquares(nextPosition).hasWall(direction) 
-                    && board.getSquares(nextPosition.next(direction))
+            } else if (board.getSquare(nextPosition).hasWall(direction) 
+                    && board.getSquare(nextPosition.next(direction))
                             .hasWall(direction.opposite())){
                 setPositionOnBoard(initPosition);
                 return initPosition;

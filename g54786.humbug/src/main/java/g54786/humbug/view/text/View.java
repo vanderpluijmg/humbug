@@ -8,6 +8,8 @@ import g54786.humbug.model.Position;
 import g54786.humbug.model.SquareType;
 import g54786.humbug.model.Animal.Snail;
 import g54786.humbug.model.Animal.Spider;
+import g54786.humbug.model.Game;
+import g54786.humbug.model.Model;
 
 /**
  * Defines how the game is seen by the user.
@@ -140,6 +142,10 @@ public abstract class View implements InterfaceView {
                 Direction directionS = Direction.SOUTH;
                 return directionS;    
         }
+    }
+    private int displayRemainingMoves(){
+        int n = 5;
+        return n;
     }
     
 }

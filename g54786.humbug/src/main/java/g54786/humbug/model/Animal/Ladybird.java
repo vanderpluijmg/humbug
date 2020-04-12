@@ -19,41 +19,51 @@ public class Ladybird extends Animal {
     public Ladybird(Position positiononBoard) {
         super(positiononBoard);
     }
-
+    /**
+     * Moves Ladybird in given direction.
+     * @param board Board on which the ladybug must move.
+     * @param direction Direction in which the ladybug must move.
+     * @param animals All animals on the board.
+     * @return New position after the ladybug moved.
+     */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        
-        Position initPosition = getPositionOnBoard();
-        Position nextPosition = initPosition.next(direction);
-        int numberOfMoves = 0;
-        while (board.isInside(nextPosition)) {
-            numberOfMoves++;
-            initPosition = getPositionOnBoard();
-            nextPosition = initPosition.next(direction);
+ 
+        Position nextPosition = getPositionOnBoard().next(direction);
+        int index = 0;
+
+        while (board.isInside(nextPosition) && index !=3) {
             for (Animal animal : animals) {
                 if (animal.getPositionOnBoard().equals(nextPosition)) {
-                    setPositionOnBoard(initPosition);
-                    return initPosition;
+                    if (board.getSquareType(getPositionOnBoard()) 
+                            == SquareType.STAR) {
+                        setOnStar(true);
+                        setPositionOnBoard(getPositionOnBoard());
+                        board.setSquareType(getPositionOnBoard(), 
+                                SquareType.GRASS);
+                        return getPositionOnBoard();
+                    }
+                    setPositionOnBoard(getPositionOnBoard());
+                    return getPositionOnBoard();
                 }
             }
-            if (board.getSquareType(nextPosition) == SquareType.STAR) {
-                setOnStar(true);
-                board.setSquareType(nextPosition, SquareType.GRASS);
-                setPositionOnBoard(nextPosition);
-                return nextPosition;
-            } else if (numberOfMoves == 2){
-                return nextPosition;
-            }else  {
-                setPositionOnBoard(nextPosition);
-            } 
+            setPositionOnBoard(nextPosition);
+            nextPosition = getPositionOnBoard().next(direction);
+            index++;
+            if (index == 2){
+                if (board.getSquareType( getPositionOnBoard()) == SquareType.STAR){
+                    setOnStar(true);
+                    board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+                    setPositionOnBoard(getPositionOnBoard());
+                    return getPositionOnBoard();
+                    
+                }
+                setPositionOnBoard(getPositionOnBoard());
+                return getPositionOnBoard();
+            }
+            
         }
         setPositionOnBoard(null);
         return null;
-    }
-
+     }
 }
-    
-
- 
-
-    

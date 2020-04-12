@@ -61,6 +61,22 @@ public abstract class Animal {
     public Position getPositionOnBoard() {
         return positionOnBoard;
     }
+    Position moveOneFlying (Direction direction, Position position, Board board, 
+            Animal ... animals){
+        Position nextPosition = position.next(direction);
+            for (Animal animal : animals){
+                if (!board.isInside(nextPosition)){
+                    setPositionOnBoard(null);
+                    return null;
+                } else if (animal.getPositionOnBoard().equals(nextPosition)){
+                    setPositionOnBoard(positionOnBoard);
+                    return nextPosition.next(direction);
+                }
+                
+            }
+            setPositionOnBoard(nextPosition);
+            return nextPosition;          
+        }
 
     /**
      * Allows the animal to move on the board in different directions.

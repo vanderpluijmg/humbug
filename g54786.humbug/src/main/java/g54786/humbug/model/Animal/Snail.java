@@ -41,11 +41,16 @@ public abstract class Snail extends Animal {
                 board.setSquareType(nextPosition, SquareType.GRASS);
                 setPositionOnBoard(nextPosition);
                 return nextPosition;
-            } else {
+            } else if (board.getSquares(nextPosition).hasWall(direction) 
+                    && board.getSquares(nextPosition.next(direction))
+                            .hasWall(direction.opposite())){
+                setPositionOnBoard(initPosition);
+                return initPosition;
+                
+            }else  {
                 setPositionOnBoard(nextPosition);
                 return nextPosition;
-            }
-
+            } 
         }
         setPositionOnBoard(null);
         return null;

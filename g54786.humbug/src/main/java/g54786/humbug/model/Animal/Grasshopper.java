@@ -30,31 +30,33 @@ public class Grasshopper extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        Position initPosition = this.getPositionOnBoard();
+
+        Position initPosition = getPositionOnBoard();
         Position nextPosition = initPosition.next(direction);
+
         while (board.isInside(nextPosition)) {
-            initPosition = this.getPositionOnBoard();
-            nextPosition = initPosition.next(direction);
             for (Animal animal : animals) {
-                if (nextPosition.equals(animal.getPositionOnBoard())) {
-                    setPositionOnBoard(nextPosition.next(direction));
-                    if (board.getSquareType(nextPosition.next(direction))
-                            == SquareType.STAR) {
+                if (animal.getPositionOnBoard().equals(nextPosition)) {
+                    if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR) {
                         setOnStar(true);
+                        board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+                        setPositionOnBoard(getPositionOnBoard());
+                        return getPositionOnBoard();
                     }
+                    setPositionOnBoard(nextPosition.next(direction));
                     return nextPosition.next(direction);
-                } else {
-                    setPositionOnBoard(nextPosition);
-                    return nextPosition;
                 }
             }
-
+            setPositionOnBoard(nextPosition);
+            return nextPosition;
         }
-        if (!board.isInside(nextPosition)) {
-            this.setPositionOnBoard(null);
-            return null;
+        if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR) {
+            setOnStar(true);
+            board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+            setPositionOnBoard(getPositionOnBoard());
+            return getPositionOnBoard();
         }
+        setPositionOnBoard(null);
         return null;
     }
-
 }

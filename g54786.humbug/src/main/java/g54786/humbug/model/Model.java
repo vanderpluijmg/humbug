@@ -22,6 +22,8 @@ public interface Model {
      * @return Array of animals.
      */
     Animal[] getAnimals();
+    
+    int getRemainingMoves();
 
     /**
      * Initializes the given level.
@@ -35,7 +37,7 @@ public interface Model {
      *
      * @return True if level is over, false if not.
      */
-    boolean levelIsOver();
+    LevelStatus getLevelStatus();
 
     /**
      * Moves the animal if its allowed, else throws exception.
@@ -44,5 +46,6 @@ public interface Model {
      * @param direction Direction in which the animal needs to move.
      */
     void move(Position position, Direction direction);
+    
 
 }

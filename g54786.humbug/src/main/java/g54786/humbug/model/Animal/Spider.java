@@ -1,6 +1,5 @@
 package g54786.humbug.model.Animal;
 
-import g54786.humbug.model.Animal.Animal;
 import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
@@ -28,27 +27,29 @@ public abstract class Spider extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
 
-        Position nextPosition = getPositionOnBoard().next(direction);
+        Position initPosition = getPositionOnBoard();
+        Position nextPosition = initPosition.next(direction);
 
         while (board.isInside(nextPosition)) {
-
+            nextPosition = getPositionOnBoard().next(direction);
             for (Animal animal : animals) {
                 if (animal.getPositionOnBoard().equals(nextPosition)) {
                     if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR) {
                         setOnStar(true);
-                        board.setSquareType(getPositionOnBoard(), SquareType.STAR);
+                        board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+                        setPositionOnBoard(getPositionOnBoard());
+                        return getPositionOnBoard();
                     }
                     setPositionOnBoard(getPositionOnBoard());
                     return getPositionOnBoard();
-
-                } else {
-                    setPositionOnBoard(nextPosition);
-                    nextPosition = getPositionOnBoard().next(direction);
                 }
             }
-        }
 
+            setPositionOnBoard(nextPosition);
+            nextPosition = nextPosition.next(direction);
+        }
         setPositionOnBoard(null);
         return null;
+
     }
 }

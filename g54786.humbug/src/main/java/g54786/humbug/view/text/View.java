@@ -70,13 +70,13 @@ public abstract class View implements InterfaceView {
         }
     }
 
-/**
- * Displays error message.
- *
- * @param message Message to display.
- */
-@Override
-public void displayError(String message) {
+    /**
+     * Displays error message.
+     *
+     * @param message Message to display.
+     */
+    @Override
+    public void displayError(String message) {
         System.err.println(message);
     }
 
@@ -86,7 +86,7 @@ public void displayError(String message) {
      * @return The position given by row and column coordinates.
      */
     @Override
-public Position askPosition() {
+    public Position askPosition() {
         int idxRow;
         int idxCol;
         System.out.println("Please enter the animals row you wish to select");
@@ -117,7 +117,7 @@ public Position askPosition() {
      * @return The direction given by the user.
      */
     @Override
-public Direction askDirection() {
+    public Direction askDirection() {
         String dir;
         do {
             System.out.println("Enter a direction. Valid directions are NORTH, "

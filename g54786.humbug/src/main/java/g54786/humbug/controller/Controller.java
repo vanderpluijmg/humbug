@@ -34,7 +34,7 @@ public class Controller {
         boolean levelIsNotOver = true;
         game.startLevel(1);
 
-        while (!game.levelIsOver() && levelIsNotOver) {
+        while (levelIsNotOver) {//!game.levelIsOver() &&
             view.displayBoard(Board.getInitialBoard(), game.getAnimals());
             Position position = view.askPosition();
             Direction direction = view.askDirection();

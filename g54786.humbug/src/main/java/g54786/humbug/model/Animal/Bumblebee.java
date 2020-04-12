@@ -14,46 +14,36 @@ import g54786.humbug.model.SquareType;
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
-public class Ladybird extends Animal {
+public abstract class Bumblebee extends Animal {
 
-    public Ladybird(Position positiononBoard) {
+    public Bumblebee(Position positiononBoard) {
         super(positiononBoard);
     }
 
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        
+
         Position initPosition = getPositionOnBoard();
         Position nextPosition = initPosition.next(direction);
-        int numberOfMoves = 0;
+
         while (board.isInside(nextPosition)) {
-            numberOfMoves++;
-            initPosition = getPositionOnBoard();
-            nextPosition = initPosition.next(direction);
             for (Animal animal : animals) {
                 if (animal.getPositionOnBoard().equals(nextPosition)) {
-                    setPositionOnBoard(initPosition);
-                    return initPosition;
+                    if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR){
+                        setOnStar(true);
+                        board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+                        setPositionOnBoard(getPositionOnBoard());
+                        return getPositionOnBoard();
+                    }
+                        setPositionOnBoard(getPositionOnBoard());
+                        return getPositionOnBoard();
+                    } else {
+                    setPositionOnBoard(nextPosition);
+                    return nextPosition;
                 }
             }
-            if (board.getSquareType(nextPosition) == SquareType.STAR) {
-                setOnStar(true);
-                board.setSquareType(nextPosition, SquareType.GRASS);
-                setPositionOnBoard(nextPosition);
-                return nextPosition;
-            } else if (numberOfMoves == 2){
-                return nextPosition;
-            }else  {
-                setPositionOnBoard(nextPosition);
-            } 
         }
         setPositionOnBoard(null);
         return null;
     }
-
 }
-    
-
- 
-
-    

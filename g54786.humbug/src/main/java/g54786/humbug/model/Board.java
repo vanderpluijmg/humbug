@@ -45,13 +45,11 @@ public class Board {
             throw new IllegalArgumentException();
         }
         if (position.getRow() >= this.getNbRow() //Checks if row is bigger than 
-            //size. 
+                //size. 
                 || position.getColumn() >= this.getNbColumn() //Checks if column
-                   //is bigger than size.
-                || position.getRow() < 0 || position.getColumn() < 0)
-                {
-            isInside = false;
-        } else if (squares[position.getRow()][position.getColumn()] == null) {
+                //is bigger than size.
+                || position.getRow() < 0 || position.getColumn() < 0 
+                || squares[position.getRow()][position.getColumn()] == null) {
             isInside = false;
         }
         return isInside;
@@ -101,4 +99,12 @@ public class Board {
     public int getNbColumn() {
         return squares[0].length;
     }
+
+    public Square getSquares(Position position) {
+        int row = position.getRow();
+        int column = position.getColumn();
+        return squares[row][column];
+
+    }
+
 }

@@ -12,6 +12,8 @@ public abstract class Game implements Model {
 
     private Board board;
     private Animal[] animals;
+    private int remainingMoves;
+    private int currentLevel;
 
     /**
      * Getter of board.
@@ -33,6 +35,11 @@ public abstract class Game implements Model {
         return this.animals;
     }
 
+    @Override
+    public int getRemainingMoves() {
+        return remainingMoves;
+    }
+
     /**
      * Initializes the given level.
      *
@@ -42,26 +49,6 @@ public abstract class Game implements Model {
     public void startLevel(int level) {
         board = Board.getInitialBoard();
         animals = new Animal[]{new Snail(new Position(0, 0)) {},};
-    }
-
-    /**
-     * Checks if the level is over, meaning all animals are on square type STAR.
-     *
-     * @return True if level is over, false if not.
-     */
-    @Override
-    public boolean levelIsOver() {
-        if (this.board == null || this.animals == null) {
-            throw new IllegalArgumentException();
-        }
-        boolean levelIsOver = true;
-        for (Animal allAnimals : animals) {
-            if (allAnimals.isOnStar() == false) {
-                levelIsOver = false;
-            }
-        }
-        return levelIsOver;
-
     }
 
     /**

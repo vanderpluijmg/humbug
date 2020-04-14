@@ -103,11 +103,13 @@ public abstract class Game implements Model {
             if (animal.getPositionOnBoard().equals(position)) {
                 Position nextPosition = animal.move(this.board, direction,
                         this.animals);
+                this.remainingMoves = getRemainingMoves() -1;
                 if (nextPosition == null) {
                     throw new IllegalArgumentException();
                 }
             }
         }
     }
+    
 
 }

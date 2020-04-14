@@ -81,6 +81,10 @@ public abstract class View implements InterfaceView {
     public void displayError(String message) {
         System.err.println(message);
     }
+    @Override
+    public void displayRemaningMoves (int remainingMoves){
+        System.out.println(remainingMoves);
+    }
 
     /**
      * Asks user for a position.
@@ -143,9 +147,6 @@ public abstract class View implements InterfaceView {
                 return directionS;    
         }
     }
-    private int displayRemainingMoves(){
-        int n = 5;
-        return n;
-    }
+    
     
 }

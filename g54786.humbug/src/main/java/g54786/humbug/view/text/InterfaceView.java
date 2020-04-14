@@ -40,5 +40,10 @@ public interface InterfaceView {
      * @param message Message to display.
      */
     void displayError(String message);
+    /**
+     * Displays number of remaining moves.
+     * @param remainingMoves Number of remaining moves.
+     */
+    void displayRemaningMoves (int remainingMoves);
 
 }

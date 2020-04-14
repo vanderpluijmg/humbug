@@ -34,14 +34,15 @@ public class Controller {
     public void startGame(int nLevel) {
         boolean levelIsNotOver = true;
         game.startLevel(1);
-
-        while (levelIsNotOver) {//!game.levelIsOver() &&
+        view.displayRemaningMoves(game.getRemainingMoves());
+        while (levelIsNotOver) {
             view.displayBoard(Board.getInitialBoard(), game.getAnimals());
             Position position = view.askPosition();
             Direction direction = view.askDirection();
             try { //Tries to move the animal
                 game.move(position, direction);
             } catch (IllegalArgumentException nonValidMove) {
+                levelIsNotOver = false;
                 view.displayError("You fell in the water!");
             }
 

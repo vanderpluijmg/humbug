@@ -5,8 +5,8 @@
  */
 package g54786.humbug.model;
 
-import g54786.humbug.model.Animal.Grasshopper;
 import g54786.humbug.model.Animal.Animal;
+import g54786.humbug.model.Animal.Grasshopper;
 import static g54786.humbug.model.SquareType.GRASS;
 import static g54786.humbug.model.SquareType.STAR;
 import org.junit.jupiter.api.Test;
@@ -85,6 +85,27 @@ public class GrasshopperTest {
         Grasshopper instance = (Grasshopper) animals[0];
         Position expResult = null; // move and fall
         Position result = instance.move(board, Direction.WEST, animals);
+        assertEquals(expResult, result);
+    }
+    /**
+     * Test of move method, of class Grasshopper.
+     */
+    @Test
+    public void testMove_bounceOver_twoAnimals() {
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(GRASS), new Square(GRASS), null},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(STAR)}
+        });
+        animals = new Animal[] {
+            new Grasshopper(new Position(0, 0)) {},
+            new Grasshopper(new Position(0, 1)) {},
+            new Grasshopper(new Position(0, 2)) {}
+        };
+        System.out.println("move next, bounce over 2 animals");
+        Grasshopper instance = (Grasshopper) animals[0];
+        Position expResult = new Position(0, 3); 
+        Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
 

@@ -195,7 +195,7 @@ public class BumblebeeTest {
     public void testMove_bouceOver_twoAnimals() {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS),
-                new Square(GRASS), new Square(GRASS), new Square(GRASS)},
+                new Square(GRASS), null, new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
@@ -208,9 +208,9 @@ public class BumblebeeTest {
             }
         };
 
-        System.out.println("fly over animal");
+        System.out.println("bounce over multiple animals");
         Bumblebee instance = (Bumblebee) animals[0];
-        Position expResult = new Position(0, 4);
+        Position expResult = null; //Falls after bouncing over 2 animals 
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }

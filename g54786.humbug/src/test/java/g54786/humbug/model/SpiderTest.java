@@ -5,9 +5,9 @@
  */
 package g54786.humbug.model;
 
+import g54786.humbug.model.Animal.Animal;
 import g54786.humbug.model.Animal.Snail;
 import g54786.humbug.model.Animal.Spider;
-import g54786.humbug.model.Animal.Animal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

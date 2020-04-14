@@ -8,8 +8,6 @@ import g54786.humbug.model.Position;
 import g54786.humbug.model.SquareType;
 import g54786.humbug.model.Animal.Snail;
 import g54786.humbug.model.Animal.Spider;
-import g54786.humbug.model.Game;
-import g54786.humbug.model.Model;
 
 /**
  * Defines how the game is seen by the user.
@@ -19,6 +17,19 @@ import g54786.humbug.model.Model;
 public abstract class View implements InterfaceView {
 
     static Scanner keyboard = new Scanner(System.in);
+    /**
+     * This method checks for valid integer.
+     *
+     * @return A integer.
+     */
+    private static int intValidation() {
+        while (!keyboard.hasNextInt()) {
+            keyboard.next();
+            System.out.println("Please enter a valid integer");
+        }
+        return keyboard.nextInt();
+        
+    }
 
     /**
      * Displays the given board in a new String Array, does not show null.
@@ -103,19 +114,6 @@ public abstract class View implements InterfaceView {
         return wantedPosition;
     }
 
-    /**
-     * This method checks for valid integer.
-     *
-     * @return A integer.
-     */
-    private static int intValidation() {
-        while (!keyboard.hasNextInt()) {
-            keyboard.next();
-            System.out.println("Please enter a valid integer");
-        }
-        return keyboard.nextInt();
-
-    }
 
     /**
      * Asks user for a direction.

@@ -6,7 +6,6 @@
 package g54786.humbug.model;
 
 import g54786.humbug.model.Animal.Animal;
-import g54786.humbug.model.Animal.Bumblebee;
 import g54786.humbug.model.Animal.Butterfly;
 import static g54786.humbug.model.SquareType.GRASS;
 import static g54786.humbug.model.SquareType.STAR;

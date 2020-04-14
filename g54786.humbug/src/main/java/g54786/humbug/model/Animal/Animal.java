@@ -1,7 +1,10 @@
 package g54786.humbug.model.Animal;
 
 import g54786.humbug.model.Board;
+import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
+import g54786.humbug.model.Direction;
+import g54786.humbug.model.Position;
 import g54786.humbug.model.Position;
 import g54786.humbug.model.Square;
 

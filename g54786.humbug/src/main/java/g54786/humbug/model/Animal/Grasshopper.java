@@ -31,20 +31,19 @@ public class Grasshopper extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
 
-        Position initPosition = getPositionOnBoard();
-        Position nextPosition = initPosition.next(direction);
+        Position nextPosition = getPositionOnBoard().next(direction);
 
         while (board.isInside(nextPosition)) {
             for (Animal animal : animals) {
-                if (animal.getPositionOnBoard().equals(nextPosition)) {
+                while (animal.getPositionOnBoard().equals(nextPosition)) {
                     if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR) {
                         setOnStar(true);
                         board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
                         setPositionOnBoard(getPositionOnBoard());
                         return getPositionOnBoard();
                     }
-                    setPositionOnBoard(nextPosition.next(direction));
-                    return nextPosition.next(direction);
+                    nextPosition = nextPosition.next(direction);
+                    setPositionOnBoard(nextPosition);
                 }
             }
             setPositionOnBoard(nextPosition);
@@ -56,6 +55,7 @@ public class Grasshopper extends Animal {
             setPositionOnBoard(getPositionOnBoard());
             return getPositionOnBoard();
         }
+        
         setPositionOnBoard(null);
         return null;
     }

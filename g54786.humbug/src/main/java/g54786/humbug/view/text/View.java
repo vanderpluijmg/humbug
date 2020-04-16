@@ -5,9 +5,7 @@ import g54786.humbug.model.Animal.Animal;
 import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
-import g54786.humbug.model.SquareType;
-import g54786.humbug.model.Animal.Snail;
-import g54786.humbug.model.Animal.Spider;
+
 
 /**
  * Defines how the game is seen by the user.
@@ -39,47 +37,40 @@ public abstract class View implements InterfaceView {
      */
     @Override
     public void displayBoard(Board board, Animal... animals) {
-        String[][] tab = new String[board.getNbRow()][board.getNbColumn()];
-        //Populating the new array "tab" by defining every square case.
-        for (int row = 0; row < tab.length; row++) {
-            for (int col = 0; col < tab[row].length; col++) {
-                Position position = new Position(row, col);
-                if (board.isInside(position) && board.getSquareType(position)
-                        .equals(SquareType.GRASS)) {
-                    tab[row][col] = TerminalColor.BG_GREEN + "     ";
-                } else if (board.isInside(position)
-                        && board.getSquareType(position)
-                                .equals(SquareType.STAR)) {
-                    tab[row][col] = TerminalColor.BG_RED + "  *  ";
-                } else {
-                    tab[row][col] = TerminalColor.BG_BLUE + "     "; //To not show null on board.
-                }
-                for (Animal animal : animals) {
-                    if (animal.getPositionOnBoard().equals(position)) {
-                        if (animal instanceof Snail) {
-                            tab[row][col] = TerminalColor.BG_GREEN + "  SN ";
-                        } else if (animal instanceof Spider) {
-                            tab[row][col] = TerminalColor.BG_GREEN + "  SP ";
-                        }
+        String [][] tab = new String [board.getNbRow()*5][board.getNbColumn()];
+        for (int i = 0, row = 0; i < tab.length; i = i+5, row++) {
+            for (int col = 0; col < tab [row].length; col++) {
+                Position position = new Position(row,col);
+                if (board.isInside(position)) {
+                    tab[i][col] = tab [i+4][col] = "-----";
+                    tab[i+1][col] = tab [i+3][col] = "|   |";
+                    switch (board.getSquareType(position)){
+                        case GRASS :
+                            tab [i+2][col] = "|   |";
+                            break;
+                        case STAR: 
+                            tab [i+2][col] = "| * |";
+                            break;
+                        
                     }
+                } else { tab[i][col] =tab[i+1][col]=tab[i+2][col] =tab[i+3][col]
+                        = tab [i+4][col] = "     ";
                 }
             }
         }
-
-        displayArray(tab);
+        displayBoard(tab);
     }
     /**
-     * Displays an array.
-     * 
+     * Displays the array
      * @param tab Array to display
      */
-    private void displayArray(String[][] tab) {
-        System.out.println("  0  " + "  1  " + "  2  ");
-        for (String[] rows : tab) {
-            for (String cols : rows) {
-                System.out.print(TerminalColor.BLACK_UNDERLINE + cols);
+    private static void displayBoard (String[][] tab){
+        for (String[] strings : tab) {
+            for (String string : strings) {
+                System.out.print(string);
             }
-            System.out.println();
+            System.out.println("");
+            
         }
     }
 
@@ -145,6 +136,7 @@ public abstract class View implements InterfaceView {
                 return directionS;    
         }
     }
+    
     
     
 }

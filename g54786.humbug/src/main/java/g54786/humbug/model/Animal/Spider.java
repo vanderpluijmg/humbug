@@ -27,9 +27,8 @@ public abstract class Spider extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
 
-        Position initPosition = getPositionOnBoard();
-        Position nextPosition = initPosition.next(direction);
-
+        Position nextPosition = getPositionOnBoard().next(direction);
+    
         while (board.isInside(nextPosition)) {
             nextPosition = getPositionOnBoard().next(direction);
             for (Animal animal : animals) {

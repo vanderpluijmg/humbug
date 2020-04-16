@@ -55,7 +55,7 @@ public class Grasshopper extends Animal {
             setPositionOnBoard(getPositionOnBoard());
             return getPositionOnBoard();
         }
-        
+
         setPositionOnBoard(null);
         return null;
     }

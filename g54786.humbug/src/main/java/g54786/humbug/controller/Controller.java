@@ -5,6 +5,7 @@ import g54786.humbug.model.Model;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
 import g54786.humbug.model.Board;
+import g54786.humbug.model.Level;
 
 /**
  * Controller is responsible for game dynamics and updates view after each move.
@@ -29,6 +30,7 @@ public class Controller {
 
     /**
      * Interacts with user.
+     *
      * @param nLevel Level to start at.
      */
     public void startGame(int nLevel) {
@@ -45,8 +47,7 @@ public class Controller {
                 levelIsNotOver = false;
                 view.displayError("You fell in the water!");
             }
-
         }
-    }
 
+    }
 }

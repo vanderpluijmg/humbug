@@ -87,5 +87,21 @@ public class SnailTest {
         Position result = instance.move(board, Direction.WEST, animals);
         assertEquals(expResult, result);
     }
+    @Test
+    public void testMove_wall(){
+        Square SouthSquare = new Square(GRASS);
+        SouthSquare.setSouthWall(true);
+        board = new Board(new Square[][]{
+            {SouthSquare, new Square(GRASS), null},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(STAR)}
+        });
+        System.out.println("Try to move into a wall");
+        Snail instance = (Snail) animals[0];
+        Position expResult = new Position(0,0);
+        Position result = instance.move(board, Direction.SOUTH, animals);
+        assertTrue(SouthSquare.hasWall(Direction.SOUTH));
+        assertEquals(expResult, result);
+    }
 
 }

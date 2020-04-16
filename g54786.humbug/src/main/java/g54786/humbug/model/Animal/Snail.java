@@ -11,8 +11,10 @@ import g54786.humbug.model.SquareType;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public abstract class Snail extends Animal {
+
     /**
      * Constructor for Snail class.
+     *
      * @param positionOnBoard Position on board.
      */
     public Snail(Position positionOnBoard) {
@@ -29,14 +31,23 @@ public abstract class Snail extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        
-        Position initPosition = getPositionOnBoard();
-        Position nextPosition = initPosition.next(direction);
+
+        Position nextPosition = getPositionOnBoard().next(direction);
+        if (!board.isInside(nextPosition)) {
+            if (board.getSquare(getPositionOnBoard()).hasWall(direction)
+                    || board.getSquare(getPositionOnBoard().next(direction))
+                            .hasWall(direction.opposite())) {
+                setPositionOnBoard(getPositionOnBoard());
+                return getPositionOnBoard();
+            }
+            setPositionOnBoard(null);
+            return null;
+        }
         while (board.isInside(nextPosition)) {
             for (Animal animal : animals) {
                 if (animal.getPositionOnBoard().equals(nextPosition)) {
-                    setPositionOnBoard(initPosition);
-                    return initPosition;
+                    setPositionOnBoard(getPositionOnBoard());
+                    return getPositionOnBoard();
                 }
             }
             if (board.getSquareType(nextPosition) == SquareType.STAR) {
@@ -44,18 +55,12 @@ public abstract class Snail extends Animal {
                 board.setSquareType(nextPosition, SquareType.GRASS);
                 setPositionOnBoard(nextPosition);
                 return nextPosition;
-            } else if (board.getSquare(nextPosition).hasWall(direction) 
-                    && board.getSquare(nextPosition.next(direction))
-                            .hasWall(direction.opposite())){
-                setPositionOnBoard(initPosition);
-                return initPosition;
-                
-            }else  {
+
+            } else {
                 setPositionOnBoard(nextPosition);
                 return nextPosition;
-            } 
+            }
         }
-        setPositionOnBoard(null);
         return null;
     }
 

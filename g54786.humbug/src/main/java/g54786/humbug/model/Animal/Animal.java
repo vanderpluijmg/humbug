@@ -1,12 +1,8 @@
 package g54786.humbug.model.Animal;
 
 import g54786.humbug.model.Board;
-import g54786.humbug.model.Board;
-import g54786.humbug.model.Direction;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
-import g54786.humbug.model.Position;
-import g54786.humbug.model.Square;
 
 /**
  * Animals know where they are on the board but they don't know if they are on
@@ -64,23 +60,17 @@ public abstract class Animal {
     public Position getPositionOnBoard() {
         return positionOnBoard;
     }
-    Position moveOneFlying (Direction direction, Position position, Board board, 
-            Animal ... animals){
-        Position nextPosition = position.next(direction);
-            for (Animal animal : animals){
-                if (!board.isInside(nextPosition)){
-                    setPositionOnBoard(null);
-                    return null;
-                } else if (animal.getPositionOnBoard().equals(nextPosition)){
-                    setPositionOnBoard(positionOnBoard);
-                    return nextPosition.next(direction);
-                }
-                
+    boolean containsAWall(Position position,Board board, Direction direction){
+        boolean containsWall = false;
+        
+        if (board.getSquare(position).hasWall(direction)
+                    || board.getSquare(position.next(direction))
+                            .hasWall(direction.opposite())) {
+                setPositionOnBoard(getPositionOnBoard());
+                containsWall = true;
             }
-            setPositionOnBoard(nextPosition);
-            return nextPosition;          
-        }
-
+        return containsWall;
+    }
     /**
      * Allows the animal to move on the board in different directions.
      *

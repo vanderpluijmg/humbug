@@ -34,24 +34,25 @@ public abstract class Game implements Model {
     public Animal[] getAnimals() {
         return this.animals;
     }
+
     /**
      * Getter of remaining moves.
-     * 
+     *
      * @return Remaining number of moves.
      */
     @Override
     public int getRemainingMoves() {
         return this.remainingMoves;
     }
+
     /**
      * Getter for current level.
-     * 
+     *
      * @return Level.
      */
     public int getCurrentLevel() {
         return this.currentLevel;
     }
-    
 
     /**
      * Initializes the given level.
@@ -61,27 +62,41 @@ public abstract class Game implements Model {
     @Override
     public void startLevel(int level) {
         board = Board.getInitialBoard();
-        animals = new Animal[]{new Snail(new Position(0, 0)) {},};
+        animals = new Animal[]{new Snail(new Position(0, 0)) {
+        },};
     }
+
+    /**
+     * Gets the level status to see where the game is at.
+     *
+     * @return The level status of the game.
+     */
     @Override
-    public LevelStatus getLevelStatus(){
-        for (Animal animal : animals){
-            if (allOnStar(animals)){
+    public LevelStatus getLevelStatus() {
+        for (Animal animal : animals) {
+            if (allOnStar(animals)) {
                 return LevelStatus.WIN;
-            } else if (animal.getPositionOnBoard() == null){
+            } else if (animal.getPositionOnBoard() == null) {
                 return LevelStatus.FAIL;
-            } else if (animal.isOnStar()){ //ADJUST DIFFERENCE BETWEEN
+            } else if (animal.isOnStar()) { //ADJUST DIFFERENCE BETWEEN
                 return LevelStatus.NOT_STARTED;
             } else {
                 return LevelStatus.IN_PROGRESS;
             }
         }
         return null;
-    }   
-    private boolean allOnStar (Animal ... animals){
+    }
+
+    /**
+     * Checks if all the animals are on star to see if the game is over.
+     *
+     * @param animals All animals on the board.
+     * @return True if the game is over false if not.
+     */
+    private boolean allOnStar(Animal... animals) {
         boolean allOnStar = true;
-        for (Animal animal : animals){
-            if (!animal.isOnStar()){
+        for (Animal animal : animals) {
+            if (!animal.isOnStar()) {
                 allOnStar = false;
             }
         }
@@ -103,13 +118,12 @@ public abstract class Game implements Model {
             if (animal.getPositionOnBoard().equals(position)) {
                 Position nextPosition = animal.move(this.board, direction,
                         this.animals);
-                this.remainingMoves = getRemainingMoves() -1;
+                this.remainingMoves = getRemainingMoves() - 1;
                 if (nextPosition == null) {
                     throw new IllegalArgumentException();
                 }
             }
         }
     }
-    
 
 }

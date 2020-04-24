@@ -5,9 +5,9 @@
  */
 package g54786.humbug.model;
 
-import g54786.humbug.model.Animal.Animal;
-import g54786.humbug.model.Animal.Snail;
-import g54786.humbug.model.Animal.Spider;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import g54786.humbug.model.animal.Animal;
+import java.io.IOException;
 
 /**
  * Responsible to generate a level. A level is a board, animals and a number of
@@ -16,11 +16,39 @@ import g54786.humbug.model.Animal.Spider;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Level {
+    /**
+     * Reads desired level.
+     * @param n Level to read
+     * @return Chosen level.
+     */
+    private static Level readLevel(int n) {
+        try {
+            var objectMapper = new ObjectMapper();
+            var inputStream = Level.class.getResourceAsStream("/data/level-" + n 
+                    + ".json");
+            var level = objectMapper.readValue(inputStream, Level.class);
+            return level;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+    /**
+     * Getter for level.
+     *
+     * @param n Level
+     * @return
+     */
+    public static Level getLevel(int n) {
+        return readLevel(n);
+    }
 
     private Board board;
     private Animal[] animals;
     private int nMoves;
 
+    public Level() {
+    }
     /**
      * Private constructor for Level class.
      *
@@ -34,57 +62,6 @@ public class Level {
         this.nMoves = nMoves;
     }
 
-    /**
-     * Getter for level.
-     *
-     * @param n Level
-     * @return
-     */
-    public Level getLevel(int n) {
-        int nMoves;
-        Square grass = new Square(SquareType.GRASS);
-        Square star = new Square(SquareType.STAR);
-        switch (n) {
-            case 1:
-                board = new Board(new Square[][]{
-                    {grass, grass, null},
-                    {null, grass, grass},
-                    {null, null, star}});
-                nMoves = 4;
-                animals = new Animal[]{
-                    new Snail(new Position(0, 0)) {
-                    }};
-                return new Level(board, animals, nMoves);
-            case 2:
-                board = new Board(new Square[][]{
-                    {grass, grass, null},
-                    {null, star, null},
-                    {star, grass, star},
-                    {null, grass, null}});
-                nMoves = 5;
-                animals = new Animal[]{
-                    new Snail(new Position(0, 0)) {
-                    },
-                    new Snail(new Position(2, 1)) {
-                    },
-                    new Snail(new Position(3, 1)) {
-                    }};
-                return new Level(board, animals, nMoves);
-            case 3:
-                board = new Board(new Square[][]{
-                    {grass, grass, grass},
-                    {grass, null, grass},
-                    {star, grass, grass}});
-                nMoves = 4;
-                animals = new Animal[]{
-                    new Spider(new Position(2, 0)) {
-                    }};
-                return new Level(board, animals, nMoves);
-            default:
-                break;
-        }
-        return null;
-    }
     
         /**
          * Getter for board.

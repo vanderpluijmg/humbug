@@ -4,8 +4,7 @@ import g54786.humbug.view.text.InterfaceView;
 import g54786.humbug.model.Model;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
-import g54786.humbug.model.Board;
-import g54786.humbug.model.Level;
+import g54786.humbug.model.LevelStatus;
 
 /**
  * Controller is responsible for game dynamics and updates view after each move.
@@ -34,20 +33,34 @@ public class Controller {
      * @param nLevel Level to start at.
      */
     public void startGame(int nLevel) {
-        boolean levelIsNotOver = true;
-        game.startLevel(1);
-        view.displayRemaningMoves(game.getRemainingMoves());
-        while (levelIsNotOver) {
-            view.displayBoard(Board.getInitialBoard(), game.getAnimals());
-            Position position = view.askPosition();
-            Direction direction = view.askDirection();
-            try { //Tries to move the animal
-                game.move(position, direction);
-            } catch (IllegalArgumentException nonValidMove) {
-                levelIsNotOver = false;
-                view.displayError("You fell in the water!");
+        while (game.getLevelStatus() != LevelStatus.NOT_STARTED){
+            game.startLevel(nLevel);
+            while (game.getLevelStatus() == LevelStatus.IN_PROGRESS){
+                view.displayRemaningMoves(game.getRemainingMoves());
+                view.displayBoard(game.getBoard(), game.getAnimals());
+                Direction direction = view.askDirection();
+                Position position = view.askPosition();
+                try {
+                    game.move(position, direction);
+                } catch (IllegalArgumentException nonValidMove) {
+                    view.displayError("You fell in the water!");
+                    }
+                }
+              
+            switch (game.getLevelStatus()) {
+            case WIN:
+                view.displayBoard(game.getBoard(), game.getAnimals());
+                System.out.println("Congratulations, you have won this level!");
+                nLevel++;
+                break;
+            case FAIL:
+                System.out.println("Game over!");
+                break;
+            default:
+                System.out.println("You have completed all levels in the game, "
+                        + "well done!");
+                break;
             }
-        }
-
+        }     
     }
 }

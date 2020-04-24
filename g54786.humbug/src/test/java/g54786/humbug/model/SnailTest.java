@@ -5,8 +5,8 @@
  */
 package g54786.humbug.model;
 
-import g54786.humbug.model.Animal.Animal;
-import g54786.humbug.model.Animal.Snail;
+import g54786.humbug.model.animal.Animal;
+import g54786.humbug.model.animal.Snail;
 import static g54786.humbug.model.SquareType.GRASS;
 import static g54786.humbug.model.SquareType.STAR;
 import org.junit.jupiter.api.Test;
@@ -88,7 +88,7 @@ public class SnailTest {
         assertEquals(expResult, result);
     }
     @Test
-    public void testMove_wall(){
+    public void testMove_wallOutside(){
         Square SouthSquare = new Square(GRASS);
         SouthSquare.setSouthWall(true);
         board = new Board(new Square[][]{
@@ -99,6 +99,25 @@ public class SnailTest {
         System.out.println("Try to move into a wall");
         Snail instance = (Snail) animals[0];
         Position expResult = new Position(0,0);
+        Position result = instance.move(board, Direction.SOUTH, animals);
+        assertTrue(SouthSquare.hasWall(Direction.SOUTH));
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testMove_wallInside(){
+        Square SouthSquare = new Square(GRASS);
+        SouthSquare.setSouthWall(true);
+        board = new Board(new Square[][]{
+            {new Square(GRASS), SouthSquare, null},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(STAR)}
+        });
+        animals = new Animal[]{
+            new Snail(new Position(0, 1)) {
+            }};
+        System.out.println("Try to move into a wall inside the board");
+        Snail instance = (Snail) animals[0];
+        Position expResult = new Position(0,1);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertTrue(SouthSquare.hasWall(Direction.SOUTH));
         assertEquals(expResult, result);

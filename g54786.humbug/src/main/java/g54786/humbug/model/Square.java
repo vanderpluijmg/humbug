@@ -27,6 +27,10 @@ public class Square {
         this.westWall = false;
     }
 
+    public Square() {
+    }
+    
+
     public void setNorthWall(boolean northWall) {
         this.northWall = northWall;
     }

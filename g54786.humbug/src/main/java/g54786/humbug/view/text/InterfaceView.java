@@ -1,6 +1,6 @@
 package g54786.humbug.view.text;
 
-import g54786.humbug.model.Animal.Animal;
+import g54786.humbug.model.animal.Animal;
 import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;

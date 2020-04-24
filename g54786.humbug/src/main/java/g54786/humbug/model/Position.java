@@ -9,8 +9,8 @@ import java.util.Objects;
  */
 public class Position {
 
-    private final int row; //Final because a row does not change.
-    private final int column; //Final because a column does not change.
+    private int row; //Final because a row does not change.
+    private int column; //Final because a column does not change.
 
     /**
      * Constructor of a position
@@ -21,6 +21,8 @@ public class Position {
     public Position(int row, int column) {
         this.row = row;
         this.column = column;
+    }
+    public Position(){
     }
 
     /**

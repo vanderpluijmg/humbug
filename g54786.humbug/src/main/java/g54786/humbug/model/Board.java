@@ -1,12 +1,16 @@
 package g54786.humbug.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Board game is constituted of squares. The board does not know if or which
  * animals are on it.
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
+
 public class Board {
+
 
     /**
      * Initializes initial board, level 1.
@@ -23,6 +27,8 @@ public class Board {
     }
 
     private Square squares[][];
+    public Board() {
+    }
 
     /**
      * Constructor for board class.
@@ -98,6 +104,10 @@ public class Board {
      */
     public int getNbColumn() {
         return squares[0].length;
+    }
+
+    public Square[][] getSquares() {
+        return squares;
     }
 
     public Square getSquare(Position position) {

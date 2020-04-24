@@ -5,9 +5,9 @@
  */
 package g54786.humbug.model;
 
-import g54786.humbug.model.Animal.Animal;
-import g54786.humbug.model.Animal.Snail;
-import g54786.humbug.model.Animal.Spider;
+import g54786.humbug.model.animal.Animal;
+import g54786.humbug.model.animal.Snail;
+import g54786.humbug.model.animal.Spider;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -106,6 +106,9 @@ public class SpiderTest {
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
     }
+    /**
+     * Test of move method, of class Spider.
+     */
 
     @Test
     public void testMove_passOnStar() {
@@ -126,6 +129,9 @@ public class SpiderTest {
         assertFalse(animals[0].isOnStar());
         assertFalse(board.getSquareType(new Position(0, 1)) == GRASS);
     }
+    /**
+     * Test of move method, of class Spider.
+     */
 
     @Test
     public void testMove_nextOnStar() {
@@ -146,8 +152,11 @@ public class SpiderTest {
         assertTrue(animals[0].isOnStar());
         assertEquals(GRASS, board.getSquareType(result));
     }
+    /**
+     * Test of move method, of class Spider.
+     */
     @Test
-    public void testMove_wall(){
+    public void testMove_wallOutside(){
         Square SouthSquare = new Square(GRASS);
         SouthSquare.setSouthWall(true);
         board = new Board(new Square[][]{
@@ -158,6 +167,29 @@ public class SpiderTest {
         System.out.println("Try to move into a wall");
         Spider instance = (Spider) animals[0];
         Position expResult = new Position(0,0);
+        Position result = instance.move(board, Direction.SOUTH, animals);
+        assertTrue(SouthSquare.hasWall(Direction.SOUTH));
+        assertEquals(expResult, result);
+    }
+    /**
+     * Test of move method, of class Spider.
+     */
+
+    @Test
+    public void testMove_wallInside(){
+        Square SouthSquare = new Square(GRASS);
+        SouthSquare.setSouthWall(true);
+        board = new Board(new Square[][]{
+            {new Square(GRASS), SouthSquare, null},
+            {null, new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(STAR)}
+        });
+        animals = new Animal[]{
+            new Spider(new Position(0, 1)) {
+            }};
+        System.out.println("Try to move into a wall inside the board");
+        Spider instance = (Spider) animals[0];
+        Position expResult = new Position(0,1);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertTrue(SouthSquare.hasWall(Direction.SOUTH));
         assertEquals(expResult, result);

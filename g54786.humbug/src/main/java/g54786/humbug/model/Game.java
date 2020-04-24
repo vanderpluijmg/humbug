@@ -1,8 +1,6 @@
 package g54786.humbug.model;
 
-import g54786.humbug.model.Animal.Animal;
-import g54786.humbug.model.Animal.Snail;
-
+import g54786.humbug.model.animal.Animal;
 /**
  * All the elements needed for the game.
  *
@@ -14,6 +12,7 @@ public abstract class Game implements Model {
     private Animal[] animals;
     private int remainingMoves;
     private int currentLevel;
+    private LevelStatus levelStatus;
 
     /**
      * Getter of board.
@@ -61,9 +60,10 @@ public abstract class Game implements Model {
      */
     @Override
     public void startLevel(int level) {
-        board = Board.getInitialBoard();
-        animals = new Animal[]{new Snail(new Position(0, 0)) {
-        },};
+        this.animals = Level.getLevel(level).getAnimals();
+        this.remainingMoves = Level.getLevel(level).getNMoves();
+        this.board = Level.getLevel(level).getBoard();
+        this.levelStatus = LevelStatus.IN_PROGRESS;
     }
 
     /**
@@ -73,36 +73,8 @@ public abstract class Game implements Model {
      */
     @Override
     public LevelStatus getLevelStatus() {
-        for (Animal animal : animals) {
-            if (allOnStar(animals)) {
-                return LevelStatus.WIN;
-            } else if (animal.getPositionOnBoard() == null) {
-                return LevelStatus.FAIL;
-            } else if (animal.isOnStar()) { //ADJUST DIFFERENCE BETWEEN
-                return LevelStatus.NOT_STARTED;
-            } else {
-                return LevelStatus.IN_PROGRESS;
-            }
-        }
-        return null;
+       return levelStatus;
     }
-
-    /**
-     * Checks if all the animals are on star to see if the game is over.
-     *
-     * @param animals All animals on the board.
-     * @return True if the game is over false if not.
-     */
-    private boolean allOnStar(Animal... animals) {
-        boolean allOnStar = true;
-        for (Animal animal : animals) {
-            if (!animal.isOnStar()) {
-                allOnStar = false;
-            }
-        }
-        return allOnStar;
-    }
-
     /**
      * Moves the animal if its allowed, else throws exception.
      *
@@ -111,6 +83,9 @@ public abstract class Game implements Model {
      */
     @Override
     public void move(Position position, Direction direction) {
+        if (position == null || direction == null){
+            throw new IllegalArgumentException();
+        }
         if (getLevelStatus() != LevelStatus.IN_PROGRESS) {
             throw new IllegalStateException();
         }
@@ -118,12 +93,11 @@ public abstract class Game implements Model {
             if (animal.getPositionOnBoard().equals(position)) {
                 Position nextPosition = animal.move(this.board, direction,
                         this.animals);
-                this.remainingMoves = getRemainingMoves() - 1;
                 if (nextPosition == null) {
+                    this.levelStatus = LevelStatus.FAIL;
                     throw new IllegalArgumentException();
                 }
             }
         }
     }
-
 }

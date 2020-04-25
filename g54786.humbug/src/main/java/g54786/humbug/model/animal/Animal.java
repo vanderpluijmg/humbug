@@ -88,7 +88,7 @@ public abstract class Animal {
      * @param animals All animals on the board.
      * @return New position of the animal.
      */
-    Position moveOneFlying(Board board, Direction direction, Position finalPosition, Animal... animals) {
+    Position moveFlying(Board board, Direction direction, Position finalPosition, Animal... animals) {
         try {
             board.getSquareType(finalPosition);
         } catch (IllegalArgumentException e) {
@@ -130,7 +130,7 @@ public abstract class Animal {
      * @param animals All animals on board.
      * @return New position of the animal.
      */
-    Position moveOneJumping(Board board, Direction direction, Animal... animals) {
+    Position moveJumping(Board board, Direction direction, Animal... animals) {
         Position nextPosition = getPositionOnBoard().next(direction);
 
         while (board.isInside(nextPosition)) {
@@ -164,7 +164,7 @@ public abstract class Animal {
      * @param animals All animals on board.
      * @return New position of the animal.
      */
-    Position moveOneCrawling(Board board, Direction direction, int index,
+    Position moveCrawling(Board board, Direction direction, int index,
             Animal... animals) {
         Position nextPosition = getPositionOnBoard().next(direction);
         while (board.isInside(nextPosition)) {

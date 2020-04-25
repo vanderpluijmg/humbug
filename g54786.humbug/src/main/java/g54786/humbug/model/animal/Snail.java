@@ -9,7 +9,7 @@ import g54786.humbug.model.Position;
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
-public abstract class Snail extends Animal {
+public class Snail extends Animal {
 
     /**
      * Constructor for Snail class.
@@ -38,6 +38,6 @@ public abstract class Snail extends Animal {
             setPositionOnBoard(getPositionOnBoard());
             return getPositionOnBoard(); 
         } 
-        return moveOneCrawling(board, direction, 2, animals);
+        return moveCrawling(board, direction, 2, animals);
     }
 }

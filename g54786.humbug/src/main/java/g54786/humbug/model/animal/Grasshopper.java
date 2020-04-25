@@ -32,6 +32,6 @@ public class Grasshopper extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        return moveOneJumping(board, direction, animals);
+        return moveJumping(board, direction, animals);
     }
 }

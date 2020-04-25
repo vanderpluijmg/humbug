@@ -13,6 +13,16 @@ public abstract class Game implements Model {
     private int remainingMoves;
     private int currentLevel;
     private LevelStatus levelStatus;
+    
+    
+    /**
+     * Setter of remaining moves.
+     * @param remainingMoves 
+     */
+    @Override
+    public void setRemainingMoves(int remainingMoves) {
+        this.remainingMoves = remainingMoves;
+    }
 
     /**
      * Getter of board.
@@ -75,6 +85,15 @@ public abstract class Game implements Model {
     public LevelStatus getLevelStatus() {
        return levelStatus;
     }
+    private boolean allOnStar (Animal ... animals){
+        boolean allOnStar = true;
+        for (Animal animal : animals) {
+            if (!animal.isOnStar()){
+                allOnStar = false;
+            }
+        }
+        return allOnStar;
+    }
     /**
      * Moves the animal if its allowed, else throws exception.
      *
@@ -93,6 +112,12 @@ public abstract class Game implements Model {
             if (animal.getPositionOnBoard().equals(position)) {
                 Position nextPosition = animal.move(this.board, direction,
                         this.animals);
+                if (allOnStar(animals) ){
+                    this.levelStatus = LevelStatus.WIN;
+                }
+                if (getRemainingMoves() == 0 && !allOnStar(animals)){
+                    this.levelStatus = LevelStatus.FAIL;
+                }
                 if (nextPosition == null) {
                     this.levelStatus = LevelStatus.FAIL;
                     throw new IllegalArgumentException();

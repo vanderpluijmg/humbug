@@ -37,10 +37,10 @@ public class Ladybird extends Animal {
             setPositionOnBoard(getPositionOnBoard());
             return getPositionOnBoard(); 
         } 
-        if (moveOneCrawling(board, direction, 1, animals) == null){//On star is off
+        if (moveCrawling(board, direction, 1, animals) == null){//On star is off
             setPositionOnBoard(getPositionOnBoard());
             return null;
         }
-        return moveOneCrawling(board, direction, 2, animals); //On star is on
+        return moveCrawling(board, direction, 2, animals); //On star is on
     }
 }

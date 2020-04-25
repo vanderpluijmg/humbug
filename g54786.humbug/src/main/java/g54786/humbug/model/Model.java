@@ -8,6 +8,12 @@ import g54786.humbug.model.animal.Animal;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public interface Model {
+    
+    /**
+     * Setter of remaining moves.
+     * @param remainingMoves 
+     */
+    void setRemainingMoves(int remainingMoves);
 
     /**
      * Getter of board.

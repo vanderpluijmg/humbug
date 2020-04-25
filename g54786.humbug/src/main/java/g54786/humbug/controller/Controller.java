@@ -5,7 +5,6 @@ import g54786.humbug.model.Model;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
 import g54786.humbug.model.LevelStatus;
-
 /**
  * Controller is responsible for game dynamics and updates view after each move.
  *
@@ -34,33 +33,39 @@ public class Controller {
      */
     public void startGame(int nLevel) {
         while (game.getLevelStatus() != LevelStatus.NOT_STARTED){
+//        while (nLevel > 40 || nLevel < 0 || nLevel != 100){
+//            System.out.println("Please enter a valid level");
+//            nLevel = view.askLevel();
+//            }
             game.startLevel(nLevel);
             while (game.getLevelStatus() == LevelStatus.IN_PROGRESS){
                 view.displayRemaningMoves(game.getRemainingMoves());
                 view.displayBoard(game.getBoard(), game.getAnimals());
-                Direction direction = view.askDirection();
                 Position position = view.askPosition();
+                Direction direction = view.askDirection();
                 try {
                     game.move(position, direction);
-                } catch (IllegalArgumentException nonValidMove) {
+                    game.setRemainingMoves(game.getRemainingMoves()-1);
+                } catch (IllegalArgumentException e ) {
                     view.displayError("You fell in the water!");
-                    }
+                
                 }
+            }
               
             switch (game.getLevelStatus()) {
+                case FAIL:
+                System.out.println("Game over!");
+                break; 
             case WIN:
                 view.displayBoard(game.getBoard(), game.getAnimals());
                 System.out.println("Congratulations, you have won this level!");
                 nLevel++;
                 break;
-            case FAIL:
-                System.out.println("Game over!");
-                break;
             default:
                 System.out.println("You have completed all levels in the game, "
                         + "well done!");
                 break;
-            }
-        }     
+            }    
+        }         
     }
 }

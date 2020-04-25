@@ -45,5 +45,10 @@ public interface InterfaceView {
      * @param remainingMoves Number of remaining moves.
      */
     void displayRemaningMoves (int remainingMoves);
-
+    
+    /**
+     * Displays welcome page.
+     * @return start level.
+     */
+    int askLevel();
 }

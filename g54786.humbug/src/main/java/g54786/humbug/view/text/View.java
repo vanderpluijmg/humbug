@@ -11,6 +11,7 @@ import g54786.humbug.model.animal.Spider;
 import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
+import static g54786.humbug.model.SquareType.STAR;
 
 
 /**
@@ -36,6 +37,96 @@ public abstract class View implements InterfaceView {
     }
 
     /**
+     * Displays the array
+     * @param tab Array to display
+     */
+    private static void displayArray (String[][] tab){
+        for (String[] strings : tab) {
+            for (String string : strings) {
+                System.out.print(string);
+            }
+            System.out.println("");
+            
+        }
+    }
+//     /**
+//     * Displays the different walls on the game.
+//     * @param tab Array in which to display the walls.
+//     * @param col Which column to display it in.
+//     * @param i Sets the correct gap in the array.
+//     * @param board Board in which to check for walls.
+//     * @param position Position to check for walls.
+//     */
+//    private void displayWallsWithAnimals (String [][] tab, int col, int i,
+//            Board board, Position position, Animal ... animals){
+//        for (Animal animal : animals){   
+//            if (board.getSquare(position).hasWall(Direction.NORTH)){
+//                tab[i][col] =  "-----";
+//                tab[i+1][col] = tab [i+3][col] = "|   |";
+//                tab [i+2][col] =  "|" + displayAnimals(tab, col, i, position,
+//                        animals) + "|";
+//                tab[i+4][col] = "-----";
+//            } else if (board.getSquare(position).hasWall(Direction.SOUTH)){
+//                tab[i][col] = "-----";
+//                tab[i+1][col] = tab [i+3][col] = "|   |";
+//                tab [i+2][col] =  "|" + displayAnimals(tab, col, i, position,
+//                        animals) + "|";
+//                tab [i+4][col] = "-----";
+//            } else if (board.getSquare(position).hasWall(Direction.EAST)){
+//                tab[i][col] = "-----";
+//                tab[i+1][col] = tab [i+3][col] = "|   "  + "|";
+//                tab [i+2][col] = "|"+ displayAnimals(tab, col, i, position, animals)
+//                    +  "|";
+//                tab[i+4][col] = "-----";
+//            } else if (board.getSquare(position).hasWall(Direction.WEST)){
+//                tab[i][col] = "-----";
+//                tab[i+1][col] = tab [i+3][col] = "|"  
+//                        + "   |";
+//                tab [i+2][col] =  "|" 
+//                        + displayAnimals(tab, col, i, position, animals)
+//                    + "|";
+//                tab[i+4][col] = "-----";
+//            } else {
+//                tab[i][col] = tab[i+4][col] = "-----";
+//                tab[i+1][col] = tab [i+3][col] ="|    |";
+//                tab [i+2][col] ="|" + displayAnimals(tab, col, i, position,
+//                        animals) + "|";
+//            }
+//        }
+//    }
+    /**
+     * Displays the correct animal.
+     * 
+     * @param tab Array in which to display the animals.
+     * @param col Which column to display it in.
+     * @param i Sets the correct gap in the array.
+     * @param animals Animals it must display. 
+     * @param position Position to check if an animal is present.
+     */
+    private void displayAnimals (String [][] tab, int col, int i,
+            Position position, Board board, Animal ... animals){
+        for (Animal animal : animals){
+            if (animal.getPositionOnBoard().equals(position)){
+                if (animal instanceof Snail){
+                    tab[i+2][col] = "| S |";
+                } else if (animal instanceof Spider){
+                    tab[i+2][col] = "| s |";
+                } else if (animal instanceof Bumblebee){
+                    tab[i+2][col] = "| b |";
+                } else if (animal instanceof Ladybird) {
+                    tab[i+2][col] = "| l |";
+                } else if (animal instanceof Butterfly){
+                    tab[i+2][col] = "| B |";
+                } else if (animal instanceof Grasshopper){
+                    tab[i+2][col] = "| g |";
+                } else if (board.getSquareType(animal.getPositionOnBoard())
+                        .equals(STAR)){
+                    tab [i+2][col] = "|   |";
+                }
+            } else tab [i+2][col] = "|   |";    
+        }
+    }
+    /**
      * Displays the given board in a new String Array, does not show null.
      *
      * @param board Board given to display.
@@ -49,82 +140,23 @@ public abstract class View implements InterfaceView {
                 Position position = new Position(row,col);
                 if (board.isInside(position)) {
                     tab[i][col] = tab [i+4][col] = "-----";
-                    switch (board.getSquareType(position)){           
+                    tab[i+1][col] = tab [i+3][col] = "|   |";
+                    switch (board.getSquareType(position)){
                         case GRASS :
-                            displayWalls(tab, col, i, board, position);
-                            displayAnimals(tab, col, i, animals);
+                                displayAnimals(tab, col, i, position,board, animals);
                             break;
                         case STAR:
-                                displayWalls(tab, col, i, board, position);
-                                tab [i+2][col] = "| * |";
+                            tab[i][col] = tab [i+4][col] = "-----";
+                            tab[i+1][col] = tab [i+3][col] = "|   |";
+                            tab [i+2][col] = "| * |";
                             break;
                     }
                 } else { tab[i][col] =tab[i+1][col]=tab[i+2][col] =tab[i+3][col]
-                        = tab [i+4][col] = TerminalColor.BG_BLUE + "     ";
-                    }
+                        = tab [i+4][col] = "     ";
+                }
             }
         }
         displayArray(tab);
-    }
-    /**
-     * Displays the different walls on the game.
-     * @param tab Array in which to display the walls.
-     * @param col Which column to display it in.
-     * @param i Sets the correct gap in the array.
-     * @param board Board in which to check for walls.
-     * @param position Position to check for walls.
-     */
-    private void displayWalls (String [][] tab, int col, int i, Board board, Position position){
-        if (board.getSquare(position).hasWall(Direction.NORTH)){
-            tab[i+1][col] = "| ° |";
-            tab [i+3][col] = "|   |";            
-        } else if (board.getSquare(position).hasWall(Direction.SOUTH)){
-            tab[i+1][col] = "|   |";
-            tab [i+3][col] = "|   |";
-        } else if (board.getSquare(position).hasWall(Direction.EAST)){
-            tab[i+1][col] = "|    " + TerminalColor.BLACK_BOLD +"|";
-            tab [i+3][col] = "|    " + TerminalColor.BLACK_BOLD +"|";
-        } else if (board.getSquare(position).hasWall(Direction.WEST)){
-            tab[i+1][col] =  TerminalColor.BLACK_BOLD + "|" +"    |";
-            tab [i+3][col] = TerminalColor.BLACK_BOLD + "|" +"    |";
-        }
-    }
-    /**
-     * Displays the correct animal.
-     * @param tab Array in which to display the animals.
-     * @param col Which column to display it in.
-     * @param i Sets the correct gap in the array.
-     * @param animals Animals it must display. 
-     */
-    private void displayAnimals (String [][] tab, int col, int i, Animal ... animals){
-        for (Animal animal : animals){
-            if (animal instanceof Snail){
-                tab [i+2][col] = "|sn |";
-            }else if (animal instanceof Spider){
-                tab [i+2][col] = "|sp |";
-            }else if (animal instanceof Bumblebee){
-                tab [i+2][col] = "|bb |";
-            }else if (animal instanceof Butterfly){
-                tab [i+2][col] = "|bt |";
-            }else if (animal instanceof Grasshopper){
-                tab [i+2][col] = "|gh  |";
-            }else {
-                tab [i+2][col] = "|lb  |";
-            }
-        }
-    }
-    /**
-     * Displays the array
-     * @param tab Array to display
-     */
-    private static void displayArray (String[][] tab){
-        for (String[] strings : tab) {
-            for (String string : strings) {
-                System.out.print(string);
-            }
-            System.out.println("");
-            
-        }
     }
 
     /**
@@ -136,6 +168,16 @@ public abstract class View implements InterfaceView {
     public void displayError(String message) {
         System.err.println(message);
     }
+    /**
+     * Displays welcome.
+     * @return Start level.
+     */
+    @Override
+    public int askLevel () {
+        System.out.println("Please enter the level you would like to start at");
+        int level = keyboard.nextInt();
+        return level;
+    }
 
     /**
      * Displays remaining moves.
@@ -143,7 +185,7 @@ public abstract class View implements InterfaceView {
      */
     @Override
     public void displayRemaningMoves (int remainingMoves){
-        System.out.println(remainingMoves);
+        System.out.println("Remaining number of moves " +remainingMoves);
     }
 
     /**

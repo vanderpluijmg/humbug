@@ -62,6 +62,10 @@ public class Level {
         this.nMoves = nMoves;
     }
 
+    public void setnMoves(int nMoves) {
+        this.nMoves = nMoves;
+    }
+
     
         /**
          * Getter for board.

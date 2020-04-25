@@ -10,7 +10,7 @@ import g54786.humbug.model.SquareType;
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
-public abstract class Spider extends Animal {
+public class Spider extends Animal {
 
     public Spider(Position positiononBoard) {
         super(positiononBoard);

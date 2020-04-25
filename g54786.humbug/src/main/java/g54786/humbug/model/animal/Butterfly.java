@@ -36,7 +36,7 @@ public class Butterfly extends Animal {
     public Position move(Board board, Direction direction, Animal... animals) {
         Position finalPosition = getPositionOnBoard().next(direction)
                 .next(direction).next(direction);
-         return moveOneFlying(board, direction, finalPosition, animals);
+         return moveFlying(board, direction, finalPosition, animals);
         }
     }
 

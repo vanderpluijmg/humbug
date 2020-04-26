@@ -1,7 +1,5 @@
 package g54786.humbug.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
  * Board game is constituted of squares. The board does not know if or which
  * animals are on it.

@@ -85,6 +85,13 @@ public abstract class Game implements Model {
     public LevelStatus getLevelStatus() {
        return levelStatus;
     }
+    /**
+     * Checks if all animals are on star.
+     * 
+     * @param animals All animals on board.
+     * @return True if all animals are on star, meaning the game is over, 
+     * false if not.
+     */
     private boolean allOnStar (Animal ... animals){
         boolean allOnStar = true;
         for (Animal animal : animals) {
@@ -112,6 +119,7 @@ public abstract class Game implements Model {
             if (animal.getPositionOnBoard().equals(position)) {
                 Position nextPosition = animal.move(this.board, direction,
                         this.animals);
+                setRemainingMoves(getRemainingMoves()-1);
                 if (allOnStar(animals) ){
                     this.levelStatus = LevelStatus.WIN;
                 }

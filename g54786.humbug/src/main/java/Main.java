@@ -13,15 +13,16 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Where would you like to start?");
+        System.out.println("----------WELCOME TO HUMBUG----------");
+        System.out.println("At what level would you like to start");
         int level = keyboard.nextInt();
             Controller controller = new Controller(new Game() {
             }, new View() {
             });
             try {
-                controller.startGame(1);
+                controller.startGame(level);
             } catch (NullPointerException GameOver) {
-                System.out.println("Level is over!");
+                System.out.println("Game is over, you lost!");
             }
         }
     }

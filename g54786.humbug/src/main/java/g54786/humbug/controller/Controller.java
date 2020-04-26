@@ -45,7 +45,6 @@ public class Controller {
                 Direction direction = view.askDirection();
                 try {
                     game.move(position, direction);
-                    game.setRemainingMoves(game.getRemainingMoves()-1);
                 } catch (IllegalArgumentException e ) {
                     view.displayError("You fell in the water!");
                 

@@ -1,6 +1,7 @@
 package g54786.humbug.model;
 
 import g54786.humbug.model.animal.Animal;
+
 /**
  * All the elements needed for the game.
  *
@@ -17,6 +18,7 @@ public abstract class Game implements Model {
     
     /**
      * Setter of remaining moves.
+     * 
      * @param remainingMoves 
      */
     @Override
@@ -85,6 +87,7 @@ public abstract class Game implements Model {
     public LevelStatus getLevelStatus() {
        return levelStatus;
     }
+    
     /**
      * Checks if all animals are on star.
      * 
@@ -101,6 +104,7 @@ public abstract class Game implements Model {
         }
         return allOnStar;
     }
+    
     /**
      * Moves the animal if its allowed, else throws exception.
      *
@@ -118,7 +122,7 @@ public abstract class Game implements Model {
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(position)) {
                 Position nextPosition = animal.move(this.board, direction,
-                        this.animals);
+                        this.animals); 
                 setRemainingMoves(getRemainingMoves()-1);
                 if (allOnStar(animals) ){
                     this.levelStatus = LevelStatus.WIN;
@@ -130,6 +134,8 @@ public abstract class Game implements Model {
                     this.levelStatus = LevelStatus.FAIL;
                     throw new IllegalArgumentException();
                 }
+            } else {
+                System.out.println("Sorry, no animal found");
             }
         }
     }

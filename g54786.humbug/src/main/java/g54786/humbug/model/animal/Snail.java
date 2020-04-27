@@ -12,14 +12,17 @@ import g54786.humbug.model.Position;
 public class Snail extends Animal {
 
     /**
-     * Constructor for Snail class.
+     * Super constructor for Snail.
      *
-     * @param positionOnBoard Position on board.
+     * @param positionOnBoard Position of snail.
      */
     public Snail(Position positionOnBoard) {
         super(positionOnBoard);
     }
 
+    /**
+     * Default constructor of snail.
+     */
     public Snail(){
     }
 
@@ -33,8 +36,7 @@ public class Snail extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        if (board.getSquare(getPositionOnBoard()).hasWall(direction) 
-                || board.getSquare(getPositionOnBoard()).hasWall(direction.opposite())){
+        if (board.getSquare(getPositionOnBoard()).hasWall(direction)) {
             setPositionOnBoard(getPositionOnBoard());
             return getPositionOnBoard(); 
         } 

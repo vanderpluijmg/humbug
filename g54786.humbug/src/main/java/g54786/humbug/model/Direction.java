@@ -6,6 +6,7 @@ package g54786.humbug.model;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public enum Direction {
+    
     NORTH(-1, 0),
     SOUTH(1, 0),
     EAST(0, 1),
@@ -20,7 +21,6 @@ public enum Direction {
     private Direction(int deltaRow, int deltaColumn) {
         this.deltaColumn = deltaColumn;
         this.deltaRow = deltaRow;
-
     }
 
     /**
@@ -41,6 +41,10 @@ public enum Direction {
         return deltaColumn;
     }
 
+    /**
+     * Returns the opposite of the current direction.
+     * @return 
+     */
     public Direction opposite() {
         if (this == EAST) {
             return WEST;
@@ -51,6 +55,5 @@ public enum Direction {
         } else {
             return NORTH;
         }
-
     }
 }

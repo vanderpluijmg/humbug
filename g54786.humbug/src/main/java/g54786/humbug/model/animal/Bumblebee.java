@@ -6,14 +6,23 @@ import g54786.humbug.model.Position;
 
 /**
  * Makes the bumblebee move. Bumblebee has a specific move pattern.
+ * 
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Bumblebee extends Animal {
 
+    /**
+     * Super constructor of bumblebee. Bumblebee has specific move pattern.
+     * 
+     * @param positiononBoard Position of bumblebee.
+     */
     public Bumblebee(Position positiononBoard) {
         super(positiononBoard);
     }
 
+    /**
+     * Default constructor of bumblebee.
+     */
     public Bumblebee() {
     }
     /**

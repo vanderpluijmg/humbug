@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g54786.humbug.model.animal;
 
 import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
-import g54786.humbug.model.SquareType;
 
 /**
  * Makes the butterfly move. Butterfly has a specific move pattern.
@@ -17,10 +11,17 @@ import g54786.humbug.model.SquareType;
  */
 public class Butterfly extends Animal {
 
+    /**
+     * Super constructor for butterfly.
+     * @param positiononBoard Position of butterfly.
+     */
     public Butterfly(Position positiononBoard) {
         super(positiononBoard);
     }
 
+    /**
+     * Default constructor of butterfly.
+     */
     public Butterfly() {
     }
 

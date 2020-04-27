@@ -16,6 +16,17 @@ import java.io.IOException;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Level {
+    
+    private Board board;
+    private Animal[] animals;
+    private int nMoves;
+    
+    /**
+     * Default constructor of level
+     */
+    public Level() {
+    }
+    
     /**
      * Reads desired level.
      * @param n Level to read
@@ -33,6 +44,7 @@ public class Level {
         }
         return null;
     }
+    
     /**
      * Getter for level.
      *
@@ -42,13 +54,7 @@ public class Level {
     public static Level getLevel(int n) {
         return readLevel(n);
     }
-
-    private Board board;
-    private Animal[] animals;
-    private int nMoves;
-
-    public Level() {
-    }
+    
     /**
      * Private constructor for Level class.
      *
@@ -62,16 +68,20 @@ public class Level {
         this.nMoves = nMoves;
     }
 
+    /**
+     * Setter for number of moves of a level.
+     * 
+     * @param nMoves Number of moves.
+     */
     public void setnMoves(int nMoves) {
         this.nMoves = nMoves;
     }
 
-    
-        /**
-         * Getter for board.
-         *
-         * @return Board game.
-         */
+    /**
+    * Getter for board.
+    *
+    * @return Board game.
+    */
     public Board getBoard() {
         return board;
     }
@@ -93,5 +103,4 @@ public class Level {
     public int getNMoves() {
         return nMoves;
     }
-
 }

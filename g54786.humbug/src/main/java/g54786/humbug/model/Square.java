@@ -27,22 +27,40 @@ public class Square {
         this.westWall = false;
     }
 
+    /**
+     * Default constructor of square.
+     */
     public Square() {
     }
     
-
+    /**
+     * Setter of a wall to the north.
+     * @param northWall Sets a wall if true.
+     */
     public void setNorthWall(boolean northWall) {
         this.northWall = northWall;
     }
 
+    /**
+     * Setter of a wall to the west.
+     * @param westWall Sets a wall if true.
+     */
     public void setWestWall(boolean westWall) {
         this.westWall = westWall;
     }
 
+    /**
+     * Setter of a wall to the east.
+     * @param eastWall Sets a wall if true.
+     */
     public void setEastWall(boolean eastWall) {
         this.eastWall = eastWall;
     }
-
+    
+    /**
+     * Setter of a wall to the south.
+     * @param southWall Sets a wall if true.
+     */
     public void setSouthWall(boolean southWall) {
         this.southWall = southWall;
     }
@@ -59,7 +77,7 @@ public class Square {
     /**
      * Getter of west wall
      *
-     * @return
+     * @return status of west wall
      */
     public boolean isWestWall() {
         return westWall;
@@ -68,7 +86,7 @@ public class Square {
     /**
      * Getter of east wall
      *
-     * @return
+     * @return status of east wall
      */
     public boolean isEastWall() {
         return eastWall;
@@ -77,7 +95,7 @@ public class Square {
     /**
      * Getter of south wall
      *
-     * @return
+     * @return status of south wall
      */
     public boolean isSouthWall() {
         return southWall;
@@ -102,6 +120,7 @@ public class Square {
     public SquareType getType() {
         return type;
     }
+    
     /**
      * Checks if the direction has a wall.
      * 

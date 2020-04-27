@@ -177,21 +177,21 @@ public class SpiderTest {
 
     @Test
     public void testMove_wallInside(){
-        Square SouthSquare = new Square(GRASS);
-        SouthSquare.setSouthWall(true);
+        Square eastWall = new Square(GRASS);
+        eastWall.setEastWall(true);
         board = new Board(new Square[][]{
-            {new Square(GRASS), SouthSquare, null},
+            {new Square(GRASS),new Square(GRASS), eastWall},
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
         animals = new Animal[]{
-            new Spider(new Position(0, 1)) {
+            new Spider(new Position(0, 0)) {
             }};
         System.out.println("Try to move into a wall inside the board");
         Spider instance = (Spider) animals[0];
-        Position expResult = new Position(0,1);
-        Position result = instance.move(board, Direction.SOUTH, animals);
-        assertTrue(SouthSquare.hasWall(Direction.SOUTH));
+        Position expResult = new Position(0,2);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertTrue(eastWall.hasWall(Direction.EAST));
         assertEquals(expResult, result);
     }
 

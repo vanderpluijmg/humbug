@@ -10,11 +10,12 @@ import g54786.humbug.model.Position;
 import g54786.humbug.model.SquareType;
 
 /**
- * Animals know where they are on the board but they don't know if they are on
- * square type STAR.
+ * Animals know where they are on the board but they don't know wether they are 
+ * on square type star or not.
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
+
 @JsonTypeInfo(use = Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
@@ -30,7 +31,10 @@ public abstract class Animal {
 
     private Position positionOnBoard;
     private boolean onStar;
-
+    
+    /**
+     * Default constructor of animal.
+     */
     public Animal() {
     }
 
@@ -88,7 +92,8 @@ public abstract class Animal {
      * @param animals All animals on the board.
      * @return New position of the animal.
      */
-    Position moveFlying(Board board, Direction direction, Position finalPosition, Animal... animals) {
+    Position moveFlying(Board board, Direction direction, Position finalPosition,
+            Animal... animals) {
         try {
             board.getSquareType(finalPosition);
         } catch (IllegalArgumentException e) {
@@ -96,7 +101,8 @@ public abstract class Animal {
             return null;
         }
         for (Animal animal : animals) {
-            if (animal.getPositionOnBoard().equals(finalPosition)) {
+            if (animal.getPositionOnBoard().equals(finalPosition) 
+                    && !animal.isOnStar()) {
                 if (!board.isInside(finalPosition.next(direction))) {
                     setPositionOnBoard(null);
                     return null;
@@ -132,24 +138,23 @@ public abstract class Animal {
      */
     Position moveJumping(Board board, Direction direction, Animal... animals) {
         Position nextPosition = getPositionOnBoard().next(direction);
-
         while (board.isInside(nextPosition)) {
             for (Animal animal : animals) {
-                while (animal.getPositionOnBoard().equals(nextPosition)) {
+                while (animal.getPositionOnBoard().equals(nextPosition) 
+                        && !animal.isOnStar()) {
                     if (checkForStar(board, getPositionOnBoard())) {
                         starProcedure(board, getPositionOnBoard());
                     }
                     nextPosition = nextPosition.next(direction);
                     setPositionOnBoard(nextPosition);
+                    }
                 }
-            }
             setPositionOnBoard(nextPosition);
+            if (checkForStar(board, getPositionOnBoard())){
+                starProcedure(board, getPositionOnBoard());
+            }
             return nextPosition;
         }
-        if (checkForStar(board, getPositionOnBoard())) {
-            starProcedure(board, getPositionOnBoard());
-        }
-
         setPositionOnBoard(null);
         return null;
     }
@@ -169,8 +174,9 @@ public abstract class Animal {
         Position nextPosition = getPositionOnBoard().next(direction);
         while (board.isInside(nextPosition)) {
             for (Animal animal : animals) {
-                if (animal.getPositionOnBoard().equals(nextPosition)) {
-                    if (checkForStar(board, getPositionOnBoard()) && index == 2) {
+                if (animal.getPositionOnBoard().equals(nextPosition) 
+                    && !animal.isOnStar()) {
+                    if (checkForStar(board, getPositionOnBoard()) && index == 2){
                         starProcedure(board, getPositionOnBoard());
                     }
                     setPositionOnBoard(getPositionOnBoard());

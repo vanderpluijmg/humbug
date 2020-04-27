@@ -16,13 +16,11 @@ public class Main {
         System.out.println("----------WELCOME TO HUMBUG----------");
         System.out.println("At what level would you like to start");
         int level = keyboard.nextInt();
-            Controller controller = new Controller(new Game() {
-            }, new View() {
-            });
-            try {
-                controller.startGame(level);
-            } catch (NullPointerException GameOver) {
-                System.out.println("Game is over, you lost!");
-            }
+        Controller controller = new Controller(new Game() {}, new View() {});
+        try {
+            controller.startGame(level);
+        } catch (NullPointerException GameOver) {
+            System.out.println("You lost!");
         }
     }
+}

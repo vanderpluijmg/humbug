@@ -5,6 +5,7 @@ import g54786.humbug.model.Model;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
 import g54786.humbug.model.LevelStatus;
+import g54786.humbug.model.animal.Animal;
 /**
  * Controller is responsible for game dynamics and updates view after each move.
  *
@@ -33,10 +34,7 @@ public class Controller {
      */
     public void startGame(int nLevel) {
         while (game.getLevelStatus() != LevelStatus.NOT_STARTED){
-//        while (nLevel > 40 || nLevel < 0 || nLevel != 100){
-//            System.out.println("Please enter a valid level");
-//            nLevel = view.askLevel();
-//            }
+            view.displayCaption();
             game.startLevel(nLevel);
             while (game.getLevelStatus() == LevelStatus.IN_PROGRESS){
                 view.displayRemaningMoves(game.getRemainingMoves());
@@ -46,11 +44,9 @@ public class Controller {
                 try {
                     game.move(position, direction);
                 } catch (IllegalArgumentException e ) {
-                    view.displayError("You fell in the water!");
-                
+                    view.displayError("You fell into the void!");
                 }
             }
-              
             switch (game.getLevelStatus()) {
                 case FAIL:
                 System.out.println("Game over!");
@@ -61,8 +57,7 @@ public class Controller {
                 nLevel++;
                 break;
             default:
-                System.out.println("You have completed all levels in the game, "
-                        + "well done!");
+                System.out.println("Thank you for playing Humbug!");
                 break;
             }    
         }         

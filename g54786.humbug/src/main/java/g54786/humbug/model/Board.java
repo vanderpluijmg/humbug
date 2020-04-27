@@ -1,5 +1,7 @@
 package g54786.humbug.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Board game is constituted of squares. The board does not know if or which
  * animals are on it.
@@ -8,7 +10,31 @@ package g54786.humbug.model;
  */
 
 public class Board {
+    
+    private Square squares[][];
 
+    /**
+     * Constructor for board class.
+     *
+     * @param square 2D array, board game.
+     */
+    Board(Square[][] squares) {
+        this.squares = squares;
+    }
+    
+    /**
+     * Default constructor of board.
+     */
+    public Board() {
+    }
+    
+    /**
+     * Getter for squares.
+     * @return A square.
+     */
+    public Square[][] getSquares() {
+        return squares;
+    }
 
     /**
      * Initializes initial board, level 1.
@@ -22,19 +48,6 @@ public class Board {
         {null, null, Star}};
         Board board = new Board(lvl1);
         return board;
-    }
-
-    private Square squares[][];
-    public Board() {
-    }
-
-    /**
-     * Constructor for board class.
-     *
-     * @param square 2D array, board game.
-     */
-    Board(Square[][] squares) {
-        this.squares = squares;
     }
 
     /**
@@ -104,15 +117,14 @@ public class Board {
         return squares[0].length;
     }
 
-    public Square[][] getSquares() {
-        return squares;
-    }
-
+    /**
+     * Getter of a square.
+     * @param position Position of square.
+     * @return The square.
+     */
     public Square getSquare(Position position) {
         int row = position.getRow();
         int column = position.getColumn();
         return squares[row][column];
-
     }
-
 }

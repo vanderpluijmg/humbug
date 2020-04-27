@@ -11,6 +11,7 @@ public interface Model {
     
     /**
      * Setter of remaining moves.
+     * 
      * @param remainingMoves 
      */
     void setRemainingMoves(int remainingMoves);

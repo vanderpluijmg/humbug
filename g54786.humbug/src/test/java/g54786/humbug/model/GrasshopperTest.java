@@ -25,7 +25,7 @@ public class GrasshopperTest {
     @BeforeEach
     public void setUp() {
         board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), null},
+            {new Square(GRASS), new Square(GRASS), new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
@@ -72,8 +72,8 @@ public class GrasshopperTest {
         Position expResult = new Position(2, 2);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertEquals(expResult, result);
-        assertFalse(instance.isOnStar());
-        assertEquals(STAR, board.getSquareType(result));
+        assertTrue(instance.isOnStar());
+        assertEquals(GRASS, board.getSquareType(result));
     }
 
     /**
@@ -93,7 +93,7 @@ public class GrasshopperTest {
     @Test
     public void testMove_bounceOver_twoAnimals() {
         board = new Board(new Square[][]{
-            {new Square(GRASS), new Square(GRASS), new Square(GRASS), null},
+            {new Square(GRASS), new Square(GRASS), new Square(GRASS), new Square(GRASS)},
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
@@ -107,8 +107,6 @@ public class GrasshopperTest {
         Position expResult = new Position(0, 3); 
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
-    }
-
-    
+    }    
 }
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g54786.humbug.model.animal;
 
 import g54786.humbug.model.Board;
@@ -10,20 +5,28 @@ import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
 
 /**
- *
+ * Makes the ladybird move. Ladybird has specific move pattern.
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Ladybird extends Animal {
 
+    /**
+     * Super constructor of ladybird.
+     * @param positiononBoard Position of ladybird.
+     */
     public Ladybird(Position positiononBoard) {
         super(positiononBoard);
     }
 
+    /**
+     * Default constructor of ladybird.
+     */
     public Ladybird() {
     }
     
     /**
      * Moves Ladybird in given direction.
+     * 
      * @param board Board on which the ladybug must move.
      * @param direction Direction in which the ladybug must move.
      * @param animals All animals on the board.

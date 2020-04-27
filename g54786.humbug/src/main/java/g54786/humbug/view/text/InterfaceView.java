@@ -40,6 +40,7 @@ public interface InterfaceView {
      * @param message Message to display.
      */
     void displayError(String message);
+    
     /**
      * Displays number of remaining moves.
      * @param remainingMoves Number of remaining moves.
@@ -47,8 +48,7 @@ public interface InterfaceView {
     void displayRemaningMoves (int remainingMoves);
     
     /**
-     * Displays welcome page.
-     * @return start level.
+     * Displays caption to know which animal is what.
      */
-    int askLevel();
+    void displayCaption ();
 }

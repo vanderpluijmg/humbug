@@ -11,11 +11,18 @@ import g54786.humbug.model.SquareType;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Spider extends Animal {
-
+    
+    /**
+     * Super constructor for Spider.
+     * @param positiononBoard Position on board of spider.
+     */
     public Spider(Position positiononBoard) {
         super(positiononBoard);
     }
 
+    /**
+     * Default constructor for spider
+     */
     public Spider() {
     }
 
@@ -39,7 +46,7 @@ public class Spider extends Animal {
         while (board.isInside(nextPosition)) {
             nextPosition = getPositionOnBoard().next(direction);
             for (Animal animal : animals) {
-                if (animal.getPositionOnBoard().equals(nextPosition)) {
+                if (animal.getPositionOnBoard().equals(nextPosition) && !animal.isOnStar()) {
                     if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR) {
                         setOnStar(true);
                         board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
@@ -53,10 +60,20 @@ public class Spider extends Animal {
                     setPositionOnBoard(getPositionOnBoard());
                     return getPositionOnBoard();
                 }
+ 
             }
-
             setPositionOnBoard(nextPosition);
+            Position position = getPositionOnBoard();
             nextPosition = nextPosition.next(direction);
+        }
+        if (board.getSquare(getPositionOnBoard()).hasWall(direction) 
+                || board.getSquare(getPositionOnBoard()).hasWall(direction.opposite())){
+            if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR) {
+                setOnStar(true);
+                board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+            }
+            setPositionOnBoard(getPositionOnBoard());
+            return getPositionOnBoard();
         }
         setPositionOnBoard(null);
         return null;

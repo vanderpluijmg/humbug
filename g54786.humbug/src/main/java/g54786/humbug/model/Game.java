@@ -134,8 +134,6 @@ public abstract class Game implements Model {
                     this.levelStatus = LevelStatus.FAIL;
                     throw new IllegalArgumentException();
                 }
-            } else {
-                System.out.println("Sorry, no animal found");
             }
         }
     }

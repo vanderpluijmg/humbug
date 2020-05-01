@@ -51,4 +51,10 @@ public interface InterfaceView {
      * Displays caption to know which animal is what.
      */
     void displayCaption ();
+    
+    /**
+     * Displays level
+     * @param n Level to display.
+     */
+    void displayLevel(int n);
 }

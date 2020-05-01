@@ -65,14 +65,13 @@ public class LadybirdTest {
     @Test
     public void testMove_next_notfree() {
         animals = new Animal[]{
-            new Ladybird(new Position(0, 1)) {
+            new Ladybird(new Position(0, 2)) {
             },
             new Ladybird(new Position(0, 0))
         };
         System.out.println("move next case not free");
         Ladybird instance = (Ladybird) animals[1];
-        animals[0].setPositionOnBoard(new Position(0, 1));
-        Position expResult = new Position(0, 0); //don't move
+        Position expResult = new Position(0, 1); //don't move
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }

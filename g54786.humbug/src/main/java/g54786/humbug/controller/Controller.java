@@ -35,6 +35,7 @@ public class Controller {
     public void startGame(int nLevel) {
         while (game.getLevelStatus() != LevelStatus.NOT_STARTED){
             view.displayCaption();
+            view.displayLevel(nLevel);
             game.startLevel(nLevel);
             while (game.getLevelStatus() == LevelStatus.IN_PROGRESS){
                 view.displayRemaningMoves(game.getRemainingMoves());

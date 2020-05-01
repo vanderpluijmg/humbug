@@ -35,7 +35,7 @@ public class Ladybird extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         if (board.getSquare(getPositionOnBoard()).hasWall(direction) 
-                || board.getSquare(getPositionOnBoard()).hasWall
+                || board.getSquare(getPositionOnBoard().next(direction)).hasWall
         (direction.opposite())){
             setPositionOnBoard(getPositionOnBoard());
             return getPositionOnBoard(); 

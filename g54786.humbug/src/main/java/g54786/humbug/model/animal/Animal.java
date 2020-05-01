@@ -10,12 +10,11 @@ import g54786.humbug.model.Position;
 import g54786.humbug.model.SquareType;
 
 /**
- * Animals know where they are on the board but they don't know wether they are 
+ * Animals know where they are on the board but they don't know wether they are
  * on square type star or not.
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
-
 @JsonTypeInfo(use = Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
@@ -24,14 +23,13 @@ import g54786.humbug.model.SquareType;
     @Type(value = Grasshopper.class),
     @Type(value = Ladybird.class),
     @Type(value = Snail.class),
-    @Type(value = Spider.class),
-    })
+    @Type(value = Spider.class),})
 
 public abstract class Animal {
 
     private Position positionOnBoard;
     private boolean onStar;
-    
+
     /**
      * Default constructor of animal.
      */
@@ -94,38 +92,61 @@ public abstract class Animal {
      */
     Position moveFlying(Board board, Direction direction, Position finalPosition,
             Animal... animals) {
-        try {
-            board.getSquareType(finalPosition);
-        } catch (IllegalArgumentException e) {
-            setPositionOnBoard(null);
-            return null;
-        }
-        for (Animal animal : animals) {
-            if (animal.getPositionOnBoard().equals(finalPosition) 
-                    && !animal.isOnStar()) {
-                if (!board.isInside(finalPosition.next(direction))) {
-                    setPositionOnBoard(null);
-                    return null;
+        while (board.isInside(finalPosition)) {
+            for (Animal animal : animals) {
+                while (!emptyCase(board, direction, finalPosition, animals)) {
+                        finalPosition = finalPosition.next(direction);     
+                    }
+                setPositionOnBoard(finalPosition);
+                if (checkForStar(board, getPositionOnBoard())){
+                    starProcedure(board, getPositionOnBoard());
                 }
-                setPositionOnBoard(finalPosition.next(direction));
-                if (board.getSquareType(getPositionOnBoard())
-                        == SquareType.STAR) {
-                    setOnStar(true);
-                    board.setSquareType(getPositionOnBoard(),
-                            SquareType.GRASS);
+                return finalPosition;
                 }
-                finalPosition = finalPosition.next(direction);
+            }   
+        setPositionOnBoard(null);
+        return null;
+    }
+//        try {
+//            board.getSquareType(finalPosition);
+//        } catch (IllegalArgumentException e) {
+//            setPositionOnBoard(null);
+//            return null;
+//        }
+//        for (Animal animal : animals) {
+//            if (animal.getPositionOnBoard().equals(finalPosition)
+//                    && !animal.isOnStar()) {
+//                if (!board.isInside(finalPosition.next(direction))) {
+//                    setPositionOnBoard(null);
+//                    return null;
+//                }
+//                setPositionOnBoard(finalPosition.next(direction));
+//                if (board.getSquareType(getPositionOnBoard())
+//                        == SquareType.STAR) {
+//                    setOnStar(true);
+//                    board.setSquareType(getPositionOnBoard(),
+//                            SquareType.GRASS);
+//                }
+//                finalPosition = finalPosition.next(direction);
+//            }
+//        }
+//        if (board.getSquareType(finalPosition) == SquareType.STAR) {
+//            setOnStar(true);
+//            setPositionOnBoard(finalPosition);
+//            board.setSquareType(finalPosition, SquareType.GRASS);
+//            return finalPosition;
+//        } else {
+//            setPositionOnBoard(finalPosition);
+//            return finalPosition;
+//        }
+    private boolean emptyCase (Board board, Direction direction, Position position, Animal... animals){
+        boolean empty = true;
+        for (Animal animal : animals){
+            if (animal.getPositionOnBoard().equals(position) && !animal.isOnStar()){
+                empty = false;
             }
         }
-        if (board.getSquareType(finalPosition) == SquareType.STAR) {
-            setOnStar(true);
-            setPositionOnBoard(finalPosition);
-            board.setSquareType(finalPosition, SquareType.GRASS);
-            return finalPosition;
-        } else {
-            setPositionOnBoard(finalPosition);
-            return finalPosition;
-        }
+        return empty;
     }
 
     /**
@@ -140,21 +161,16 @@ public abstract class Animal {
         Position nextPosition = getPositionOnBoard().next(direction);
         while (board.isInside(nextPosition)) {
             for (Animal animal : animals) {
-                while (animal.getPositionOnBoard().equals(nextPosition) 
-                        && !animal.isOnStar()) {
-                    if (checkForStar(board, getPositionOnBoard())) {
-                        starProcedure(board, getPositionOnBoard());
+                while (!emptyCase(board, direction, nextPosition, animals)) {
+                        nextPosition = nextPosition.next(direction);     
                     }
-                    nextPosition = nextPosition.next(direction);
-                    setPositionOnBoard(nextPosition);
-                    }
+                setPositionOnBoard(nextPosition);
+                if (checkForStar(board, getPositionOnBoard())){
+                    starProcedure(board, getPositionOnBoard());
                 }
-            setPositionOnBoard(nextPosition);
-            if (checkForStar(board, getPositionOnBoard())){
-                starProcedure(board, getPositionOnBoard());
-            }
-            return nextPosition;
-        }
+                return nextPosition;
+                }
+            }   
         setPositionOnBoard(null);
         return null;
     }
@@ -174,9 +190,9 @@ public abstract class Animal {
         Position nextPosition = getPositionOnBoard().next(direction);
         while (board.isInside(nextPosition)) {
             for (Animal animal : animals) {
-                if (animal.getPositionOnBoard().equals(nextPosition) 
-                    && !animal.isOnStar()) {
-                    if (checkForStar(board, getPositionOnBoard()) && index == 2){
+                if (animal.getPositionOnBoard().equals(nextPosition)
+                        && !animal.isOnStar()) {
+                    if (checkForStar(board, getPositionOnBoard()) && index == 2) {
                         starProcedure(board, getPositionOnBoard());
                     }
                     setPositionOnBoard(getPositionOnBoard());
@@ -236,6 +252,9 @@ public abstract class Animal {
      * @return True if it contains a star, false if not.
      */
     private boolean checkForStar(Board board, Position position) {
+        if (position == null){
+            return false;
+        }
         boolean SquareIsStar = false;
         if (board.getSquareType(position) == SquareType.STAR) {
             SquareIsStar = true;

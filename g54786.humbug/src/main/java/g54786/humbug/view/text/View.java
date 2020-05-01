@@ -12,6 +12,7 @@ import g54786.humbug.model.Board;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
 import g54786.humbug.model.SquareType;
+import java.util.List;
 
 
 /**
@@ -46,11 +47,17 @@ public abstract class View implements InterfaceView {
         int nbCol = board.getNbColumn();
         int nbRow = board.getNbRow()*5;
         for (int i = 0; i < nbCol; i++){
-            System.out.print("  "+ i + "  ");
+            System.out.print("    "+ i);
             }
+
         System.out.println("");
-        
-        for (String[] strings : tab) {
+        for (String[] strings : tab) { //row
+            index++;
+            if ((index-3)%5 == 0){
+                System.out.print((index-3)/5 + " ");
+            } else {
+                System.out.print("  ");
+            }
             for (String string : strings) {
                 System.out.print(string);
             }
@@ -168,7 +175,7 @@ public abstract class View implements InterfaceView {
      */
     @Override
     public void displayRemaningMoves (int remainingMoves){
-        System.out.println("Remaining number of moves " +remainingMoves);
+        System.out.println("Remaining number of moves: " +remainingMoves);
     }
 
     /**
@@ -182,6 +189,15 @@ public abstract class View implements InterfaceView {
         System.out.println("BUM = Bumblebee");
         System.out.println("GRA = Grasshopper");
         System.out.println("LAD = Ladybird");
+    }
+    
+    /**
+     * Displays level
+     * @param n Level to display.
+     */
+    @Override
+    public void displayLevel (int n){
+        System.out.println("You are at level: " + n);
     }
     
     /**

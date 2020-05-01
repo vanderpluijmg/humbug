@@ -9,6 +9,8 @@ import g54786.humbug.model.animal.Animal;
 import g54786.humbug.model.animal.Grasshopper;
 import static g54786.humbug.model.SquareType.GRASS;
 import static g54786.humbug.model.SquareType.STAR;
+import g54786.humbug.model.animal.Snail;
+import g54786.humbug.model.animal.Spider;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -99,8 +101,8 @@ public class GrasshopperTest {
         });
         animals = new Animal[] {
             new Grasshopper(new Position(0, 0)) {},
-            new Grasshopper(new Position(0, 1)) {},
-            new Grasshopper(new Position(0, 2)) {}
+            new Snail(new Position(0, 1)) {},
+            new Spider(new Position(0, 2)) {}
         };
         System.out.println("move next, bounce over 2 animals");
         Grasshopper instance = (Grasshopper) animals[0];

@@ -37,3 +37,27 @@ public class Grasshopper extends Animal {
         return moveJumping(board, direction, animals);
     }
 }
+//        setPositionOnBoard(FinalPosition);
+//        if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR){
+//            setPositionOnBoard(getPositionOnBoard());
+//            setOnStar(true);
+//            board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+//            return getPositionOnBoard();
+//        }
+//        for (Animal animal : animals){
+//            
+//            while (animal.getPositionOnBoard().equals(getPositionOnBoard())){
+//                setPositionOnBoard(getPositionOnBoard().next(direction));                
+//            }
+//            if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR){
+//                setPositionOnBoard(getPositionOnBoard());
+//                setOnStar(true);
+//                board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
+//                return getPositionOnBoard();
+//            }
+//                return getPositionOnBoard();
+//        }
+//            setPositionOnBoard(null);
+//            return null;     
+//    }
+//}

@@ -13,7 +13,7 @@ import g54786.humbug.model.Position;
 public interface InterfaceView {
 
     /**
-     * Displays the given board in a new String Array, does not show null.
+     * Displays the given board in a new String Array, null is blank.
      *
      * @param board Board given to display.
      * @param animal All animals on board.
@@ -40,20 +40,22 @@ public interface InterfaceView {
      * @param message Message to display.
      */
     void displayError(String message);
-    
+
     /**
      * Displays number of remaining moves.
+     *
      * @param remainingMoves Number of remaining moves.
      */
-    void displayRemaningMoves (int remainingMoves);
-    
+    void displayRemaningMoves(int remainingMoves);
+
     /**
      * Displays caption to know which animal is what.
      */
-    void displayCaption ();
-    
+    void displayCaption();
+
     /**
-     * Displays level
+     * Displays current level.
+     *
      * @param n Level to display.
      */
     void displayLevel(int n);

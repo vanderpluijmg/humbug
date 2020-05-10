@@ -35,6 +35,7 @@ public class Square {
     
     /**
      * Setter of a wall to the north.
+     * 
      * @param northWall Sets a wall if true.
      */
     public void setNorthWall(boolean northWall) {
@@ -43,6 +44,7 @@ public class Square {
 
     /**
      * Setter of a wall to the west.
+     * 
      * @param westWall Sets a wall if true.
      */
     public void setWestWall(boolean westWall) {
@@ -51,6 +53,7 @@ public class Square {
 
     /**
      * Setter of a wall to the east.
+     * 
      * @param eastWall Sets a wall if true.
      */
     public void setEastWall(boolean eastWall) {
@@ -59,6 +62,7 @@ public class Square {
     
     /**
      * Setter of a wall to the south.
+     * 
      * @param southWall Sets a wall if true.
      */
     public void setSouthWall(boolean southWall) {
@@ -66,7 +70,7 @@ public class Square {
     }
 
     /**
-     * Getter of north wall
+     * Getter of north wall.
      *
      * @return status of north wall
      */
@@ -75,7 +79,7 @@ public class Square {
     }
 
     /**
-     * Getter of west wall
+     * Getter of west wall.
      *
      * @return status of west wall
      */
@@ -84,18 +88,18 @@ public class Square {
     }
 
     /**
-     * Getter of east wall
+     * Getter of east wall.
      *
-     * @return status of east wall
+     * @return status of east wall.
      */
     public boolean isEastWall() {
         return eastWall;
     }
 
     /**
-     * Getter of south wall
+     * Getter of south wall.
      *
-     * @return status of south wall
+     * @return status of south wall.
      */
     public boolean isSouthWall() {
         return southWall;

@@ -8,11 +8,11 @@ import g54786.humbug.model.animal.Animal;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public interface Model {
-    
+
     /**
      * Setter of remaining moves.
-     * 
-     * @param remainingMoves 
+     *
+     * @param remainingMoves
      */
     void setRemainingMoves(int remainingMoves);
 
@@ -29,9 +29,10 @@ public interface Model {
      * @return Array of animals.
      */
     Animal[] getAnimals();
+
     /**
      * Getter of remaining moves.
-     * 
+     *
      * @return Remaining number of moves.
      */
     int getRemainingMoves();
@@ -57,6 +58,5 @@ public interface Model {
      * @param direction Direction in which the animal needs to move.
      */
     void move(Position position, Direction direction);
-    
 
 }

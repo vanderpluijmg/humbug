@@ -14,12 +14,11 @@ public abstract class Game implements Model {
     private int remainingMoves;
     private int currentLevel;
     private LevelStatus levelStatus;
-    
-    
+
     /**
      * Setter of remaining moves.
-     * 
-     * @param remainingMoves 
+     *
+     * @param remainingMoves
      */
     @Override
     public void setRemainingMoves(int remainingMoves) {
@@ -85,26 +84,26 @@ public abstract class Game implements Model {
      */
     @Override
     public LevelStatus getLevelStatus() {
-       return levelStatus;
+        return levelStatus;
     }
-    
+
     /**
      * Checks if all animals are on star.
-     * 
+     *
      * @param animals All animals on board.
-     * @return True if all animals are on star, meaning the game is over, 
-     * false if not.
+     * @return True if all animals are on star, meaning the game is over, false
+     * if not.
      */
-    private boolean allOnStar (Animal ... animals){
+    private boolean allOnStar(Animal... animals) {
         boolean allOnStar = true;
         for (Animal animal : animals) {
-            if (!animal.isOnStar()){
+            if (!animal.isOnStar()) {
                 allOnStar = false;
             }
         }
         return allOnStar;
     }
-    
+
     /**
      * Moves the animal if its allowed, else throws exception.
      *
@@ -113,7 +112,7 @@ public abstract class Game implements Model {
      */
     @Override
     public void move(Position position, Direction direction) {
-        if (position == null || direction == null){
+        if (position == null || direction == null) {
             throw new IllegalArgumentException();
         }
         if (getLevelStatus() != LevelStatus.IN_PROGRESS) {
@@ -122,12 +121,12 @@ public abstract class Game implements Model {
         for (Animal animal : animals) {
             if (animal.getPositionOnBoard().equals(position)) {
                 Position nextPosition = animal.move(this.board, direction,
-                        this.animals); 
-                setRemainingMoves(getRemainingMoves()-1);
-                if (allOnStar(animals) ){
+                        this.animals);
+                setRemainingMoves(getRemainingMoves() - 1);
+                if (allOnStar(animals)) {
                     this.levelStatus = LevelStatus.WIN;
                 }
-                if (getRemainingMoves() == 0 && !allOnStar(animals)){
+                if (getRemainingMoves() == 0 && !allOnStar(animals)) {
                     this.levelStatus = LevelStatus.FAIL;
                 }
                 if (nextPosition == null) {

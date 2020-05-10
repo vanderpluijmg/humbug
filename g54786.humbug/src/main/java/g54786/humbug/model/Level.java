@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g54786.humbug.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,26 +11,27 @@ import java.io.IOException;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Level {
-    
+
     private Board board;
     private Animal[] animals;
     private int nMoves;
-    
+
     /**
      * Default constructor of level
      */
     public Level() {
     }
-    
+
     /**
-     * Reads desired level.
-     * @param n Level to read
+     * Reads desired level with the help of Json object mapper.
+     *
+     * @param n Level to read.
      * @return Chosen level.
      */
     private static Level readLevel(int n) {
         try {
             var objectMapper = new ObjectMapper();
-            var inputStream = Level.class.getResourceAsStream("/data/level-" + n 
+            var inputStream = Level.class.getResourceAsStream("/data/level-" + n
                     + ".json");
             var level = objectMapper.readValue(inputStream, Level.class);
             return level;
@@ -44,17 +40,17 @@ public class Level {
         }
         return null;
     }
-    
+
     /**
      * Getter for level.
      *
-     * @param n Level
-     * @return
+     * @param n Level to get.
+     * @return Level.
      */
     public static Level getLevel(int n) {
         return readLevel(n);
     }
-    
+
     /**
      * Private constructor for Level class.
      *
@@ -70,7 +66,7 @@ public class Level {
 
     /**
      * Setter for number of moves of a level.
-     * 
+     *
      * @param nMoves Number of moves.
      */
     public void setnMoves(int nMoves) {
@@ -78,10 +74,10 @@ public class Level {
     }
 
     /**
-    * Getter for board.
-    *
-    * @return Board game.
-    */
+     * Getter for board.
+     *
+     * @return Board game.
+     */
     public Board getBoard() {
         return board;
     }

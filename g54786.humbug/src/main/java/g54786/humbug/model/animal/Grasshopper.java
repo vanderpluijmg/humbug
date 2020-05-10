@@ -6,20 +6,22 @@ import g54786.humbug.model.Position;
 
 /**
  * Makes the grasshopper move. Grasshopper has specific move pattern.
+ *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Grasshopper extends Animal {
 
     /**
      * Super constructor for grasshopper.
+     *
      * @param positiononBoard Position of grasshopper
      */
     public Grasshopper(Position positiononBoard) {
         super(positiononBoard);
     }
-    
+
     /**
-     * Default constructor of grasshopper. 
+     * Default constructor of grasshopper.
      */
     public Grasshopper() {
     }
@@ -37,27 +39,3 @@ public class Grasshopper extends Animal {
         return moveJumping(board, direction, animals);
     }
 }
-//        setPositionOnBoard(FinalPosition);
-//        if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR){
-//            setPositionOnBoard(getPositionOnBoard());
-//            setOnStar(true);
-//            board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
-//            return getPositionOnBoard();
-//        }
-//        for (Animal animal : animals){
-//            
-//            while (animal.getPositionOnBoard().equals(getPositionOnBoard())){
-//                setPositionOnBoard(getPositionOnBoard().next(direction));                
-//            }
-//            if (board.getSquareType(getPositionOnBoard()) == SquareType.STAR){
-//                setPositionOnBoard(getPositionOnBoard());
-//                setOnStar(true);
-//                board.setSquareType(getPositionOnBoard(), SquareType.GRASS);
-//                return getPositionOnBoard();
-//            }
-//                return getPositionOnBoard();
-//        }
-//            setPositionOnBoard(null);
-//            return null;     
-//    }
-//}

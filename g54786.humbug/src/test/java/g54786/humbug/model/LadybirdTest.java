@@ -1,10 +1,5 @@
 package g54786.humbug.model;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import g54786.humbug.model.animal.Animal;
 import g54786.humbug.model.animal.Ladybird;
 import static g54786.humbug.model.SquareType.GRASS;
@@ -14,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
+ * Tests for ladybird class.
  *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
@@ -113,8 +109,9 @@ public class LadybirdTest {
         assertFalse(animals[0].isOnStar());
         assertFalse(board.getSquareType(new Position(0, 1)) == GRASS);
     }
+
     @Test
-    public void testMove_wallOutside(){
+    public void testMove_wallOutside() {
         Square SouthSquare = new Square(GRASS);
         SouthSquare.setSouthWall(true);
         board = new Board(new Square[][]{
@@ -124,17 +121,18 @@ public class LadybirdTest {
         });
         System.out.println("Try to move into a wall");
         Ladybird instance = (Ladybird) animals[0];
-        Position expResult = new Position(0,0);
+        Position expResult = new Position(0, 0);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertTrue(SouthSquare.hasWall(Direction.SOUTH));
         assertEquals(expResult, result);
     }
+
     /**
      * Test of move method, of class Ladybird.
      */
 
     @Test
-    public void testMove_wallInside(){
+    public void testMove_wallInside() {
         Square SouthSquare = new Square(GRASS);
         SouthSquare.setSouthWall(true);
         board = new Board(new Square[][]{
@@ -147,7 +145,7 @@ public class LadybirdTest {
             }};
         System.out.println("Try to move into a wall inside the board");
         Ladybird instance = (Ladybird) animals[0];
-        Position expResult = new Position(0,1);
+        Position expResult = new Position(0, 1);
         Position result = instance.move(board, Direction.SOUTH, animals);
         assertTrue(SouthSquare.hasWall(Direction.SOUTH));
         assertEquals(expResult, result);

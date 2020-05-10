@@ -6,7 +6,7 @@ package g54786.humbug.model;
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public enum Direction {
-    
+
     NORTH(-1, 0),
     SOUTH(1, 0),
     EAST(0, 1),
@@ -42,18 +42,20 @@ public enum Direction {
     }
 
     /**
-     * Returns the opposite of the current direction.
-     * @return 
+     * Gives the opposite of the current direction.
+     *
+     * @return The opposite of the current direction.
      */
     public Direction opposite() {
-        if (this == EAST) {
-            return WEST;
-        } else if (this == WEST) {
-            return EAST;
-        } else if (this == NORTH) {
-            return SOUTH;
-        } else {
-            return NORTH;
+        switch (this) {
+            case EAST:
+                return WEST;
+            case WEST:
+                return EAST;
+            case NORTH:
+                return SOUTH;
+            default:
+                return NORTH;
         }
     }
 }

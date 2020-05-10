@@ -23,7 +23,7 @@ public class Snail extends Animal {
     /**
      * Default constructor of snail.
      */
-    public Snail(){
+    public Snail() {
     }
 
     /**
@@ -36,10 +36,6 @@ public class Snail extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        if (board.getSquare(getPositionOnBoard()).hasWall(direction)) {
-            setPositionOnBoard(getPositionOnBoard());
-            return getPositionOnBoard(); 
-        } 
-        return moveCrawling(board, direction, 2, animals);
+        return moveCrawling(board, direction, 1, animals);
     }
 }

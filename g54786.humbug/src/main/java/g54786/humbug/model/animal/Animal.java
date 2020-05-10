@@ -92,61 +92,19 @@ public abstract class Animal {
      */
     Position moveFlying(Board board, Direction direction, Position finalPosition,
             Animal... animals) {
-        while (board.isInside(finalPosition)) {
-            for (Animal animal : animals) {
-                while (!emptyCase(board, direction, finalPosition, animals)) {
-                        finalPosition = finalPosition.next(direction);     
-                    }
-                setPositionOnBoard(finalPosition);
-                if (checkForStar(board, getPositionOnBoard())){
-                    starProcedure(board, getPositionOnBoard());
-                }
-                return finalPosition;
-                }
-            }   
-        setPositionOnBoard(null);
-        return null;
-    }
-//        try {
-//            board.getSquareType(finalPosition);
-//        } catch (IllegalArgumentException e) {
-//            setPositionOnBoard(null);
-//            return null;
-//        }
-//        for (Animal animal : animals) {
-//            if (animal.getPositionOnBoard().equals(finalPosition)
-//                    && !animal.isOnStar()) {
-//                if (!board.isInside(finalPosition.next(direction))) {
-//                    setPositionOnBoard(null);
-//                    return null;
-//                }
-//                setPositionOnBoard(finalPosition.next(direction));
-//                if (board.getSquareType(getPositionOnBoard())
-//                        == SquareType.STAR) {
-//                    setOnStar(true);
-//                    board.setSquareType(getPositionOnBoard(),
-//                            SquareType.GRASS);
-//                }
-//                finalPosition = finalPosition.next(direction);
-//            }
-//        }
-//        if (board.getSquareType(finalPosition) == SquareType.STAR) {
-//            setOnStar(true);
-//            setPositionOnBoard(finalPosition);
-//            board.setSquareType(finalPosition, SquareType.GRASS);
-//            return finalPosition;
-//        } else {
-//            setPositionOnBoard(finalPosition);
-//            return finalPosition;
-//        }
-    private boolean emptyCase (Board board, Direction direction, Position position, Animal... animals){
-        boolean empty = true;
-        for (Animal animal : animals){
-            if (animal.getPositionOnBoard().equals(position) && !animal.isOnStar()){
-                empty = false;
-            }
+        while (!emptyCase(board, finalPosition, animals)) {
+            finalPosition = finalPosition.next(direction);
         }
-        return empty;
+        setPositionOnBoard(finalPosition);
+        if (board.isInside(getPositionOnBoard())) {
+            if (containsStar(board, getPositionOnBoard())) {
+                starProcedure(board, getPositionOnBoard());
+            }
+            return getPositionOnBoard();
+        } else {
+            setPositionOnBoard(null);
+            return null;
+        }
     }
 
     /**
@@ -159,27 +117,26 @@ public abstract class Animal {
      */
     Position moveJumping(Board board, Direction direction, Animal... animals) {
         Position nextPosition = getPositionOnBoard().next(direction);
-        while (board.isInside(nextPosition)) {
-            for (Animal animal : animals) {
-                while (!emptyCase(board, direction, nextPosition, animals)) {
-                        nextPosition = nextPosition.next(direction);     
-                    }
-                setPositionOnBoard(nextPosition);
-                if (checkForStar(board, getPositionOnBoard())){
-                    starProcedure(board, getPositionOnBoard());
-                }
-                return nextPosition;
-                }
-            }   
-        setPositionOnBoard(null);
-        return null;
+        while (!emptyCase(board, nextPosition, animals)) {
+            nextPosition = nextPosition.next(direction);
+        }
+        setPositionOnBoard(nextPosition);
+        if (board.isInside(getPositionOnBoard())) {
+            if (containsStar(board, getPositionOnBoard())) {
+                starProcedure(board, getPositionOnBoard());
+            }
+            return getPositionOnBoard();
+        } else {
+            setPositionOnBoard(null);
+            return null;
+        }
     }
 
     /**
      * Moves a crawling animal
      *
      * @param index Turns on or off the ability to set the animal on star and
-     * switch the square type. 2 means it's on.
+     * switch the square type. 1 means it's on.
      * @param board Board game.
      * @param direction Direction in which to go.
      * @param animals All animals on board.
@@ -188,29 +145,61 @@ public abstract class Animal {
     Position moveCrawling(Board board, Direction direction, int index,
             Animal... animals) {
         Position nextPosition = getPositionOnBoard().next(direction);
-        while (board.isInside(nextPosition)) {
-            for (Animal animal : animals) {
-                if (animal.getPositionOnBoard().equals(nextPosition)
-                        && !animal.isOnStar()) {
-                    if (checkForStar(board, getPositionOnBoard()) && index == 2) {
-                        starProcedure(board, getPositionOnBoard());
-                    }
-                    setPositionOnBoard(getPositionOnBoard());
-                    return getPositionOnBoard();
-                }
-            }
-            if (checkForWall(board, direction)) {
+        if (!board.isInside(nextPosition)) {
+            if (board.getSquare(getPositionOnBoard()).hasWall(direction)) {
                 setPositionOnBoard(getPositionOnBoard());
                 return getPositionOnBoard();
             }
-            setPositionOnBoard(nextPosition);
-            if (checkForStar(board, getPositionOnBoard()) && index == 2) {
+            setPositionOnBoard(null);
+            return null;
+        } else {
+            if (emptyCase(board, nextPosition, animals)
+                    && !containsWall(board, direction)) {
+                setPositionOnBoard(nextPosition);
+            }
+            if (containsStar(board, getPositionOnBoard()) && index == 1) {
                 starProcedure(board, getPositionOnBoard());
             }
             return getPositionOnBoard();
         }
-        setPositionOnBoard(null);
-        return null;
+    }
+
+    /**
+     * Moves a walking animal.
+     *
+     * @param board Board game.
+     * @param direction Direction in which to go.
+     * @param animals All animals on board.
+     * @return New position of the animal.
+     */
+    Position moveWalking(Board board, Direction direction, Animal... animals) {
+        Position nextPosition = getPositionOnBoard().next(direction);
+        if (!board.isInside(nextPosition)) {
+            if (board.getSquare(getPositionOnBoard()).hasWall(direction)) {
+                setPositionOnBoard(getPositionOnBoard());
+                return getPositionOnBoard();
+            }
+            setPositionOnBoard(null);
+            return null;
+        } else {
+            while (emptyCase(board, nextPosition, animals)
+                    && !containsWall(board, direction)) {
+                setPositionOnBoard(nextPosition);
+                nextPosition = nextPosition.next(direction);
+                if (!board.isInside(nextPosition)) {
+                    if (board.getSquare(getPositionOnBoard()).hasWall(direction)){
+                        setPositionOnBoard(getPositionOnBoard());
+                        return getPositionOnBoard();
+                    }
+                    setPositionOnBoard(null);
+                    return null;
+                }
+            }
+            if (containsStar(board, getPositionOnBoard())) {
+                starProcedure(board, getPositionOnBoard());
+            }
+            return getPositionOnBoard();
+        }
     }
 
     /**
@@ -220,7 +209,7 @@ public abstract class Animal {
      * @param direction Direction in which to check.
      * @return True if there is a wall, false if not.
      */
-    private boolean checkForWall(Board board, Direction direction) {
+    private boolean containsWall(Board board, Direction direction) {
         boolean wall = false;
         if (board.getSquare(getPositionOnBoard()).hasWall(direction)
                 || board.getSquare(getPositionOnBoard().next(direction))
@@ -251,8 +240,8 @@ public abstract class Animal {
      * @param position Position to check.
      * @return True if it contains a star, false if not.
      */
-    private boolean checkForStar(Board board, Position position) {
-        if (position == null){
+    private boolean containsStar(Board board, Position position) {
+        if (position == null) {
             return false;
         }
         boolean SquareIsStar = false;
@@ -260,6 +249,25 @@ public abstract class Animal {
             SquareIsStar = true;
         }
         return SquareIsStar;
+    }
+
+    /**
+     * Checks if the case is empty meaning there is no animal on it.
+     *
+     * @param board Board game.
+     * @param position Position to check for empty square.
+     * @param animals All animals on board.
+     * @return True if square is empty, false if not.
+     */
+    private boolean emptyCase(Board board, Position position, Animal... animals) {
+        boolean empty = true;
+        for (Animal animal : animals) {
+            if (animal.getPositionOnBoard().equals(position) &&
+                    !animal.isOnStar()) {
+                empty = false;
+            }
+        }
+        return empty;
     }
 
     /**

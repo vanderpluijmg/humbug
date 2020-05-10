@@ -9,11 +9,11 @@ import java.util.Objects;
  */
 public class Position {
 
-    private int row; 
+    private int row;
     private int column;
 
     /**
-     * Constructor of a position
+     * Constructor of a position.
      *
      * @param row Row coordinates of position.
      * @param column Column coordinates of position.
@@ -22,11 +22,11 @@ public class Position {
         this.row = row;
         this.column = column;
     }
-    
+
     /**
      * Default constructor of position.
      */
-    public Position(){
+    public Position() {
     }
 
     /**

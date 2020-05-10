@@ -13,6 +13,7 @@ public class Butterfly extends Animal {
 
     /**
      * Super constructor for butterfly.
+     *
      * @param positiononBoard Position of butterfly.
      */
     public Butterfly(Position positiononBoard) {
@@ -36,8 +37,7 @@ public class Butterfly extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position finalPosition = getPositionOnBoard().next(direction)
-                .next(direction).next(direction);
-         return moveFlying(board, direction, finalPosition, animals);
-        }
+                .next(direction).next(direction); //Expected final position
+        return moveFlying(board, direction, finalPosition, animals);
     }
-
+}

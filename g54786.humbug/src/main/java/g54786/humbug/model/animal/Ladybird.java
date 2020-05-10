@@ -6,12 +6,14 @@ import g54786.humbug.model.Position;
 
 /**
  * Makes the ladybird move. Ladybird has specific move pattern.
+ *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Ladybird extends Animal {
 
     /**
      * Super constructor of ladybird.
+     *
      * @param positiononBoard Position of ladybird.
      */
     public Ladybird(Position positiononBoard) {
@@ -23,10 +25,10 @@ public class Ladybird extends Animal {
      */
     public Ladybird() {
     }
-    
+
     /**
      * Moves Ladybird in given direction.
-     * 
+     *
      * @param board Board on which the ladybug must move.
      * @param direction Direction in which the ladybug must move.
      * @param animals All animals on the board.
@@ -34,16 +36,10 @@ public class Ladybird extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        if (board.getSquare(getPositionOnBoard()).hasWall(direction) 
-                || board.getSquare(getPositionOnBoard().next(direction)).hasWall
-        (direction.opposite())){
-            setPositionOnBoard(getPositionOnBoard());
-            return getPositionOnBoard(); 
-        } 
-        if (moveCrawling(board, direction, 1, animals) == null){//On star is off
+        if (moveCrawling(board, direction, 0, animals) == null) {//On star is off
             setPositionOnBoard(getPositionOnBoard());
             return null;
         }
-        return moveCrawling(board, direction, 2, animals); //On star is on
+        return moveCrawling(board, direction, 1, animals); //On star is on
     }
 }

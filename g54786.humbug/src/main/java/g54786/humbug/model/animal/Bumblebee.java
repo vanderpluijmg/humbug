@@ -6,14 +6,14 @@ import g54786.humbug.model.Position;
 
 /**
  * Makes the bumblebee move. Bumblebee has a specific move pattern.
- * 
+ *
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class Bumblebee extends Animal {
 
     /**
      * Super constructor of bumblebee. Bumblebee has specific move pattern.
-     * 
+     *
      * @param positiononBoard Position of bumblebee.
      */
     public Bumblebee(Position positiononBoard) {
@@ -25,8 +25,10 @@ public class Bumblebee extends Animal {
      */
     public Bumblebee() {
     }
+
     /**
      * Moves bumblebee in given direction.
+     *
      * @param board Board on which the bumblebee must move.
      * @param direction Direction in which the bumblebee must move.
      * @param animals All animals on the board.
@@ -35,7 +37,7 @@ public class Bumblebee extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position finalPosition = getPositionOnBoard().next(direction)
-                    .next(direction);
-         return moveFlying(board, direction, finalPosition, animals);
-        }
+                .next(direction); //Expected final position.
+        return moveFlying(board, direction, finalPosition, animals);
     }
+}

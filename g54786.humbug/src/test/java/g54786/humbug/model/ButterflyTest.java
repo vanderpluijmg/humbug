@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g54786.humbug.model;
 
 import g54786.humbug.model.animal.Animal;
@@ -14,11 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
- *
+ * Tests for butterfly class.
+ * 
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class ButterflyTest {
-    
+
     private Board board;
     private Animal[] animals;
 
@@ -31,7 +27,7 @@ public class ButterflyTest {
             {null, null, new Square(STAR)}
         });
         animals = new Animal[]{
-          new Butterfly(new Position(0, 0)) {
+            new Butterfly(new Position(0, 0)) {
             }
         };
     }
@@ -190,6 +186,7 @@ public class ButterflyTest {
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
+
     /**
      * Test of move method, of class Bumblebee.
      */
@@ -216,7 +213,5 @@ public class ButterflyTest {
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
-    
 
-    
 }

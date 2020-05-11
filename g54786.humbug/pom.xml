@@ -9,7 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <mainClass>g54786.humbug.Main</mainClass>
     </properties>
     <dependencies>
         <dependency>
@@ -46,7 +45,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>${mainClass}</mainClass>                        
+                            <mainClass>g54786.humbug.main.Main</mainClass>                        
                         </manifest>
                     </archive>
                     <descriptorRefs>

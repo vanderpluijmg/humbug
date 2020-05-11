@@ -5,6 +5,7 @@ import g54786.humbug.model.Model;
 import g54786.humbug.model.Direction;
 import g54786.humbug.model.Position;
 import g54786.humbug.model.LevelStatus;
+import java.util.Scanner;
 
 /**
  * Controller is responsible for game dynamics and updates view after each move.
@@ -13,6 +14,7 @@ import g54786.humbug.model.LevelStatus;
  */
 public class Controller {
 
+    Scanner keyboard = new Scanner(System.in);
     private Model game;
     private InterfaceView view;
 
@@ -61,7 +63,13 @@ public class Controller {
                     break;
                 default:
                     System.out.println("Thank you for playing Humbug!");
-                    break;
+                    System.out.println("Would you like to play a bonus level? Yes/No");
+                    String answer = keyboard.nextLine();
+                    if (answer.equalsIgnoreCase("yes")) {
+                        nLevel = 100;
+                    } else {
+                        break;
+                    }
             }
         }
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +5,7 @@ import g54786.humbug.model.Position;
 import java.io.IOException;
 
 /**
- *
+ *Json position test class.
  * @author Gregory van der Pluijm <54786@etu.he2b.be>
  */
 public class JsonPosition {
